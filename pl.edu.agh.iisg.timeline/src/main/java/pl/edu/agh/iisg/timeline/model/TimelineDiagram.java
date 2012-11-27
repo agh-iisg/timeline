@@ -102,6 +102,12 @@ public class TimelineDiagram {
 			diagram.setMaxDateTime(date);
 			return this;
 		}
+
+		public TimelineDiagramBuilder initialDate(Long date) {
+			diagram.setInitialDateTime(date);
+			return this;
+		}
+
 		public TimelineDiagram build() {
 			diagram.validate();
 			return diagram;

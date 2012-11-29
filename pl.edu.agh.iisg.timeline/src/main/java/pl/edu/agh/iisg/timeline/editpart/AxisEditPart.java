@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
@@ -40,15 +39,15 @@ public class AxisEditPart extends AbstractGraphicalEditPart {
 		// EventsLayer layer = ((TimelineDiagramEditPart) getParent())
 		// .getEventsLayer();
 		// layer.add(this.getFigure());
-		Rectangle bounds = new Rectangle(0, 0, AxisFigure.WIDTH,
-				AxisFigure.LENGTH);
+		// Rectangle bounds = new Rectangle(0, 0, AxisFigure.WIDTH,
+		// AxisFigure.LENGTH);
 		// layer.setConstraint(getFigure(), bounds);
 		// super.refreshVisuals();
 		// ((GraphicalEditPart) getParent()).setLayoutConstraint(this,
 		// getFigure(), bounds);
 		TimelineDiagramEditPart timeline = (TimelineDiagramEditPart) getParent();
-		timeline.getAxisLayer().add(getFigure());
-		timeline.getAxisLayer().setConstraint(getFigure(), bounds);
+		timeline.getAxesLayer().add(getFigure());
+		// timeline.getAxesLayer().setConstraint(getFigure(), bounds);
 		// super.refreshVisuals();
 	}
 

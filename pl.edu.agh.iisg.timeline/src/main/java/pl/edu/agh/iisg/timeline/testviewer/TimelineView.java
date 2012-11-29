@@ -58,7 +58,7 @@ public class TimelineView {
 		root.add(timelines, "Timelines");
 		layout.setConstraint(timelines, root.getBounds());
 
-		ScrollPane scroll = new EventsScrollPane(new EventsLayer(), null);
+		ScrollPane scroll = new EventsScrollPane(new EventsLayer());
 		root.add(scroll, "Events");
 		layout.setConstraint(scroll, new Rectangle(new Point(0,
 				TimelineConstants.DEFAULT_TIMELINE_HEADER_HEIGHT), new Point(

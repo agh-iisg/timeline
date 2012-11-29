@@ -7,6 +7,7 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.ScrollPane;
 
 import pl.edu.agh.iisg.timeline.editpart.TimelineDiagramEditPart;
+import pl.edu.agh.iisg.timeline.editpart.TimelineRootEditPart;
 
 public class EventsScrollPane extends ScrollPane {
 
@@ -14,11 +15,8 @@ public class EventsScrollPane extends ScrollPane {
 
 	private final IEventsRefresher eventsRefresher = new FakeEventsRefresher();
 
-	private TimelineDiagramEditPart editPart;
-
-	public EventsScrollPane(EventsLayer eventsLayer, TimelineDiagramEditPart editPart) {
+	public EventsScrollPane(EventsLayer eventsLayer) {
 		this.layer = eventsLayer;
-		this.editPart = editPart;
 		init();
 	}
 
@@ -34,7 +32,7 @@ public class EventsScrollPane extends ScrollPane {
 
 					@Override
 					public void propertyChange(PropertyChangeEvent evt) {
-						//editPart.refresh();
+						// editPart.refresh();
 
 					}
 				});

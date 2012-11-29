@@ -16,7 +16,7 @@ public class TimelineEditPartsFactory implements EditPartFactory {
 			return new TimelineDiagramEditPart((TimelineDiagram) model);
 		}
 		else if (model instanceof Axis) {
-			return new AxisEditPart();
+			return new AxisEditPart((Axis) model);
 		}
 		return null;
 	}

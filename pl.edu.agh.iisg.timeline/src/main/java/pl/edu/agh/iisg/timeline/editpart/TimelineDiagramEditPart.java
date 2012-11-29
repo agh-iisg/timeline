@@ -1,6 +1,5 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.Figure;
@@ -11,17 +10,16 @@ import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
+import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.testviewer.EventsLayer;
 import pl.edu.agh.iisg.timeline.testviewer.EventsScrollPane;
-import pl.edu.agh.iisg.timeline.testviewer.TimelinesLayer;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
-	private String[] companies = new String[] { "Firma krzak", "Firma Jesion",
-			"Firma Modrzew" };
-
 	private EventsLayer eventsLayer;
+
+	private Layer axesLayer;
 
 	public TimelineDiagramEditPart(TimelineDiagram model) {
 		super.setModel(model);
@@ -33,9 +31,10 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		XYLayout layout = new XYLayout();
 		root.setLayoutManager(layout);
 
-		Layer timelines = new TimelinesLayer(companies);
-		root.add(timelines, "Timelines");
-		layout.setConstraint(timelines, root.getBounds());
+		axesLayer = new Layer();
+		axesLayer.setLayoutManager(new XYLayout());
+		root.add(axesLayer);
+		layout.setConstraint(axesLayer, root.getBounds());
 
 		eventsLayer = new EventsLayer();
 		ScrollPane scroll = new EventsScrollPane(eventsLayer, this);
@@ -52,19 +51,9 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	}
 
 	@Override
-	protected List getModelChildren() {
-		return Collections.EMPTY_LIST;
-		//
-		// return ((TimelineDiagram) getModel()).getAxes();
+	protected List<Axis> getModelChildren() {
+		return ((TimelineDiagram) getModel()).getAxes();
 
-	}
-
-	@Override
-	protected void refreshVisuals() {
-		// Rectangle bounds = new Rectangle(100, 100, 100, 100);
-		// ((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-		// getFigure(), bounds);
-		super.refreshVisuals();
 	}
 
 	public EventsLayer getEventsLayer() {
@@ -75,6 +64,10 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	public IFigure getContentPane() {
 		// TODO Auto-generated method stub
 		return eventsLayer;
+	}
+
+	public Layer getAxisLayer() {
+		return axesLayer;
 	}
 
 }

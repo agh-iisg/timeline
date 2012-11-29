@@ -34,7 +34,7 @@ public class EventsScrollPane extends ScrollPane {
 
 					@Override
 					public void propertyChange(PropertyChangeEvent evt) {
-						editPart.refresh();
+						//editPart.refresh();
 
 					}
 				});

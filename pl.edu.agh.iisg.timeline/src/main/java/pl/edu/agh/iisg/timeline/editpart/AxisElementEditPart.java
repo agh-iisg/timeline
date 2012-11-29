@@ -7,14 +7,12 @@ public class AxisElementEditPart extends AbstractGraphicalEditPart {
 
 	@Override
 	protected IFigure createFigure() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected void createEditPolicies() {
 		// TODO Auto-generated method stub
-
 	}
 
 }

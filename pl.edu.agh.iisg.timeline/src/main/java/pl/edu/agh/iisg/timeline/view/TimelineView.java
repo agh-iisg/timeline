@@ -7,6 +7,7 @@ import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
+import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class TimelineView extends ViewPart {
@@ -36,6 +37,8 @@ public class TimelineView extends ViewPart {
 	private TimelineDiagram createSampleDiagram(Composite parent) {
 		TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L)
 				.maxDateTime(10L).initialDate(5L).build();
+		Axis axis = new Axis("Firma krewniak");
+		diagram.addAxis(axis);
 
 		return diagram;
 	}

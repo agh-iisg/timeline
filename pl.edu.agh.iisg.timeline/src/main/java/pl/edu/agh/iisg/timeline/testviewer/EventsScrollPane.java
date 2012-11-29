@@ -6,14 +6,19 @@ import java.beans.PropertyChangeListener;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.ScrollPane;
 
+import pl.edu.agh.iisg.timeline.editpart.TimelineDiagramEditPart;
+
 public class EventsScrollPane extends ScrollPane {
 
 	private final EventsLayer layer;
 
 	private final IEventsRefresher eventsRefresher = new FakeEventsRefresher();
 
-	public EventsScrollPane(EventsLayer eventsLayer) {
+	private TimelineDiagramEditPart editPart;
+
+	public EventsScrollPane(EventsLayer eventsLayer, TimelineDiagramEditPart editPart) {
 		this.layer = eventsLayer;
+		this.editPart = editPart;
 		init();
 	}
 
@@ -25,7 +30,14 @@ public class EventsScrollPane extends ScrollPane {
 
 	private void addRefreshOnViewportChangeListener() {
 		this.getViewport().getVerticalRangeModel()
-				.addPropertyChangeListener(new RefreshEventsListener());
+				.addPropertyChangeListener(new PropertyChangeListener() {
+
+					@Override
+					public void propertyChange(PropertyChangeEvent evt) {
+						editPart.refresh();
+
+					}
+				});
 	}
 
 	private void refresh(int position) {

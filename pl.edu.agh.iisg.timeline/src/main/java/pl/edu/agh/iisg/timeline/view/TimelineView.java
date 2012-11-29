@@ -7,7 +7,6 @@ import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
-import pl.edu.agh.iisg.timeline.editpart.TimelineDiagramEditPart;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class TimelineView extends ViewPart {
@@ -17,7 +16,7 @@ public class TimelineView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		createDiagram(parent);
-		viewer.setContents(createSampleDiagram());
+		viewer.setContents(createSampleDiagram(parent));
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class TimelineView extends ViewPart {
 		return (FigureCanvas) viewer.getControl();
 	}
 
-	private TimelineDiagram createSampleDiagram() {
+	private TimelineDiagram createSampleDiagram(Composite parent) {
 		TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L)
 				.maxDateTime(10L).initialDate(5L).build();
 

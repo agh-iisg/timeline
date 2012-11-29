@@ -42,7 +42,6 @@ public class TimelineView {
 				display.sleep();
 			}
 		}
-
 	}
 
 	private Canvas createDiagram(Composite parent) {
@@ -59,7 +58,7 @@ public class TimelineView {
 		root.add(timelines, "Timelines");
 		layout.setConstraint(timelines, root.getBounds());
 
-		ScrollPane scroll = new EventsScrollPane(new EventsLayer());
+		ScrollPane scroll = new EventsScrollPane(new EventsLayer(), null);
 		root.add(scroll, "Events");
 		layout.setConstraint(scroll, new Rectangle(new Point(0,
 				TimelineConstants.DEFAULT_TIMELINE_HEADER_HEIGHT), new Point(

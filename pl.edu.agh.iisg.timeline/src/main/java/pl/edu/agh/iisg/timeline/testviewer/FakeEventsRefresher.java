@@ -1,5 +1,6 @@
 package pl.edu.agh.iisg.timeline.testviewer;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -14,9 +15,20 @@ public class FakeEventsRefresher implements IEventsRefresher {
 
 	@Override
 	public EventsRefresh refreshEvents(int position) {
-		List<AbsoluteEventFigure> eventsToRemove = prepareFiguresToRemove();
-		eventsToAdd = addRandomFigures();
-		return new EventsRefresh(eventsToAdd, eventsToRemove);
+		// List<AbsoluteEventFigure> eventsToRemove = prepareFiguresToRemove();
+		// eventsToAdd = addRandomFigures();
+		// return new EventsRefresh(eventsToAdd, eventsToRemove);
+		return new EventsRefresh(createOneEventToAdd(),
+				new LinkedList<AbsoluteEventFigure>());
+	}
+
+	private Collection<AbsoluteEventFigure> createOneEventToAdd() {
+		List<AbsoluteEventFigure> res = new LinkedList<>();
+		for (int i = 0; i < 10; i++) {
+			res.add(createAbsoluteFigureFrom(i * 10000));
+		}
+
+		return res;
 	}
 
 	private List<AbsoluteEventFigure> prepareFiguresToRemove() {
@@ -52,7 +64,7 @@ public class FakeEventsRefresher implements IEventsRefresher {
 	private AbsoluteEventFigure createAbsoluteFigureFrom(int index) {
 		EventFigure figure = new EventFigure("Company", "nr "
 				+ String.valueOf(index));
-		Rectangle position = new Rectangle(new Point(0, index * 100),
+		Rectangle position = new Rectangle(new Point(0, index * 100 + 50),
 				figure.getPreferredSize());
 		return new AbsoluteEventFigure(figure, position);
 	}

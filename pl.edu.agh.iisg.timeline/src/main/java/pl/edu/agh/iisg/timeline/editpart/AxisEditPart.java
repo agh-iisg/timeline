@@ -31,6 +31,7 @@ public class AxisEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected List<AxisElement> getModelChildren() {
 		// TODO Auto-generated method stub
+		//return ((Axis) getModel()).getAxisElementsInRange(
 		return Collections.EMPTY_LIST;
 	}
 

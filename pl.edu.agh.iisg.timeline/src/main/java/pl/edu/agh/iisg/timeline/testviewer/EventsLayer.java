@@ -3,15 +3,15 @@ package pl.edu.agh.iisg.timeline.testviewer;
 import java.util.Collection;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
-import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 public class EventsLayer extends Layer {
 
-	private final XYLayout layout = new XYLayout();
+	private final FlowLayout layout = new FlowLayout();
 
 	public EventsLayer() {
 		init();

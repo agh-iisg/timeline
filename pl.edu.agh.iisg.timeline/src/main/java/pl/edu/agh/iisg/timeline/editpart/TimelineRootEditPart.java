@@ -38,13 +38,11 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 		return root;
 	}
 
-	@Override
-	public IFigure getContentPane() {
-		return eventsLayer;
-	}
-
 	public Layer getAxesLayer() {
 		return axesLayer;
 	}
 
+	public Layer getEventsLayer() {
+		return eventsLayer;
+	}
 }

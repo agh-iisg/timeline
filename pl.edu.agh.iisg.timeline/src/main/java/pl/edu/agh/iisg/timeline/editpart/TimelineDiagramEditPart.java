@@ -6,6 +6,8 @@ import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.ScrollPane;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
@@ -29,17 +31,21 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected void createEditPolicies() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected List<Axis> getModelChildren() {
 		return ((TimelineDiagram) getModel()).getAxes();
-
 	}
 
-	public Layer getAxesLayer() {
-		return ((TimelineRootEditPart) getParent()).getAxesLayer();
-	}
+	@Override
+	protected void addChildVisual(EditPart childEditPart, int index) {
+		IFigure axesLayerChild = ((AxisEditPart) childEditPart)
+				.getAxexLayerFigure();
+		((TimelineRootEditPart) getRoot()).getAxesLayer().add(axesLayerChild,
+				index);
 
+		IFigure child = ((GraphicalEditPart) childEditPart).getFigure();
+		((TimelineRootEditPart) getRoot()).getEventsLayer().add(child, index);
+	}
 }

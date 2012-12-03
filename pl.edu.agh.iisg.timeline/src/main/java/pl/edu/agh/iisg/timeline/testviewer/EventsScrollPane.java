@@ -21,9 +21,9 @@ public class EventsScrollPane extends ScrollPane {
 	}
 
 	private void init() {
-		addRefreshOnViewportChangeListener();
+		//addRefreshOnViewportChangeListener();
 		this.setContents(layer);
-		refresh(0);
+		//refresh(0);
 	}
 
 	private void addRefreshOnViewportChangeListener() {

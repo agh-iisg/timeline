@@ -1,5 +1,7 @@
 package pl.edu.agh.iisg.timeline.view;
 
+import java.util.Date;
+
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
@@ -8,6 +10,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import pl.edu.agh.iisg.timeline.editpart.TimelineRootEditPart;
 import pl.edu.agh.iisg.timeline.model.Axis;
+import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class TimelineView extends ViewPart {
@@ -38,8 +41,15 @@ public class TimelineView extends ViewPart {
 		TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L)
 				.maxDateTime(10L).initialDate(5L).build();
 		Axis axis = new Axis("Firma krewniak");
+		axis.addAxisElement(AxisElement.builder().name("name 1")
+				.description("description 1").owner(axis).date(new Date())
+				.build());
 		diagram.addAxis(axis);
-		diagram.addAxis(new Axis("Firma klusek"));
+		axis = new Axis("Firma klusek");
+		axis.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis).date(new Date())
+				.build());
+		diagram.addAxis(axis);
 
 		return diagram;
 	}

@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.testviewer;
+package pl.edu.agh.iisg.timeline.view;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -29,7 +29,7 @@ public class EventFigure extends RectangleFigure {
 	private void init() {
 		setBackgroundColor(BACKGROUND_COLOR);
 		setLayoutManager(new ToolbarLayout());
-		setPreferredSize(220, 70);
+		// setPreferredSize(220, 70);
 	}
 
 	private Label createTitleLabel(String title) {

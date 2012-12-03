@@ -2,6 +2,8 @@ package pl.edu.agh.iisg.timeline.testviewer;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 
+import pl.edu.agh.iisg.timeline.view.EventFigure;
+
 public class AbsoluteEventFigure {
 
 	private EventFigure figure;

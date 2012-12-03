@@ -1,6 +1,6 @@
 package pl.edu.agh.iisg.timeline.testviewer;
 
-public class TimelineConstants {
+public class TimelineConstantsOld {
 
 	public static final int DEFAULT_TIMELINE_WIDTH = 300;
 

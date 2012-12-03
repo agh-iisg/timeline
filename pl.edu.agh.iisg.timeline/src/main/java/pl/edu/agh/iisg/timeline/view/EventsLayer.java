@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.testviewer;
+package pl.edu.agh.iisg.timeline.view;
 
 import java.util.Collection;
 
@@ -8,6 +8,8 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.geometry.Rectangle;
+
+import pl.edu.agh.iisg.timeline.testviewer.AbsoluteEventFigure;
 
 public class EventsLayer extends Layer {
 
@@ -45,5 +47,4 @@ public class EventsLayer extends Layer {
 		super.paint(graphics);
 		graphics.setAlpha(oldAlpha);
 	}
-
 }

@@ -5,12 +5,13 @@ import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.LayeredPane;
+import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 
-import pl.edu.agh.iisg.timeline.testviewer.EventsLayer;
-import pl.edu.agh.iisg.timeline.testviewer.EventsScrollPane;
+import pl.edu.agh.iisg.timeline.view.EventsLayer;
+import pl.edu.agh.iisg.timeline.view.EventsScrollPane;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
@@ -31,6 +32,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 		layout.setConstraint(axesLayer, root.getBounds());
 
 		eventsLayer = new EventsLayer();
+		eventsLayer.setBorder(new MarginBorder(70, 5, 0, 0));
 		ScrollPane scroll = new EventsScrollPane(eventsLayer);
 		root.add(scroll, "Events");
 		layout.setConstraint(scroll, root.getBounds());

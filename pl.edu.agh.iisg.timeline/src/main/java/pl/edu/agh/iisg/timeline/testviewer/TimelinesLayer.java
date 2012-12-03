@@ -14,10 +14,10 @@ public class TimelinesLayer extends FreeformLayer {
 	private final static int HEADER_ICON_WIDTH = 30;
 	private final static int HEADER_ICON_HEIGHT = 30;
 
-	private final static int TIMELINE_LENGTH = TimelineConstants.DEFAULT_TIMELINE_LENGTH;
+	private final static int TIMELINE_LENGTH = TimelineConstantsOld.DEFAULT_TIMELINE_LENGTH;
 
-	private int width = TimelineConstants.DEFAULT_TIMELINE_WIDTH;
-	private int headerHeight = TimelineConstants.DEFAULT_TIMELINE_HEADER_HEIGHT;
+	private int width = TimelineConstantsOld.DEFAULT_TIMELINE_WIDTH;
+	private int headerHeight = TimelineConstantsOld.DEFAULT_TIMELINE_HEADER_HEIGHT;
 
 	private final XYLayout layout = new XYLayout();
 

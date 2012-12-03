@@ -8,6 +8,8 @@ import java.util.Random;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+import pl.edu.agh.iisg.timeline.view.EventFigure;
+
 public class FakeEventsRefresher implements IEventsRefresher {
 
 	private final List<AbsoluteEventFigure> figures = new LinkedList<>();

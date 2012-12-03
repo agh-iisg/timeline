@@ -1,29 +1,31 @@
-package pl.edu.agh.iisg.timeline.testviewer;
+package pl.edu.agh.iisg.timeline.view;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.ScrollPane;
 
-import pl.edu.agh.iisg.timeline.editpart.TimelineDiagramEditPart;
-import pl.edu.agh.iisg.timeline.editpart.TimelineRootEditPart;
+import pl.edu.agh.iisg.timeline.testviewer.EventsRefresh;
+import pl.edu.agh.iisg.timeline.testviewer.FakeEventsRefresher;
+import pl.edu.agh.iisg.timeline.testviewer.IEventsRefresher;
 
 public class EventsScrollPane extends ScrollPane {
 
-	private final EventsLayer layer;
+	private final Layer layer;
 
 	private final IEventsRefresher eventsRefresher = new FakeEventsRefresher();
 
-	public EventsScrollPane(EventsLayer eventsLayer) {
+	public EventsScrollPane(Layer eventsLayer) {
 		this.layer = eventsLayer;
 		init();
 	}
 
 	private void init() {
-		//addRefreshOnViewportChangeListener();
+		// addRefreshOnViewportChangeListener();
 		this.setContents(layer);
-		//refresh(0);
+		// refresh(0);
 	}
 
 	private void addRefreshOnViewportChangeListener() {
@@ -41,8 +43,8 @@ public class EventsScrollPane extends ScrollPane {
 	private void refresh(int position) {
 		EventsRefresh refresh = eventsRefresher.refreshEvents(position);
 		if (refresh.shouldRefresh()) {
-			layer.removeFigures(refresh.getEventsToRemove());
-			layer.addFigures(refresh.getEventsToAdd());
+			//layer.removeFigures(refresh.getEventsToRemove());
+			//layer.addFigures(refresh.getEventsToAdd());
 
 		}
 	}

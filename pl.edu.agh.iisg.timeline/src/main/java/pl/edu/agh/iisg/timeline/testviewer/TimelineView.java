@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import pl.edu.agh.iisg.timeline.view.EventsLayer;
+import pl.edu.agh.iisg.timeline.view.EventsScrollPane;
+
 public class TimelineView {
 
 	private static final int MAX_WIDTH = 1000;
@@ -61,8 +64,8 @@ public class TimelineView {
 		ScrollPane scroll = new EventsScrollPane(new EventsLayer());
 		root.add(scroll, "Events");
 		layout.setConstraint(scroll, new Rectangle(new Point(0,
-				TimelineConstants.DEFAULT_TIMELINE_HEADER_HEIGHT), new Point(
-				MAX_WIDTH, TimelineConstants.DEFAULT_TIMELINE_LENGTH)));
+				TimelineConstantsOld.DEFAULT_TIMELINE_HEADER_HEIGHT), new Point(
+				MAX_WIDTH, TimelineConstantsOld.DEFAULT_TIMELINE_LENGTH)));
 
 		return canvas;
 	}

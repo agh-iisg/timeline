@@ -38,7 +38,7 @@ public class AxisEditPart extends AbstractGraphicalEditPart {
 		return new AxisFigure(axis.getName());
 	}
 
-	public IFigure getAxexLayerFigure() {
+	public IFigure getAxesLayerFigure() {
 		if (axesLayerFigure == null) {
 			axesLayerFigure = createAxesLayerFigure();
 		}

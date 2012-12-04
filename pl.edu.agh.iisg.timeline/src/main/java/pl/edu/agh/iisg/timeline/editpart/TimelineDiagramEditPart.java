@@ -2,10 +2,8 @@ package pl.edu.agh.iisg.timeline.editpart;
 
 import java.util.List;
 
-import org.eclipse.draw2d.FlowLayout;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Layer;
-import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
@@ -21,11 +19,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
 	@Override
 	protected IFigure createFigure() {
-		ScrollPane figure = new ScrollPane();
-		Layer layer = new Layer();
-		layer.setLayoutManager(new FlowLayout());
-		figure.setContents(layer);
-		return figure;
+		return new Figure();
 	}
 
 	@Override
@@ -41,7 +35,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure axesLayerChild = ((AxisEditPart) childEditPart)
-				.getAxexLayerFigure();
+				.getAxesLayerFigure();
 		((TimelineRootEditPart) getRoot()).getAxesLayer().add(axesLayerChild,
 				index);
 

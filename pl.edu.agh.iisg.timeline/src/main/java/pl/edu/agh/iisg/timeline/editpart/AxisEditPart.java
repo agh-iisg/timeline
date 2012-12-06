@@ -3,7 +3,6 @@ package pl.edu.agh.iisg.timeline.editpart;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
@@ -17,6 +16,8 @@ import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 import pl.edu.agh.iisg.timeline.view.figure.AxisFigure;
+
+import com.google.common.collect.ImmutableBiMap;
 
 public class AxisEditPart extends AbstractGraphicalEditPart {
 
@@ -68,14 +69,15 @@ public class AxisEditPart extends AbstractGraphicalEditPart {
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		IFigure child = ((GraphicalEditPart) childEditPart).getFigure();
 		getContentPane().add(child, index);
-		int yIndex = getYIndexOf(childEditPart.getModel());
+		int yIndex = getYIndexOf((AxisElement) childEditPart.getModel());
 		getContentPane().setConstraint(child,
 				new Rectangle(0, yIndex, TimelineConstants.ELEMENT_WIDTH, 100));
 	}
 
-	private int getYIndexOf(Object model) {
-		Random rand = new Random();
-		return rand.nextInt(5000);
+	private int getYIndexOf(AxisElement element) {
+		ImmutableBiMap<Integer, AxisElement> positions = ((TimelineDiagramEditPart) getParent())
+				.getPositions();
+		return positions.inverse().get(element);
 	}
 
 }

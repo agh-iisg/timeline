@@ -42,12 +42,17 @@ public class TimelineView extends ViewPart {
 				.maxDateTime(10L).initialDate(5L).build();
 		Axis axis = new Axis("Firma krewniak");
 		axis.addAxisElement(AxisElement.builder().name("name 1")
-				.description("description 1").owner(axis).date(new Date())
+				.description("description 1").owner(axis).date(0L)
 				.build());
 		diagram.addAxis(axis);
 		axis = new Axis("Firma klusek");
 		axis.addAxisElement(AxisElement.builder().name("name 2")
-				.description("description 2").owner(axis).date(new Date())
+				.description("description 2").owner(axis).date(10L)
+				.build());
+		diagram.addAxis(axis);
+		axis = new Axis("Firma zombie");
+		axis.addAxisElement(AxisElement.builder().name("name 3")
+				.description("description 3").owner(axis).date(5L)
 				.build());
 		diagram.addAxis(axis);
 

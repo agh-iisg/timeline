@@ -25,7 +25,7 @@ public class DiscretePositionerTest {
 				.description("description2").owner(axis).date(800L).build();
 
 		// when
-		SortedMap<Long, AxisElement> res = positioner.position(Arrays.asList(
+		SortedMap<Integer, AxisElement> res = positioner.position(Arrays.asList(
 				element1, element2));
 
 		// then

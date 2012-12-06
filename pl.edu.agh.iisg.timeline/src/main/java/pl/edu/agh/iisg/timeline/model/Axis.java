@@ -61,8 +61,13 @@ public class Axis {
 		elements.remove(element.getDate(), element);
 	}
 
-	public SortedMap<Long, Collection<AxisElement>> getAxisElementsInRange(Long start, Long end) {
+	public SortedMap<Long, Collection<AxisElement>> getAxisElementsInRange(
+			Long start, Long end) {
 		return elements.asMap().subMap(start, end);
+	}
+
+	public Collection<AxisElement> getAxisElements() {
+		return elements.values();
 	}
 
 	public static AxisBuilder builder() {

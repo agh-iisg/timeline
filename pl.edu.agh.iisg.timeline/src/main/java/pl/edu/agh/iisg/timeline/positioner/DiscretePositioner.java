@@ -10,8 +10,8 @@ import pl.edu.agh.iisg.timeline.model.AxisElement;
 
 public class DiscretePositioner implements IPositioner {
 
-	private static final long GROUP_GAP = 100;
-	private static final long ELEMENT_GAP = 200;
+	private static final long GROUP_GAP = 50;
+	private static final long ELEMENT_GAP = 120;
 
 	private long start = 0L;
 
@@ -22,7 +22,7 @@ public class DiscretePositioner implements IPositioner {
 	}
 
 	@Override
-	public SortedMap<Long, AxisElement> position(List<AxisElement> elements) {
+	public SortedMap<Integer, AxisElement> position(List<AxisElement> elements) {
 		long[] dates = extractDates(elements);
 		List<Integer> groups = groupByIntervals(dates);
 		return positionInGroups(elements, groups);
@@ -54,10 +54,10 @@ public class DiscretePositioner implements IPositioner {
 		return groups;
 	}
 
-	private SortedMap<Long, AxisElement> positionInGroups(
+	private SortedMap<Integer, AxisElement> positionInGroups(
 			List<AxisElement> elements, List<Integer> groups) {
-		SortedMap<Long, AxisElement> res = new TreeMap<>();
-		long x = 0;
+		SortedMap<Integer, AxisElement> res = new TreeMap<>();
+		int x = 0;
 		Iterator<AxisElement> itr = elements.iterator();
 		for (Integer group : groups) {
 			x += GROUP_GAP;

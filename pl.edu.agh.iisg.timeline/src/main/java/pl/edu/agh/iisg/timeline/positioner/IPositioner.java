@@ -22,6 +22,6 @@ public interface IPositioner {
 	 *            timeline elements
 	 * @return positions of timeline elements
 	 */
-	SortedMap<Long, AxisElement> position(List<AxisElement> elements);
+	SortedMap<Integer, AxisElement> position(List<AxisElement> elements);
 
 }

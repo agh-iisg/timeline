@@ -20,13 +20,9 @@ import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
-import com.google.common.collect.ImmutableBiMap;
-
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
 	private IPositioner positioner = new DiscretePositioner(1000);
-
-	private ImmutableBiMap<Integer, AxisElement> positions;
 
 	private Map<Axis, IFigure> axisLayers = new HashMap<>();
 
@@ -38,7 +34,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	private void initElementPositions() {
 		Collection<AxisElement> elements = ((TimelineDiagram) getModel())
 				.getAxisElements();
-		positions = ImmutableBiMap.copyOf(positioner.position(elements));
+		positioner.position(elements);
 	}
 
 	@Override
@@ -62,13 +58,13 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof AxisEditPart) {
-			addAxisChild((AxisEditPart) childEditPart, index);
+			addAxisChildVisual((AxisEditPart) childEditPart, index);
 		} else if (childEditPart instanceof AxisElementEditPart) {
-			addAxisElementChild((AxisElementEditPart) childEditPart);
+			addAxisElementChildVisual((AxisElementEditPart) childEditPart);
 		}
 	}
 
-	private void addAxisChild(AxisEditPart childEditPart, int index) {
+	private void addAxisChildVisual(AxisEditPart childEditPart, int index) {
 		IFigure axesLayerChild = childEditPart.getFigure();
 		((TimelineRootEditPart) getRoot()).getAxesLayer().add(axesLayerChild);
 
@@ -83,7 +79,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		return figure;
 	}
 
-	private void addAxisElementChild(AxisElementEditPart childEditPart) {
+	private void addAxisElementChildVisual(AxisElementEditPart childEditPart) {
 		AxisElement model = (AxisElement) childEditPart.getModel();
 		IFigure parent = axisLayers.get(model.getAxis());
 		IFigure child = childEditPart.getFigure();
@@ -95,6 +91,6 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 	}
 
 	private int getYIndexOf(AxisElement element) {
-		return positions.inverse().get(element);
+		return positioner.getPositionOf(element);
 	}
 }

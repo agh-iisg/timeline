@@ -42,13 +42,13 @@ public class TimelineView extends ViewPart {
 		diagram.addAxisElement(AxisElement.builder().name("name 1")
 				.description("description 1").owner(axis).date(0L).build());
 		diagram.addAxis(axis);
-		axis = new Axis("Firma klusek");
-		diagram.addAxisElement(AxisElement.builder().name("name 2")
-				.description("description 2").owner(axis).date(10L).build());
-		diagram.addAxis(axis);
+		Axis axis2 = new Axis("Firma klusek");
+		diagram.addAxis(axis2);
 		axis = new Axis("Firma zombie");
 		diagram.addAxisElement(AxisElement.builder().name("name 3")
 				.description("description 3").owner(axis).date(5L).build());
+		diagram.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis2).date(2000L).build());
 		diagram.addAxis(axis);
 
 		return diagram;

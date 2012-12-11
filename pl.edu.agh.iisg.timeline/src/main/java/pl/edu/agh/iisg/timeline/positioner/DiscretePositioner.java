@@ -1,33 +1,54 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.TreeMultimap;
+
+/**
+ * Positioner for the discrete timeline. It positions the elements in the groups
+ * representing the same time on the axis.
+ *
+ * XXX [leszko] if it works too slow, it can be optimised by using only arrays
+ * in the logic.
+ *
+ * @author leszko
+ *
+ */
 public class DiscretePositioner implements IPositioner {
 
-	private static final long GROUP_GAP = 50;
-	private static final long ELEMENT_GAP = 120;
+	private static final int SEPARATOR_GAP = 50;
+	private static final int ELEMENT_GAP = 120;
 
 	private long start = 0L;
 
 	private long interval;
+
+	private SortedMap<Integer, Long> separators = new TreeMap<>();
+
+	private Map<AxisElement, Integer> positions = new HashMap<>();
+
+	private Multimap<Integer, AxisElement> elementsByPosition = TreeMultimap
+			.create();
 
 	public DiscretePositioner(long interval) {
 		this.interval = interval;
 	}
 
 	@Override
-	public SortedMap<Integer, AxisElement> position(
-			Collection<AxisElement> elements) {
+	public void position(Collection<AxisElement> elements) {
 		long[] dates = extractDates(elements);
-		List<Integer> groups = groupByIntervals(dates);
-		return positionInGroups(elements, groups);
+		SortedMap<Long, Integer> groups = groupByIntervals(dates);
+		positionInGroups(elements, groups);
 	}
 
 	private long[] extractDates(Collection<AxisElement> elements) {
@@ -39,36 +60,47 @@ public class DiscretePositioner implements IPositioner {
 		return res;
 	}
 
-	private List<Integer> groupByIntervals(long[] dates) {
-		List<Integer> groups = new LinkedList<>();
-		long intStart = (dates[0] - start) % interval;
+	private SortedMap<Long, Integer> groupByIntervals(long[] dates) {
+		SortedMap<Long, Integer> groups = new TreeMap<>();
+		long intStart = dates[0] - ((dates[0] - start) % interval);
 		int group = 0;
 		for (long date : dates) {
 			if (date < intStart + interval) {
 				group++;
 			} else {
-				groups.add(group);
+				groups.put(intStart, group);
 				group = 1;
-				intStart = (date - intStart) % interval;
+				intStart = date - ((date - intStart) % interval);
 			}
 		}
-		groups.add(group);
+		groups.put(intStart, group);
 		return groups;
 	}
 
-	private SortedMap<Integer, AxisElement> positionInGroups(
-			Collection<AxisElement> elements, List<Integer> groups) {
-		SortedMap<Integer, AxisElement> res = new TreeMap<>();
-		int x = 0;
+	private void positionInGroups(Collection<AxisElement> elements,
+			SortedMap<Long, Integer> groups) {
+		Map<Axis, Integer> pos = new HashMap<>();
+		int posMax = 0;
 		Iterator<AxisElement> itr = elements.iterator();
-		for (Integer group : groups) {
-			x += GROUP_GAP;
-			for (int i = 0; i < group; i++) {
-				res.put(x, itr.next());
-				x += ELEMENT_GAP;
+		for (Map.Entry<Long, Integer> group : groups.entrySet()) {
+			long date = group.getKey();
+			int n = group.getValue();
+			separators.put(posMax, date);
+			posMax += SEPARATOR_GAP;
+			for (int i = 0; i < n; i++) {
+				AxisElement element = itr.next();
+				Axis axis = element.getAxis();
+				Integer posForAxis = pos.get(axis);
+				if (posForAxis == null || posForAxis < posMax) {
+					posForAxis = posMax;
+				}
+				positions.put(element, posForAxis);
+				elementsByPosition.put(posForAxis, element);
+				posForAxis += ELEMENT_GAP;
+				pos.put(axis, posForAxis);
 			}
+			posMax = Collections.max(pos.values());
 		}
-		return res;
 	}
 
 	public void setGranulation(long granulation) {
@@ -77,5 +109,10 @@ public class DiscretePositioner implements IPositioner {
 
 	public void setStart(long start) {
 		this.start = start;
+	}
+
+	@Override
+	public int getPositionOf(AxisElement element) {
+		return positions.get(element);
 	}
 }

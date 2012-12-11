@@ -72,7 +72,7 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	// BEGIN Getters & Setters
 
-	public Axis getOwner() {
+	public Axis getAxis() {
 		return owner;
 	}
 

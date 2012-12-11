@@ -1,6 +1,6 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.SortedMap;
 
 import pl.edu.agh.iisg.timeline.model.AxisElement;
@@ -22,6 +22,6 @@ public interface IPositioner {
 	 *            timeline elements
 	 * @return positions of timeline elements
 	 */
-	SortedMap<Integer, AxisElement> position(List<AxisElement> elements);
+	SortedMap<Integer, AxisElement> position(Collection<AxisElement> elements);
 
 }

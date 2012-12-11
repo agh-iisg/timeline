@@ -1,5 +1,6 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,13 +23,14 @@ public class DiscretePositioner implements IPositioner {
 	}
 
 	@Override
-	public SortedMap<Integer, AxisElement> position(List<AxisElement> elements) {
+	public SortedMap<Integer, AxisElement> position(
+			Collection<AxisElement> elements) {
 		long[] dates = extractDates(elements);
 		List<Integer> groups = groupByIntervals(dates);
 		return positionInGroups(elements, groups);
 	}
 
-	private long[] extractDates(List<AxisElement> elements) {
+	private long[] extractDates(Collection<AxisElement> elements) {
 		long[] res = new long[elements.size()];
 		int i = 0;
 		for (AxisElement e : elements) {
@@ -55,7 +57,7 @@ public class DiscretePositioner implements IPositioner {
 	}
 
 	private SortedMap<Integer, AxisElement> positionInGroups(
-			List<AxisElement> elements, List<Integer> groups) {
+			Collection<AxisElement> elements, List<Integer> groups) {
 		SortedMap<Integer, AxisElement> res = new TreeMap<>();
 		int x = 0;
 		Iterator<AxisElement> itr = elements.iterator();

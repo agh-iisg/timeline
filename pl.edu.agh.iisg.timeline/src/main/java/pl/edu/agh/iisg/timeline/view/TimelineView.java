@@ -1,7 +1,5 @@
 package pl.edu.agh.iisg.timeline.view;
 
-import java.util.Date;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
@@ -41,19 +39,16 @@ public class TimelineView extends ViewPart {
 		TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L)
 				.maxDateTime(10L).initialDate(5L).build();
 		Axis axis = new Axis("Firma krewniak");
-		axis.addAxisElement(AxisElement.builder().name("name 1")
-				.description("description 1").owner(axis).date(0L)
-				.build());
+		diagram.addAxisElement(AxisElement.builder().name("name 1")
+				.description("description 1").owner(axis).date(0L).build());
 		diagram.addAxis(axis);
 		axis = new Axis("Firma klusek");
-		axis.addAxisElement(AxisElement.builder().name("name 2")
-				.description("description 2").owner(axis).date(10L)
-				.build());
+		diagram.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis).date(10L).build());
 		diagram.addAxis(axis);
 		axis = new Axis("Firma zombie");
-		axis.addAxisElement(AxisElement.builder().name("name 3")
-				.description("description 3").owner(axis).date(5L)
-				.build());
+		diagram.addAxisElement(AxisElement.builder().name("name 3")
+				.description("description 3").owner(axis).date(5L).build());
 		diagram.addAxis(axis);
 
 		return diagram;

@@ -38,34 +38,19 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	// BEGIN Constructors
 
-	public AxisElement(Axis owner, String name, String description, Date date,
+	public AxisElement(Axis owner, String name, String description, Long date,
 			Long duration) {
-		this(owner, name, date);
+		this.owner = owner;
+		this.name = name;
 		this.description = description;
+		this.date = date;
 		this.duration = duration;
+
+		init();
 	}
 
-	public AxisElement(Axis owner, String name, Date date) {
-		this();
-		setOwner(owner);
-		setName(name);
-		setDate(date);
-
-	}
-
-	private AxisElement() {
+	private void init() {
 		pcph = new PropertyChangeProviderHelper(this);
-	}
-
-	protected void validate() {
-		Preconditions.checkNotNull(pcph);
-		Preconditions.checkNotNull(owner);
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(date);
-		if (duration != null) {
-			Preconditions.checkArgument(duration >= 0);
-		}
-
 	}
 
 	// END Constructors
@@ -138,12 +123,6 @@ public class AxisElement implements Comparable<AxisElement>,
 	// BEGIN Overridden Methods
 
 	@Override
-	public int compareTo(AxisElement o) {
-		Preconditions.checkNotNull(o);
-		return date.compareTo(o.date);
-	}
-
-	@Override
 	public void addPropertyChangeListener(PropertyChangeListener l) {
 		pcph.addPropertyChangeListener(l);
 
@@ -153,6 +132,28 @@ public class AxisElement implements Comparable<AxisElement>,
 	public void removePropertyChangeListener(PropertyChangeListener l) {
 		pcph.removePropertyChangeListener(l);
 
+	}
+
+	@Override
+	public int compareTo(AxisElement o) {
+		Preconditions.checkNotNull(o);
+		int res = date.compareTo(o.date);
+		if (res != 0) {
+			return res;
+		}
+		res = name.compareTo(o.name);
+		if (res != 0) {
+			return res;
+		}
+		res = description.compareTo(o.description);
+		if (res != 0) {
+			return res;
+		}
+		res = duration.compareTo(o.duration);
+		if (res != 0) {
+			return res;
+		}
+		return owner.hashCode() - o.owner.hashCode();
 	}
 
 	@Override
@@ -181,45 +182,59 @@ public class AxisElement implements Comparable<AxisElement>,
 	}
 
 	public static class AxisElementBuilder {
-		private AxisElement axisElement;
 
-		private AxisElementBuilder() {
-			axisElement = new AxisElement();
-		}
+		private Axis owner = null;
+
+		private String name = null;
+
+		private String description = null;
+
+		private Long date = null;
+
+		private Long duration = 0L;
 
 		public AxisElementBuilder owner(Axis owner) {
-			axisElement.setOwner(owner);
+			this.owner = owner;
 			return this;
 		}
 
 		public AxisElementBuilder name(String name) {
-			axisElement.setName(name);
+			this.name = name;
 			return this;
 		}
 
 		public AxisElementBuilder date(Long date) {
-			axisElement.setDate(date);
+			this.date = date;
 			return this;
 		}
 
 		public AxisElementBuilder date(Date date) {
-			axisElement.setDate(date);
+			this.date = date.getTime();
 			return this;
 		}
 
 		public AxisElementBuilder description(String desc) {
-			axisElement.setDescription(desc);
+			this.description = desc;
 			return this;
 		}
 
 		public AxisElementBuilder setDuration(Long duration) {
-			axisElement.setDuration(duration);
+			this.duration = duration;
 			return this;
 		}
 
 		public AxisElement build() {
-			axisElement.validate();
-			return axisElement;
+			validate();
+			return new AxisElement(owner, name, description, date, duration);
+		}
+
+		protected void validate() {
+			Preconditions.checkNotNull(owner);
+			Preconditions.checkNotNull(name);
+			Preconditions.checkNotNull(date);
+			if (duration != null) {
+				Preconditions.checkArgument(duration >= 0);
+			}
 		}
 	}
 

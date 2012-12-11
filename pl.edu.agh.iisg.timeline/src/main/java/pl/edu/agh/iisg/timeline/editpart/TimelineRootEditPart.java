@@ -15,9 +15,11 @@ import pl.edu.agh.iisg.timeline.view.EventsScrollPane;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
-	private EventsLayer eventsLayer;
+	private Layer eventsLayer;
 
 	private Layer axesLayer;
+
+	private Layer separatorsLayer;
 
 	@Override
 	protected IFigure createFigure() {
@@ -31,11 +33,18 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 		root.add(axesLayer);
 		layout.setConstraint(axesLayer, root.getBounds());
 
-		eventsLayer = new EventsLayer();
-		eventsLayer.setBorder(new MarginBorder(70, 5, 0, 0));
-		ScrollPane scroll = new EventsScrollPane(eventsLayer);
+		Layer eventsLayeredPane = new LayeredPane();
+		eventsLayeredPane.setBorder(new MarginBorder(70, 5, 0, 0));
+		ScrollPane scroll = new EventsScrollPane(eventsLayeredPane);
 		root.add(scroll, "Events");
 		layout.setConstraint(scroll, root.getBounds());
+
+		eventsLayer = new EventsLayer();
+		eventsLayeredPane.add(eventsLayer);
+
+		separatorsLayer = new Layer();
+		separatorsLayer.setLayoutManager(new XYLayout());
+		eventsLayeredPane.add(separatorsLayer);
 
 		return root;
 	}
@@ -46,5 +55,9 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 
 	public Layer getEventsLayer() {
 		return eventsLayer;
+	}
+
+	public Layer getSeparatorsLayer() {
+		return separatorsLayer;
 	}
 }

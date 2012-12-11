@@ -49,6 +49,15 @@ public class TimelineView extends ViewPart {
 				.description("description 3").owner(axis).date(5L).build());
 		diagram.addAxisElement(AxisElement.builder().name("name 2")
 				.description("description 2").owner(axis2).date(2000L).build());
+		diagram.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis2).date(4000L).build());
+		diagram.addAxisElement(AxisElement.builder().name("name 22")
+				.description("description 122").owner(axis2).date(4000L)
+				.build());
+		diagram.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis2).date(8000L).build());
+		diagram.addAxisElement(AxisElement.builder().name("name 2")
+				.description("description 2").owner(axis2).date(10000L).build());
 		diagram.addAxis(axis);
 
 		return diagram;

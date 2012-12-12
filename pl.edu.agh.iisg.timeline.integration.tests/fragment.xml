@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="pl.edu.agh.iisg.timeline.TimelineViewTest"
+            id="pl.edu.agh.iisg.timeline.integration.tests.view2"
+            name="Timeline View Test"
+            restorable="true">
+      </view>
+   </extension>
+
+</fragment>

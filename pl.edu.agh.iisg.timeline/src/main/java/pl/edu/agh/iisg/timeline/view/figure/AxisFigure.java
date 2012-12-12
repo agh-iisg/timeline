@@ -1,12 +1,12 @@
 package pl.edu.agh.iisg.timeline.view.figure;
 
+import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.Polyline;
-import org.eclipse.draw2d.ToolbarLayout;
-import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.RectangleFigure;
 
 public class AxisFigure extends Figure {
 
@@ -18,30 +18,37 @@ public class AxisFigure extends Figure {
 	public AxisFigure(String name) {
 		init();
 
-		add(createLabel(name));
-		add(createLine());
+		addLabel(name);
+		addLine();
 
 	}
 
 	private void init() {
-		setLayoutManager(new ToolbarLayout());
+		setLayoutManager(new BorderLayout());
 		setPreferredSize(WIDTH, LENGTH + LABEL_HEIGHT);
 	}
 
-	private IFigure createLabel(String name) {
+	private void addLabel(String name) {
 		Label label = new Label(name);
-		return label;
+		add(label);
+		setConstraint(label, BorderLayout.TOP);
 	}
 
-	private IFigure createLine() {
-		Polyline line = new Polyline();
-		line.addPoint(new Point(WIDTH / 2, LABEL_HEIGHT));
-		line.addPoint(new Point(WIDTH / 2, LENGTH + LABEL_HEIGHT));
+	private void addLine() {
+		Figure figure = new Figure();
+		GridLayout layout = new GridLayout(1, false);
+		layout.marginWidth = WIDTH / 2;
+		figure.setLayoutManager(layout);
+		add(figure);
+		setConstraint(figure, BorderLayout.CENTER);
 
-		line.setForegroundColor(ColorConstants.green);
-		line.setLineWidth(2);
+		RectangleFigure rect = new RectangleFigure();
+		rect.setForegroundColor(ColorConstants.green);
+		rect.setBackgroundColor(ColorConstants.green);
+		rect.setSize(3, 10);
 
-		return line;
+		figure.add(rect);
+		figure.setConstraint(rect, new GridData(GridData.FILL_VERTICAL));
 	}
 
 }

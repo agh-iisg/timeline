@@ -4,12 +4,12 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 
 public class SeparatorFigure extends Figure {
-
-	public static int LENGTH = 4000;
 
 	public SeparatorFigure(String label) {
 		init();
@@ -24,11 +24,15 @@ public class SeparatorFigure extends Figure {
 	private IFigure createLine() {
 		RectangleFigure rect = new RectangleFigure();
 		rect.setForegroundColor(ColorConstants.orange);
+		rect.setBackgroundColor(ColorConstants.orange);
+		rect.setPreferredSize(new Dimension(10, 5));
 		return rect;
 	}
 
 	private IFigure createLabel(String labelName) {
 		Label label = new Label(labelName);
+		label.setLabelAlignment(PositionConstants.LEFT);
+		label.setForegroundColor(ColorConstants.black);
 		return label;
 	}
 }

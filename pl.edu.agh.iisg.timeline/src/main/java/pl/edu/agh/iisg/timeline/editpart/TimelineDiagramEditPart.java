@@ -24,7 +24,6 @@ import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
-import pl.edu.agh.iisg.timeline.view.figure.SeparatorFigure;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
@@ -73,12 +72,6 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		Layer layer = ((TimelineRootEditPart) getRoot()).getSeparatorsLayer();
-		Figure separator = new SeparatorFigure("ALA");
-		layer.add(separator);
-		layer.setConstraint(separator, new Rectangle(new Point(0, 50),
-				new Dimension(100, 100)));
-
 		if (childEditPart instanceof AxisEditPart) {
 			addAxisChildVisual((AxisEditPart) childEditPart, index);
 		} else if (childEditPart instanceof AxisElementEditPart) {
@@ -120,7 +113,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		IFigure figure = childEditPart.getFigure();
 		layer.add(figure);
 		layer.setConstraint(figure, new Rectangle(new Point(0, position),
-				new Dimension(100, 100)));
+				new Dimension(1000, 100)));
 	}
 
 	private int getYIndexOf(AxisElement element) {

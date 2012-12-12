@@ -102,8 +102,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		IFigure child = childEditPart.getFigure();
 		parent.add(child);
 		int yIndex = getYIndexOf((AxisElement) childEditPart.getModel());
-		parent.setConstraint(child, new Rectangle(0, yIndex,
-				TimelineConstants.ELEMENT_WIDTH, 100));
+		parent.setConstraint(child, new Rectangle(5, yIndex,
+				TimelineConstants.ELEMENT_WIDTH, 80));
 	}
 
 	private void addSeparatorChildVisual(SeparatorEditPart childEditPart) {

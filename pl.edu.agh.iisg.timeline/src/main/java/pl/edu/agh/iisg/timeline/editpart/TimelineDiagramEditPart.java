@@ -85,12 +85,12 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		IFigure axesLayerChild = childEditPart.getFigure();
 		((TimelineRootEditPart) getRoot()).getAxesLayer().add(axesLayerChild);
 
-		IFigure axisLayer = createXYfigure();
+		IFigure axisLayer = createXYFigure();
 		((TimelineRootEditPart) getRoot()).getEventsLayer().add(axisLayer);
 		axisLayers.put((Axis) childEditPart.getModel(), axisLayer);
 	}
 
-	private IFigure createXYfigure() {
+	private IFigure createXYFigure() {
 		Figure figure = new Figure();
 		figure.setLayoutManager(new XYLayout());
 		return figure;
@@ -101,8 +101,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		IFigure parent = axisLayers.get(model.getAxis());
 		IFigure child = childEditPart.getFigure();
 		parent.add(child);
-		int yIndex = getYIndexOf((AxisElement) childEditPart.getModel());
-		parent.setConstraint(child, new Rectangle(5, yIndex,
+		int y = getYIndexOf((AxisElement) childEditPart.getModel());
+		parent.setConstraint(child, new Rectangle(5, y,
 				TimelineConstants.ELEMENT_WIDTH, 80));
 	}
 

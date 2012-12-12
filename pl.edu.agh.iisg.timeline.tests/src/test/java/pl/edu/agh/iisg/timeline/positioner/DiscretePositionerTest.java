@@ -1,5 +1,6 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -29,6 +30,9 @@ public class DiscretePositionerTest {
 		// then
 		assertTrue(positioner.getPositionOf(element1) < positioner
 				.getPositionOf(element2));
+		assertEquals(1, positioner.getSeparators().size());
+		assertTrue(positioner.getSeparators().firstKey() < positioner
+				.getPositionOf(element1));
 	}
 
 }

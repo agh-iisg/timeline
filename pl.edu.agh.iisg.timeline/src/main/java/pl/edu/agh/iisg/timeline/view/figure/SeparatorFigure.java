@@ -7,7 +7,6 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.ToolbarLayout;
-import org.eclipse.draw2d.geometry.Dimension;
 
 public class SeparatorFigure extends Figure {
 
@@ -25,7 +24,7 @@ public class SeparatorFigure extends Figure {
 		RectangleFigure rect = new RectangleFigure();
 		rect.setForegroundColor(ColorConstants.orange);
 		rect.setBackgroundColor(ColorConstants.orange);
-		rect.setPreferredSize(new Dimension(10, 5));
+		rect.setPreferredSize(10, 5);
 		return rect;
 	}
 

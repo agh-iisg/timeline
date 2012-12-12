@@ -29,7 +29,6 @@ public class EventFigure extends RectangleFigure {
 	private void init() {
 		setBackgroundColor(BACKGROUND_COLOR);
 		setLayoutManager(new ToolbarLayout());
-		// setPreferredSize(220, 70);
 	}
 
 	private Label createTitleLabel(String title) {

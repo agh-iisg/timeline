@@ -1,6 +1,7 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
 import java.util.Collection;
+import java.util.SortedMap;
 
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 
@@ -23,5 +24,9 @@ public interface IPositioner {
 	void position(Collection<AxisElement> elements);
 
 	int getPositionOf(AxisElement element);
+
+	int getPositionOfSeparator(Long separator);
+
+	SortedMap<Integer, Long> getSeparators();
 
 }

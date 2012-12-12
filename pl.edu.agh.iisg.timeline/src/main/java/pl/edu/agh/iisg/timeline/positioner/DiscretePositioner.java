@@ -35,6 +35,8 @@ public class DiscretePositioner implements IPositioner {
 
 	private SortedMap<Integer, Long> separators = new TreeMap<>();
 
+	private Map<Long, Integer> separatorPosition = new HashMap<>();
+
 	private Map<AxisElement, Integer> positions = new HashMap<>();
 
 	private Multimap<Integer, AxisElement> elementsByPosition = TreeMultimap
@@ -86,6 +88,7 @@ public class DiscretePositioner implements IPositioner {
 			long date = group.getKey();
 			int n = group.getValue();
 			separators.put(posMax, date);
+			separatorPosition.put(date, posMax);
 			posMax += SEPARATOR_GAP;
 			for (int i = 0; i < n; i++) {
 				AxisElement element = itr.next();
@@ -115,4 +118,15 @@ public class DiscretePositioner implements IPositioner {
 	public int getPositionOf(AxisElement element) {
 		return positions.get(element);
 	}
+
+	@Override
+	public SortedMap<Integer, Long> getSeparators() {
+		return separators;
+	}
+
+	@Override
+	public int getPositionOfSeparator(Long separator) {
+		return separatorPosition.get(separator);
+	}
+
 }

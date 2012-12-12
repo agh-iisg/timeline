@@ -1,5 +1,7 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
+import java.util.Date;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
@@ -15,7 +17,7 @@ public class SeparatorEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected IFigure createFigure() {
 		Separator separator = (Separator) getModel();
-		return new SeparatorFigure(String.valueOf(separator.getValue()));
+		return new SeparatorFigure(new Date(separator.getValue()).toString());
 	}
 
 	@Override

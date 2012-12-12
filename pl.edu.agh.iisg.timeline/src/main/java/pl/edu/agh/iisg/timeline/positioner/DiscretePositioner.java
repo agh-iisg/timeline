@@ -26,7 +26,7 @@ import com.google.common.collect.TreeMultimap;
  */
 public class DiscretePositioner implements IPositioner {
 
-	private static final int SEPARATOR_GAP = 100;
+	private static final int SEPARATOR_GAP = 70;
 	private static final int ELEMENT_GAP = 120;
 
 	private long start = 0L;
@@ -87,8 +87,7 @@ public class DiscretePositioner implements IPositioner {
 		for (Map.Entry<Long, Integer> group : groups.entrySet()) {
 			long date = group.getKey();
 			int n = group.getValue();
-			separators.put(posMax, date);
-			separatorPosition.put(date, posMax);
+			addSeparator(posMax, date);
 			posMax += SEPARATOR_GAP;
 			for (int i = 0; i < n; i++) {
 				AxisElement element = itr.next();
@@ -104,6 +103,12 @@ public class DiscretePositioner implements IPositioner {
 			}
 			posMax = Collections.max(pos.values());
 		}
+	}
+
+	private void addSeparator(int position, long date) {
+		int sepPos = position + SEPARATOR_GAP / 2;
+		separators.put(sepPos, date);
+		separatorPosition.put(date, sepPos);
 	}
 
 	public void setGranulation(long granulation) {

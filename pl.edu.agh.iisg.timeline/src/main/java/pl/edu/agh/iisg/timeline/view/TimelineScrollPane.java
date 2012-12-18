@@ -4,11 +4,11 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.ScrollPane;
 
-public class EventsScrollPane extends ScrollPane {
+public class TimelineScrollPane extends ScrollPane {
 
 	private final Layer layer;
 
-	public EventsScrollPane(Layer eventsLayer) {
+	public TimelineScrollPane(Layer eventsLayer) {
 		this.layer = eventsLayer;
 
 		init();

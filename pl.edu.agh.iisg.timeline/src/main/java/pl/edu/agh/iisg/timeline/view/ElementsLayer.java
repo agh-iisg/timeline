@@ -5,11 +5,11 @@ import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Layer;
 
-public class EventsLayer extends Layer {
+public class ElementsLayer extends Layer {
 
 	private final FlowLayout layout = new FlowLayout();
 
-	public EventsLayer() {
+	public ElementsLayer() {
 		init();
 	}
 

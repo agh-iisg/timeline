@@ -4,7 +4,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import pl.edu.agh.iisg.timeline.model.AxisElement;
-import pl.edu.agh.iisg.timeline.view.figure.EventFigure;
+import pl.edu.agh.iisg.timeline.view.figure.ElementFigure;
 
 public class AxisElementEditPart extends AbstractGraphicalEditPart {
 
@@ -15,7 +15,7 @@ public class AxisElementEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected IFigure createFigure() {
 		AxisElement model = (AxisElement) getModel();
-		return new EventFigure(model.getName(), model.getDescription());
+		return new ElementFigure(model.getName(), model.getDescription());
 	}
 
 	@Override

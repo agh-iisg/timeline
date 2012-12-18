@@ -10,7 +10,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 
-public class EventFigure extends RectangleFigure {
+public class ElementFigure extends RectangleFigure {
 
 	private final static Color BACKGROUND_COLOR = new Color(
 			Display.getCurrent(), 240, 240, 240);
@@ -19,7 +19,7 @@ public class EventFigure extends RectangleFigure {
 			new FontData(Display.getCurrent().getSystemFont().getFontData()[0]
 					.getName(), 10, SWT.BOLD));
 
-	public EventFigure(String title, String description) {
+	public ElementFigure(String title, String description) {
 		init();
 
 		add(createTitleLabel(title));

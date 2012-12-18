@@ -10,43 +10,65 @@ import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 
-import pl.edu.agh.iisg.timeline.view.EventsLayer;
-import pl.edu.agh.iisg.timeline.view.EventsScrollPane;
+import pl.edu.agh.iisg.timeline.view.ElementsLayer;
+import pl.edu.agh.iisg.timeline.view.TimelineScrollPane;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
-	private Layer eventsLayer;
-
 	private Layer axesLayer;
+
+	private Layer elementsLayer;
 
 	private Layer separatorsLayer;
 
 	@Override
 	protected IFigure createFigure() {
+		Figure root = createRoot();
 
+		createAxesLayer(root);
+		Layer scrollLayeredPane = createScrollLayeredPane(root);
+		createElementsLayer(scrollLayeredPane);
+		createSeparatorsLayer(scrollLayeredPane);
+
+		return root;
+	}
+
+	private static Figure createRoot() {
 		Figure root = new LayeredPane();
 		XYLayout layout = new XYLayout();
 		root.setLayoutManager(layout);
+		return root;
+	}
 
+	private void createAxesLayer(Figure root) {
 		axesLayer = new Layer();
 		axesLayer.setLayoutManager(new FlowLayout());
 		root.add(axesLayer);
-		layout.setConstraint(axesLayer, root.getBounds());
+		root.setConstraint(axesLayer, root.getBounds());
+	}
 
-		Layer eventsLayeredPane = new LayeredPane();
-		eventsLayeredPane.setBorder(new MarginBorder(70, 5, 0, 0));
-		ScrollPane scroll = new EventsScrollPane(eventsLayeredPane);
+	private Layer createScrollLayeredPane(Figure root) {
+		Layer scrollLayeredPane = new LayeredPane();
+		scrollLayeredPane.setBorder(new MarginBorder(70, 5, 0, 0));
+		ScrollPane scroll = createScrollPane(scrollLayeredPane);
 		root.add(scroll, "Events");
-		layout.setConstraint(scroll, root.getBounds());
+		root.setConstraint(scroll, root.getBounds());
+		return scrollLayeredPane;
+	}
 
-		eventsLayer = new EventsLayer();
-		eventsLayeredPane.add(eventsLayer);
+	private ScrollPane createScrollPane(Layer layer) {
+		return new TimelineScrollPane(layer);
+	}
 
+	private void createElementsLayer(Layer layer) {
+		elementsLayer = new ElementsLayer();
+		layer.add(elementsLayer);
+	}
+
+	private void createSeparatorsLayer(Layer layer) {
 		separatorsLayer = new Layer();
 		separatorsLayer.setLayoutManager(new XYLayout());
-		eventsLayeredPane.add(separatorsLayer);
-
-		return root;
+		layer.add(separatorsLayer);
 	}
 
 	public Layer getAxesLayer() {
@@ -54,7 +76,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 	}
 
 	public Layer getEventsLayer() {
-		return eventsLayer;
+		return elementsLayer;
 	}
 
 	public Layer getSeparatorsLayer() {

@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.editpart;
+package pl.edu.agh.iisg.timeline.editpart.dynamic;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,6 +10,9 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import pl.edu.agh.iisg.timeline.editpart.dynamic.DynamicModelRefresher;
+import pl.edu.agh.iisg.timeline.editpart.dynamic.IRangeControl;
+import pl.edu.agh.iisg.timeline.editpart.dynamic.ModelRefresh;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;

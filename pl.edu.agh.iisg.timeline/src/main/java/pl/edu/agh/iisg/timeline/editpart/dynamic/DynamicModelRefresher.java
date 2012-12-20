@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.editpart;
+package pl.edu.agh.iisg.timeline.editpart.dynamic;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.editpart;
+package pl.edu.agh.iisg.timeline.editpart.dynamic;
 
 /**
  * A class designed to control and determine how much of the model space should be visible. When the scroll position if changed the range of

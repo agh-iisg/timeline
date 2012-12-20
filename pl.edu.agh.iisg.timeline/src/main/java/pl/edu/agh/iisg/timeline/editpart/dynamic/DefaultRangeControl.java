@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.editpart;
+package pl.edu.agh.iisg.timeline.editpart.dynamic;
 
 /**
  * Default implementation range control. It has some inertia - not every change of the scroll provokes the change of range.

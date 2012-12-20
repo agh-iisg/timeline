@@ -1,10 +1,12 @@
-package pl.edu.agh.iisg.timeline.editpart;
+package pl.edu.agh.iisg.timeline.editpart.dynamic;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import pl.edu.agh.iisg.timeline.editpart.dynamic.DefaultRangeControl;
 
 public class DefaultRangeControlTest {
 

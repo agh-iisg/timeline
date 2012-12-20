@@ -27,7 +27,7 @@ public class DefaultRangeControl implements IRangeControl {
     }
 
     public DefaultRangeControl() {
-        this(100, 200, 1000);
+        this(850, 300, 4000);
     }
 
     @Override

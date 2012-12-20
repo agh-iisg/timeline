@@ -16,6 +16,10 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
+import pl.edu.agh.iisg.timeline.editpart.dynamic.DefaultRangeControl;
+import pl.edu.agh.iisg.timeline.editpart.dynamic.DynamicModelRefresher;
+import pl.edu.agh.iisg.timeline.editpart.dynamic.IModelRefresher;
+import pl.edu.agh.iisg.timeline.editpart.dynamic.ModelRefresh;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.Separator;
@@ -26,87 +30,95 @@ import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
-	private IPositioner positioner = new DiscretePositioner(1000);
+    private IPositioner positioner = new DiscretePositioner(1000);
 
-	private Map<Axis, IFigure> axisLayers = new HashMap<>();
+    private IModelRefresher refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
 
-	public TimelineDiagramEditPart(TimelineDiagram model) {
-		super.setModel(model);
-		initElementPositions();
-	}
+    private Map<Axis, IFigure> axisLayers = new HashMap<>();
 
-	private void initElementPositions() {
-		Collection<AxisElement> elements = ((TimelineDiagram) getModel())
-				.getAxisElements();
-		positioner.position(elements);
-	}
+    public TimelineDiagramEditPart(TimelineDiagram model) {
+        super.setModel(model);
+        initElementPositions();
+    }
 
-	@Override
-	protected IFigure createFigure() {
-		return new Figure();
-	}
+    private void initElementPositions() {
+        Collection<AxisElement> elements = ((TimelineDiagram)getModel()).getAxisElements();
+        positioner.position(elements);
+    }
 
-	@Override
-	protected void createEditPolicies() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected IFigure createFigure() {
+        return new Figure();
+    }
 
-	@Override
-	protected List<Object> getModelChildren() {
-		List<Object> list = new LinkedList<>();
-		list.addAll(((TimelineDiagram) getModel()).getAxes());
-		list.addAll(((TimelineDiagram) getModel()).getAxisElements());
-		list.addAll(positioner.getSeparatorsByPosition(0, 1000000));
-		return list;
-	}
+    @Override
+    protected void createEditPolicies() {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (childEditPart instanceof AxisEditPart) {
-			addAxisChildVisual((AxisEditPart) childEditPart, index);
-		} else if (childEditPart instanceof AxisElementEditPart) {
-			addAxisElementChildVisual((AxisElementEditPart) childEditPart);
-		} else if (childEditPart instanceof SeparatorEditPart) {
-			addSeparatorChildVisual((SeparatorEditPart) childEditPart);
-		}
-	}
+    @Override
+    protected List<Object> getModelChildren() {
+        List<Object> list = new LinkedList<>();
+        list.addAll(((TimelineDiagram)getModel()).getAxes());
 
-	private void addAxisChildVisual(AxisEditPart childEditPart, int index) {
-		IFigure axesLayerChild = childEditPart.getFigure();
-		((TimelineRootEditPart) getRoot()).getAxesLayer().add(axesLayerChild);
+        ModelRefresh refresh = refresher.refresh(0);
+        list.addAll(refresh.getElementsToAdd());
+        list.addAll(refresh.getSeparatorsToAdd());
 
-		IFigure axisLayer = createXYFigure();
-		((TimelineRootEditPart) getRoot()).getEventsLayer().add(axisLayer);
-		axisLayers.put((Axis) childEditPart.getModel(), axisLayer);
-	}
+        return list;
+    }
 
-	private IFigure createXYFigure() {
-		Figure figure = new Figure();
-		figure.setLayoutManager(new XYLayout());
-		return figure;
-	}
+    @Override
+    protected void addChildVisual(EditPart childEditPart, int index) {
+        if (childEditPart instanceof AxisEditPart) {
+            addAxisChildVisual((AxisEditPart)childEditPart, index);
+        } else if (childEditPart instanceof AxisElementEditPart) {
+            addAxisElementChildVisual((AxisElementEditPart)childEditPart);
+        } else if (childEditPart instanceof SeparatorEditPart) {
+            addSeparatorChildVisual((SeparatorEditPart)childEditPart);
+        }
+    }
 
-	private void addAxisElementChildVisual(AxisElementEditPart childEditPart) {
-		AxisElement model = (AxisElement) childEditPart.getModel();
-		IFigure parent = axisLayers.get(model.getAxis());
-		IFigure child = childEditPart.getFigure();
-		parent.add(child);
-		int y = getYIndexOf((AxisElement) childEditPart.getModel());
-		parent.setConstraint(child, new Rectangle(5, y,
-				TimelineConstants.ELEMENT_WIDTH, 80));
-	}
+    private void addAxisChildVisual(AxisEditPart childEditPart, int index) {
+        IFigure axesLayerChild = childEditPart.getFigure();
+        ((TimelineRootEditPart)getRoot()).getAxesLayer().add(axesLayerChild);
 
-	private void addSeparatorChildVisual(SeparatorEditPart childEditPart) {
-		Separator model = (Separator) childEditPart.getModel();
-		int position = positioner.getPositionOfSeparator(model.getValue());
-		Layer layer = ((TimelineRootEditPart) getRoot()).getSeparatorsLayer();
-		IFigure figure = childEditPart.getFigure();
-		layer.add(figure);
-		layer.setConstraint(figure, new Rectangle(new Point(0, position),
-				new Dimension(1000, 100)));
-	}
+        IFigure axisLayer = createXYFigure();
+        ((TimelineRootEditPart)getRoot()).getEventsLayer().add(axisLayer);
+        axisLayers.put((Axis)childEditPart.getModel(), axisLayer);
+    }
 
-	private int getYIndexOf(AxisElement element) {
-		return positioner.getPositionOf(element);
-	}
+    private IFigure createXYFigure() {
+        Figure figure = new Figure();
+        figure.setLayoutManager(new XYLayout());
+        return figure;
+    }
+
+    private void addAxisElementChildVisual(AxisElementEditPart childEditPart) {
+        AxisElement model = (AxisElement)childEditPart.getModel();
+        IFigure parent = axisLayers.get(model.getAxis());
+        IFigure child = childEditPart.getFigure();
+        parent.add(child);
+        int y = getYIndexOf((AxisElement)childEditPart.getModel());
+        parent.setConstraint(child, new Rectangle(5, y, TimelineConstants.ELEMENT_WIDTH, 80));
+    }
+
+    private void addSeparatorChildVisual(SeparatorEditPart childEditPart) {
+        Separator model = (Separator)childEditPart.getModel();
+        int position = positioner.getPositionOfSeparator(model.getValue());
+        Layer layer = ((TimelineRootEditPart)getRoot()).getSeparatorsLayer();
+        IFigure figure = childEditPart.getFigure();
+        layer.add(figure);
+        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(1000, 100)));
+    }
+
+    private int getYIndexOf(AxisElement element) {
+        return positioner.getPositionOf(element);
+    }
+
+    public void notifyScroll(int position) {
+        System.out.println("scroll : " + position);
+        // TODO refresh position
+    }
+
 }

@@ -25,7 +25,6 @@ final public class DynamicModelRefresher implements IModelRefresher {
     @Override
     public ModelRefresh refresh(int scrollPos) {
         range.setScrollPosition(scrollPos);
-
         if (range.isChanged()) {
             return refreshRangeChanged();
         } else {

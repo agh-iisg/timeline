@@ -3,26 +3,11 @@ package pl.edu.agh.iisg.timeline.model;
 import static com.google.common.base.Objects.equal;
 import static java.util.Objects.hash;
 
-import java.beans.PropertyChangeListener;
 import java.util.Date;
-
-import pl.edu.agh.iisg.common.property.IPropertyChangeProvider;
-import pl.edu.agh.iisg.common.property.PropertyChangeProviderHelper;
 
 import com.google.common.base.Preconditions;
 
-public class AxisElement implements Comparable<AxisElement>,
-		IPropertyChangeProvider {
-
-	private static final String OWNER = "AxisElement.OWNER";
-
-	private static final String NAME = "AxisElement.NAME";
-
-	private static final String DESCRIPTION = "AxisElement.DESCRIPTION";
-
-	private static final String DATE = "AxisElement.DATE";
-
-	private static final String DURATION = "AxisElement.DURATION";
+public class AxisElement implements Comparable<AxisElement> {
 
 	private Axis owner;
 
@@ -34,8 +19,6 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	private Long duration;
 
-	private PropertyChangeProviderHelper pcph;
-
 	// BEGIN Constructors
 
 	public AxisElement(Axis owner, String name, String description, Long date,
@@ -45,12 +28,11 @@ public class AxisElement implements Comparable<AxisElement>,
 		this.description = description;
 		this.date = date;
 		this.duration = duration;
-
 		init();
 	}
 
 	private void init() {
-		pcph = new PropertyChangeProviderHelper(this);
+
 	}
 
 	// END Constructors
@@ -63,9 +45,7 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	public void setOwner(Axis owner) {
 		Preconditions.checkNotNull(owner);
-		Axis oldValue = this.owner;
 		this.owner = owner;
-		pcph.firePropertyChange(OWNER, oldValue, owner);
 	}
 
 	public String getName() {
@@ -74,9 +54,7 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	public void setName(String name) {
 		Preconditions.checkNotNull(name);
-		String oldValue = this.name;
 		this.name = name;
-		pcph.firePropertyChange(NAME, oldValue, name);
 	}
 
 	public String getDescription() {
@@ -84,10 +62,7 @@ public class AxisElement implements Comparable<AxisElement>,
 	}
 
 	public void setDescription(String description) {
-		String oldValue = this.description;
 		this.description = description;
-		pcph.firePropertyChange(DESCRIPTION, oldValue, description);
-
 	}
 
 	public Long getDate() {
@@ -96,16 +71,12 @@ public class AxisElement implements Comparable<AxisElement>,
 
 	public void setDate(Long date) {
 		Preconditions.checkNotNull(date);
-		Long oldValue = this.date;
 		this.date = date;
-		pcph.firePropertyChange(DATE, oldValue, date);
 	}
 
 	public void setDate(Date date) {
 		Preconditions.checkNotNull(date);
-		Long oldValue = this.date;
 		this.date = date.getTime();
-		pcph.firePropertyChange(DATE, oldValue, date);
 	}
 
 	public Long getDuration() {
@@ -113,26 +84,12 @@ public class AxisElement implements Comparable<AxisElement>,
 	}
 
 	public void setDuration(Long duration) {
-		Long oldValue = this.duration;
 		this.duration = duration;
-		pcph.firePropertyChange(DURATION, oldValue, duration);
 	}
 
 	// END Getters & Setters
 
 	// BEGIN Overridden Methods
-
-	@Override
-	public void addPropertyChangeListener(PropertyChangeListener l) {
-		pcph.addPropertyChangeListener(l);
-
-	}
-
-	@Override
-	public void removePropertyChangeListener(PropertyChangeListener l) {
-		pcph.removePropertyChangeListener(l);
-
-	}
 
 	@Override
 	public int compareTo(AxisElement o) {

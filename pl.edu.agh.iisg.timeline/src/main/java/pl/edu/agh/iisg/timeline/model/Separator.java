@@ -4,6 +4,10 @@ public class Separator {
 
 	private long value;
 
+	public Separator() {
+
+	}
+
 	public Separator(long value) {
 		this.value = value;
 	}

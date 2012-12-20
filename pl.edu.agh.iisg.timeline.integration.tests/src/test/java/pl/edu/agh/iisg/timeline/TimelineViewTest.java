@@ -21,7 +21,6 @@ public class TimelineViewTest extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		createDiagram(parent);
-		viewer.setContents(createSampleDiagram(parent));
 	}
 
 	@Override
@@ -30,11 +29,13 @@ public class TimelineViewTest extends ViewPart {
 	}
 
 	private FigureCanvas createDiagram(Composite parent) {
+		TimelineDiagram timelineDiagram = createSampleDiagram(parent);
 		viewer = new ScrollingGraphicalViewer();
 		viewer.createControl(parent);
 		viewer.setRootEditPart(new TimelineRootEditPart());
 		viewer.getControl().setBackground(ColorConstants.white);
 		viewer.setEditPartFactory(new TimelineEditPartsFactory());
+		viewer.setContents(timelineDiagram);
 		return (FigureCanvas) viewer.getControl();
 	}
 

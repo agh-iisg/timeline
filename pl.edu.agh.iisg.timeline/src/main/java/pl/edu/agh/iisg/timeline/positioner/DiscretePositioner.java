@@ -4,14 +4,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Separator;
 
-import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 
 /**
@@ -33,13 +35,13 @@ public class DiscretePositioner implements IPositioner {
 
 	private long interval;
 
-	private SortedMap<Integer, Long> separators = new TreeMap<>();
+	private TreeMap<Integer, Separator> separators = new TreeMap<>();
 
 	private Map<Long, Integer> separatorPosition = new HashMap<>();
 
 	private Map<AxisElement, Integer> positions = new HashMap<>();
 
-	private Multimap<Integer, AxisElement> elementsByPosition = TreeMultimap
+	private TreeMultimap<Integer, AxisElement> elementsByPosition = TreeMultimap
 			.create();
 
 	public DiscretePositioner(long interval) {
@@ -107,7 +109,7 @@ public class DiscretePositioner implements IPositioner {
 
 	private void addSeparator(int position, long date) {
 		int sepPos = position + SEPARATOR_GAP / 2;
-		separators.put(sepPos, date);
+		separators.put(sepPos, new Separator(date));
 		separatorPosition.put(date, sepPos);
 	}
 
@@ -125,8 +127,8 @@ public class DiscretePositioner implements IPositioner {
 	}
 
 	@Override
-	public SortedMap<Integer, Long> getSeparators() {
-		return separators;
+	public Collection<Separator> getSeparatorsByPosition(int start, int end) {
+		return separators.subMap(start, end).values();
 	}
 
 	@Override
@@ -134,4 +136,17 @@ public class DiscretePositioner implements IPositioner {
 		return separatorPosition.get(separator);
 	}
 
+	@Override
+	public Collection<AxisElement> getElementsByPosition(int start, int end) {
+		return flatten(elementsByPosition.asMap().subMap(start, end).values());
+	}
+
+	private Collection<AxisElement> flatten(
+			Collection<Collection<AxisElement>> values) {
+		List<AxisElement> result = new LinkedList<>();
+		for (Collection<AxisElement> col : values) {
+			result.addAll(col);
+		}
+		return result;
+	}
 }

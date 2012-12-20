@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
@@ -57,17 +56,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 		List<Object> list = new LinkedList<>();
 		list.addAll(((TimelineDiagram) getModel()).getAxes());
 		list.addAll(((TimelineDiagram) getModel()).getAxisElements());
-		list.addAll(createSeparators());
+		list.addAll(positioner.getSeparatorsByPosition(0, 1000000));
 		return list;
-	}
-
-	private Collection<Separator> createSeparators() {
-		List<Separator> res = new LinkedList<>();
-		SortedMap<Integer, Long> separators = positioner.getSeparators();
-		for (Long sepValue : separators.values()) {
-			res.add(new Separator(sepValue));
-		}
-		return res;
 	}
 
 	@Override

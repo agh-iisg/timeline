@@ -7,4 +7,7 @@ Bundle-Vendor: AGH-UST Krakow
 Fragment-Host: pl.edu.agh.iisg.timeline;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit;bundle-version="4.8.2",
- org.hamcrest.library;bundle-version="1.2.1"
+ org.hamcrest.library;bundle-version="1.2.1",
+ org.easymock.easymock;bundle-version="3.1.0",
+ net.sf.cglib;bundle-version="2.4.0",
+ org.objenesis.objenesis;bundle-version="1.2.0"

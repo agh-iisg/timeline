@@ -1,5 +1,8 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
@@ -57,7 +60,23 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 	}
 
 	private ScrollPane createScrollPane(Layer layer) {
-		return new TimelineScrollPane(layer);
+		TimelineScrollPane scrollPane = new TimelineScrollPane(layer);
+		addScrollListener(scrollPane);
+		return scrollPane;
+	}
+
+	private void addScrollListener(TimelineScrollPane scrollPane) {
+		scrollPane.getViewport().getVerticalRangeModel()
+				.addPropertyChangeListener(new PropertyChangeListener() {
+					private static final String SCROLL_PROPERTY_NAME = "value";
+
+					@Override
+					public void propertyChange(PropertyChangeEvent evt) {
+						if (evt.getPropertyName().equals(SCROLL_PROPERTY_NAME)) {
+							notifyScroll((int) evt.getNewValue());
+						}
+					}
+				});
 	}
 
 	private void createElementsLayer(Layer layer) {
@@ -69,6 +88,11 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 		separatorsLayer = new Layer();
 		separatorsLayer.setLayoutManager(new XYLayout());
 		layer.add(separatorsLayer);
+	}
+
+	private void notifyScroll(int position) {
+		System.out.println("scroll : " + position);
+		System.out.println(this.getChildren());
 	}
 
 	public Layer getAxesLayer() {

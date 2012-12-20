@@ -30,9 +30,8 @@ public class DiscretePositionerTest {
 		// then
 		assertTrue(positioner.getPositionOf(element1) < positioner
 				.getPositionOf(element2));
-		assertEquals(1, positioner.getSeparators().size());
-		assertTrue(positioner.getSeparators().firstKey() < positioner
+		assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
+		assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getValue() < positioner
 				.getPositionOf(element1));
 	}
-
 }

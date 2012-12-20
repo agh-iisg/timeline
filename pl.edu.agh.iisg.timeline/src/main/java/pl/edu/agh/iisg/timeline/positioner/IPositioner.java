@@ -1,9 +1,9 @@
 package pl.edu.agh.iisg.timeline.positioner;
 
 import java.util.Collection;
-import java.util.SortedMap;
 
 import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Separator;
 
 /**
  * Arranger of timeline elements. Assigns a timeline position (x coordinate) to
@@ -27,6 +27,8 @@ public interface IPositioner {
 
 	int getPositionOfSeparator(Long separator);
 
-	SortedMap<Integer, Long> getSeparators();
+	Collection<Separator> getSeparatorsByPosition(int start, int end);
+
+	Collection<AxisElement> getElementsByPosition(int start, int end);
 
 }

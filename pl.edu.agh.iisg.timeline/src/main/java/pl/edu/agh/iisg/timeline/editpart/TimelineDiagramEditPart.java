@@ -36,6 +36,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private Map<Axis, IFigure> axisLayers = new HashMap<>();
 
+    private int currectScrollPosition = 0;
+
     public TimelineDiagramEditPart(TimelineDiagram model) {
         super.setModel(model);
         initElementPositions();
@@ -60,12 +62,13 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     protected List<Object> getModelChildren() {
         List<Object> list = new LinkedList<>();
         list.addAll(((TimelineDiagram)getModel()).getAxes());
-
-        ModelRefresh refresh = refresher.refresh(0);
-        list.addAll(refresh.getElementsToAdd());
-        list.addAll(refresh.getSeparatorsToAdd());
-
         return list;
+    }
+
+    @Override
+    protected void refreshChildren() {
+        super.refreshChildren();
+        refreshScroll();
     }
 
     @Override
@@ -79,6 +82,17 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         }
     }
 
+    @Override
+    protected void removeChildVisual(EditPart childEditPart) {
+        if (childEditPart instanceof AxisEditPart) {
+            removeAxisChildVisual((AxisEditPart)childEditPart);
+        } else if (childEditPart instanceof AxisElementEditPart) {
+            removeAxisElementChildVisual((AxisElementEditPart)childEditPart);
+        } else if (childEditPart instanceof SeparatorEditPart) {
+            removeSeparatorChildVisual((SeparatorEditPart)childEditPart);
+        }
+    }
+
     private void addAxisChildVisual(AxisEditPart childEditPart, int index) {
         IFigure axesLayerChild = childEditPart.getFigure();
         ((TimelineRootEditPart)getRoot()).getAxesLayer().add(axesLayerChild);
@@ -86,6 +100,12 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         IFigure axisLayer = createXYFigure();
         ((TimelineRootEditPart)getRoot()).getEventsLayer().add(axisLayer);
         axisLayers.put((Axis)childEditPart.getModel(), axisLayer);
+    }
+
+    private void removeAxisChildVisual(AxisEditPart childEditPart) {
+        IFigure axisLayer = axisLayers.remove(childEditPart.getModel());
+        ((TimelineRootEditPart)getRoot()).getEventsLayer().remove(axisLayer);
+        ((TimelineRootEditPart)getRoot()).getAxesLayer().remove(childEditPart.getFigure());
     }
 
     private IFigure createXYFigure() {
@@ -103,6 +123,13 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         parent.setConstraint(child, new Rectangle(5, y, TimelineConstants.ELEMENT_WIDTH, 80));
     }
 
+    private void removeAxisElementChildVisual(AxisElementEditPart childEditPart) {
+        AxisElement model = (AxisElement)childEditPart.getModel();
+        IFigure parent = axisLayers.get(model.getAxis());
+        IFigure child = childEditPart.getFigure();
+        parent.remove(child);
+    }
+
     private void addSeparatorChildVisual(SeparatorEditPart childEditPart) {
         Separator model = (Separator)childEditPart.getModel();
         int position = positioner.getPositionOfSeparator(model.getValue());
@@ -112,13 +139,42 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(1000, 100)));
     }
 
+    private void removeSeparatorChildVisual(SeparatorEditPart childEditPart) {
+        Layer layer = ((TimelineRootEditPart)getRoot()).getSeparatorsLayer();
+        IFigure figure = childEditPart.getFigure();
+        layer.remove(figure);
+    }
+
     private int getYIndexOf(AxisElement element) {
         return positioner.getPositionOf(element);
     }
 
     public void notifyScroll(int position) {
-        System.out.println("scroll : " + position);
-        // TODO refresh position
+        this.currectScrollPosition = position;
+        refreshScroll();
     }
 
+    private void refreshScroll() {
+        ModelRefresh refresh = refresher.refresh(currectScrollPosition);
+        if (refresh.shouldRefresh()) {
+            addChildren(refresh.getElementsToAdd());
+            removeChildren(refresh.getElementsToRemove());
+            addChildren(refresh.getSeparatorsToAdd());
+            removeChildren(refresh.getSeparatorsToRemove());
+        }
+    }
+
+    private <T> void addChildren(Collection<T> models) {
+        for (T model : models) {
+            EditPart editPart = createChild(model);
+            addChild(editPart, 0);
+        }
+    }
+
+    private <T> void removeChildren(Collection<T> models) {
+        for (T model : models) {
+            EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(model);
+            removeChild(editPart);
+        }
+    }
 }

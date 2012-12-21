@@ -37,7 +37,6 @@ public class TimelineView extends ViewPart {
 	private TimelineDiagram createEmptyDiagram(Composite parent) {
 		TimelineDiagram diagram = TimelineDiagram.builder().name("Timeline").minDateTime(1L)
 				.maxDateTime(10L).initialDateTime(5L).build();
-
 		return diagram;
 	}
 
@@ -46,6 +45,6 @@ public class TimelineView extends ViewPart {
 		// XXX [kpietak] I'm not sure if it's right way to refresh the view contents
 		// but it works now. In the target solution we will use editor so it wouldn't be an issue
 		viewer.setRootEditPart(new TimelineRootEditPart());
-		viewer.setContents(diagram);
+        viewer.setContents(diagram);
 	}
 }

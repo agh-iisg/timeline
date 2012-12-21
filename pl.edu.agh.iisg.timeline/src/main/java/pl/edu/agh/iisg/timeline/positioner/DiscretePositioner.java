@@ -66,18 +66,20 @@ public class DiscretePositioner implements IPositioner {
 
 	private SortedMap<Long, Integer> groupByIntervals(long[] dates) {
 		SortedMap<Long, Integer> groups = new TreeMap<>();
-		long intStart = dates[0] - ((dates[0] - start) % interval);
-		int group = 0;
-		for (long date : dates) {
-			if (date < intStart + interval) {
-				group++;
-			} else {
-				groups.put(intStart, group);
-				group = 1;
-				intStart = date - ((date - intStart) % interval);
+		if (dates.length > 0) {
+			long intStart = dates[0] - ((dates[0] - start) % interval);
+			int group = 0;
+			for (long date : dates) {
+				if (date < intStart + interval) {
+					group++;
+				} else {
+					groups.put(intStart, group);
+					group = 1;
+					intStart = date - ((date - intStart) % interval);
+				}
 			}
+			groups.put(intStart, group);
 		}
-		groups.put(intStart, group);
 		return groups;
 	}
 

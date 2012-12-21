@@ -134,11 +134,11 @@ public class AxisElement implements Comparable<AxisElement> {
 	// END Overridden Methods
 
 	// BEGIN Builder Methods
-	public static AxisElementBuilder builder() {
-		return new AxisElementBuilder();
+	public static Builder builder() {
+		return new Builder();
 	}
 
-	public static class AxisElementBuilder {
+	public static class Builder {
 
 		private Axis owner = null;
 
@@ -150,32 +150,32 @@ public class AxisElement implements Comparable<AxisElement> {
 
 		private Long duration = 0L;
 
-		public AxisElementBuilder owner(Axis owner) {
+		public Builder owner(Axis owner) {
 			this.owner = owner;
 			return this;
 		}
 
-		public AxisElementBuilder name(String name) {
+		public Builder name(String name) {
 			this.name = name;
 			return this;
 		}
 
-		public AxisElementBuilder date(Long date) {
+		public Builder date(Long date) {
 			this.date = date;
 			return this;
 		}
 
-		public AxisElementBuilder date(Date date) {
+		public Builder date(Date date) {
 			this.date = date.getTime();
 			return this;
 		}
 
-		public AxisElementBuilder description(String desc) {
+		public Builder description(String desc) {
 			this.description = desc;
 			return this;
 		}
 
-		public AxisElementBuilder setDuration(Long duration) {
+		public Builder setDuration(Long duration) {
 			this.duration = duration;
 			return this;
 		}

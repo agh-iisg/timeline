@@ -44,8 +44,9 @@ public class TimelineViewTest extends ViewPart {
 		long diff = 3000L;
 		Random rand = new Random();
 
-		TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L)
-				.maxDateTime(10L).initialDate(5L).build();
+		TimelineDiagram diagram = TimelineDiagram.builder()
+				.name("TimelineDiagram").minDateTime(1L).maxDateTime(10L)
+				.initialDateTime(5L).build();
 		Axis axis = new Axis("Firma krewniak");
 		diagram.addAxis(axis);
 
@@ -59,4 +60,5 @@ public class TimelineViewTest extends ViewPart {
 
 		return diagram;
 	}
+
 }

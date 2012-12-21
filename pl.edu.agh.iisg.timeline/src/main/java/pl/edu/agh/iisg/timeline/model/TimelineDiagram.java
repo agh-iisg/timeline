@@ -11,6 +11,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.TreeMultimap;
 
 public class TimelineDiagram {
+	private String name;
+
 	private Long minDateTime;
 	private Long maxDateTime;
 	private Long initialDateTime;
@@ -31,6 +33,7 @@ public class TimelineDiagram {
 
 	protected void validate() {
 		try {
+			Preconditions.checkNotNull(name);
 			Preconditions.checkNotNull(minDateTime);
 			Preconditions.checkNotNull(maxDateTime);
 			Preconditions.checkNotNull(elements);
@@ -41,6 +44,15 @@ public class TimelineDiagram {
 			throw new IllegalArgumentException(
 					"MinDateTime cannot be greated than MaxDateTime");
 		}
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getMinDateTime() {
@@ -102,40 +114,59 @@ public class TimelineDiagram {
 		return Collections.unmodifiableList(axes);
 	}
 
-	public static TimelineDiagramBuilder builder() {
-		return new TimelineDiagramBuilder();
+	public static Builder builder() {
+		return new Builder();
 	}
 
-	public static class TimelineDiagramBuilder {
+	public static class Builder {
 
 		private TimelineDiagram diagram;
 
-		private TimelineDiagramBuilder() {
+		private Builder() {
 			diagram = new TimelineDiagram();
 		}
 
-		public TimelineDiagramBuilder minDateTime(Date date) {
+		public Builder name(String name) {
+			diagram.setName(name);
+			return this;
+		}
+
+		public Builder minDateTime(Date date) {
 			diagram.setMinDateTime(date.getTime());
 			return this;
 		}
 
-		public TimelineDiagramBuilder minDateTime(Long date) {
+		public Builder minDateTime(Long date) {
 			diagram.setMinDateTime(date);
 			return this;
 		}
 
-		public TimelineDiagramBuilder maxDateTime(Date date) {
+		public Builder maxDateTime(Date date) {
 			diagram.setMaxDateTime(date.getTime());
 			return this;
 		}
 
-		public TimelineDiagramBuilder maxDateTime(Long date) {
+		public Builder maxDateTime(Long date) {
 			diagram.setMaxDateTime(date);
 			return this;
 		}
 
-		public TimelineDiagramBuilder initialDate(Long date) {
+		public Builder initialDateTime(Long date) {
 			diagram.setInitialDateTime(date);
+			return this;
+		}
+
+		public Builder addAxis(Axis axis) {
+			diagram.addAxis(axis);
+			return this;
+		}
+
+		public Axis getAxis(int index) {
+			return diagram.getAxes().get(index);
+		}
+
+		public Builder addElement(AxisElement element) {
+			diagram.addAxisElement(element);
 			return this;
 		}
 

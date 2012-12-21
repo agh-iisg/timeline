@@ -45,23 +45,23 @@ public class Axis {
 		this.imageDesc = imageDesc;
 	}
 
-	public static AxisBuilder builder() {
-		return new AxisBuilder();
+	public static Builder builder() {
+		return new Builder();
 	}
 
-	public static class AxisBuilder {
+	public static class Builder {
 		private Axis axis;
 
-		private AxisBuilder() {
+		private Builder() {
 			axis = new Axis();
 		}
 
-		public AxisBuilder name(String name) {
+		public Builder name(String name) {
 			axis.setName(name);
 			return this;
 		}
 
-		public AxisBuilder imageDesc(ImageDescriptor imageDesc) {
+		public Builder imageDesc(ImageDescriptor imageDesc) {
 			axis.setImageDesc(imageDesc);
 			return this;
 		}

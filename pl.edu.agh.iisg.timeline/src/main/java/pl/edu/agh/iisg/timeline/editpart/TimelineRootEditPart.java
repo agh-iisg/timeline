@@ -18,7 +18,11 @@ import pl.edu.agh.iisg.timeline.view.TimelineScrollPane;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
+    private ScrollPane axesScroll;
+
     private Layer axesLayer;
+
+    private ScrollPane elementsScroll;
 
     private Layer elementsLayer;
 
@@ -29,6 +33,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
         Figure root = createRoot();
 
         createAxesLayer(root);
+
         Layer scrollLayeredPane = createScrollLayeredPane(root);
         createElementsLayer(scrollLayeredPane);
         createSeparatorsLayer(scrollLayeredPane);
@@ -46,26 +51,29 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     private void createAxesLayer(Figure root) {
         axesLayer = new Layer();
         axesLayer.setLayoutManager(new FlowLayout());
-        root.add(axesLayer);
-        root.setConstraint(axesLayer, root.getBounds());
+        axesScroll = new ScrollPane();
+        axesScroll.setScrollBarVisibility(ScrollPane.NEVER);
+        axesScroll.setContents(axesLayer);
+        root.add(axesScroll);
+        root.setConstraint(axesScroll, root.getBounds());
     }
 
     private Layer createScrollLayeredPane(Figure root) {
         Layer scrollLayeredPane = new LayeredPane();
         scrollLayeredPane.setBorder(new MarginBorder(70, 5, 0, 0));
-        ScrollPane scroll = createScrollPane(scrollLayeredPane);
-        root.add(scroll, "Events");
-        root.setConstraint(scroll, root.getBounds());
+        elementsScroll = createElementsScroll(scrollLayeredPane);
+        root.add(elementsScroll, "Events");
+        root.setConstraint(elementsScroll, root.getBounds());
         return scrollLayeredPane;
     }
 
-    private ScrollPane createScrollPane(Layer layer) {
+    private ScrollPane createElementsScroll(Layer layer) {
         TimelineScrollPane scrollPane = new TimelineScrollPane(layer);
-        addScrollListener(scrollPane);
+        addScrollListeners(scrollPane);
         return scrollPane;
     }
 
-    private void addScrollListener(TimelineScrollPane scrollPane) {
+    private void addScrollListeners(TimelineScrollPane scrollPane) {
         scrollPane.getViewport().getVerticalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
             private static final String SCROLL_PROPERTY_NAME = "value";
 
@@ -73,6 +81,18 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
             public void propertyChange(PropertyChangeEvent evt) {
                 if (evt.getPropertyName().equals(SCROLL_PROPERTY_NAME)) {
                     notifyScroll((int)evt.getNewValue());
+                }
+            }
+        });
+
+        scrollPane.getViewport().getHorizontalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
+
+            private static final String SCROLL_PROPERTY_NAME = "value";
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals(SCROLL_PROPERTY_NAME)) {
+                    axesScroll.scrollHorizontalTo((int)evt.getNewValue());
                 }
             }
         });

@@ -128,4 +128,10 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     public Layer getSeparatorsLayer() {
         return separatorsLayer;
     }
+
+    public void scrollVerticalTo(int count) {
+        int SPEED = 20;
+        int current = elementsScroll.getViewport().getVerticalRangeModel().getValue();
+        elementsScroll.scrollVerticalTo(current - SPEED * count);
+    }
 }

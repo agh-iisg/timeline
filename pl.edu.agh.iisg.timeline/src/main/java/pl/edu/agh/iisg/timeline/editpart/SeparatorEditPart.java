@@ -10,18 +10,18 @@ import pl.edu.agh.iisg.timeline.view.figure.SeparatorFigure;
 
 public class SeparatorEditPart extends AbstractGraphicalEditPart {
 
-	public SeparatorEditPart(Separator model) {
-		this.setModel(model);
-	}
+    public SeparatorEditPart(Separator model) {
+        this.setModel(model);
+    }
 
-	@Override
-	protected IFigure createFigure() {
-		Separator separator = (Separator) getModel();
-		return new SeparatorFigure(new Date(separator.getValue()).toString());
-	}
+    @Override
+    protected IFigure createFigure() {
+        Separator separator = (Separator)getModel();
+        return new SeparatorFigure(new Date(separator.getValue()).toString());
+    }
 
-	@Override
-	protected void createEditPolicies() {
+    @Override
+    protected void createEditPolicies() {
 
-	}
+    }
 }

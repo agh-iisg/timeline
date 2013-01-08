@@ -6,70 +6,70 @@ import com.google.common.base.Preconditions;
 
 public class Axis {
 
-	private String name;
+    private String name;
 
-	private ImageDescriptor imageDesc;
+    private ImageDescriptor imageDesc;
 
-	public Axis(String name, ImageDescriptor imageDesc) {
-		this(name);
-		setImageDesc(imageDesc);
-	}
+    public Axis(String name, ImageDescriptor imageDesc) {
+        this(name);
+        setImageDesc(imageDesc);
+    }
 
-	public Axis(String name) {
-		this();
-		setName(name);
-	}
+    public Axis(String name) {
+        this();
+        setName(name);
+    }
 
-	protected Axis() {
+    protected Axis() {
 
-	}
+    }
 
-	protected void validate() {
-		Preconditions.checkNotNull(name);
-	}
+    protected void validate() {
+        Preconditions.checkNotNull(name);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		Preconditions.checkNotNull(name);
-		this.name = name;
-	}
+    public void setName(String name) {
+        Preconditions.checkNotNull(name);
+        this.name = name;
+    }
 
-	public ImageDescriptor getImageDesc() {
-		return imageDesc;
-	}
+    public ImageDescriptor getImageDesc() {
+        return imageDesc;
+    }
 
-	public void setImageDesc(ImageDescriptor imageDesc) {
-		this.imageDesc = imageDesc;
-	}
+    public void setImageDesc(ImageDescriptor imageDesc) {
+        this.imageDesc = imageDesc;
+    }
 
-	public static Builder builder() {
-		return new Builder();
-	}
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	public static class Builder {
-		private Axis axis;
+    public static class Builder {
+        private Axis axis;
 
-		private Builder() {
-			axis = new Axis();
-		}
+        private Builder() {
+            axis = new Axis();
+        }
 
-		public Builder name(String name) {
-			axis.setName(name);
-			return this;
-		}
+        public Builder name(String name) {
+            axis.setName(name);
+            return this;
+        }
 
-		public Builder imageDesc(ImageDescriptor imageDesc) {
-			axis.setImageDesc(imageDesc);
-			return this;
-		}
+        public Builder imageDesc(ImageDescriptor imageDesc) {
+            axis.setImageDesc(imageDesc);
+            return this;
+        }
 
-		public Axis build() {
-			axis.validate();
-			return axis;
-		}
-	}
+        public Axis build() {
+            axis.validate();
+            return axis;
+        }
+    }
 
 }

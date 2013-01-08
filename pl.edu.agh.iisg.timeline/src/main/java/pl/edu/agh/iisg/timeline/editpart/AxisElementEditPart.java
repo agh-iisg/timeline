@@ -8,19 +8,19 @@ import pl.edu.agh.iisg.timeline.view.figure.ElementFigure;
 
 public class AxisElementEditPart extends AbstractGraphicalEditPart {
 
-	public AxisElementEditPart(AxisElement model) {
-		setModel(model);
-	}
+    public AxisElementEditPart(AxisElement model) {
+        setModel(model);
+    }
 
-	@Override
-	protected IFigure createFigure() {
-		AxisElement model = (AxisElement) getModel();
-		return new ElementFigure(model.getName(), model.getDescription());
-	}
+    @Override
+    protected IFigure createFigure() {
+        AxisElement model = (AxisElement)getModel();
+        return new ElementFigure(model.getName(), model.getDescription());
+    }
 
-	@Override
-	protected void createEditPolicies() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected void createEditPolicies() {
+        // TODO Auto-generated method stub
+    }
 
 }

@@ -12,32 +12,30 @@ import org.eclipse.swt.widgets.Display;
 
 public class ElementFigure extends RectangleFigure {
 
-	private final static Color BACKGROUND_COLOR = new Color(
-			Display.getCurrent(), 240, 240, 240);
+    private final static Color BACKGROUND_COLOR = new Color(Display.getCurrent(), 240, 240, 240);
 
-	private final static Font TITLE_FONT = new Font(Display.getCurrent(),
-			new FontData(Display.getCurrent().getSystemFont().getFontData()[0]
-					.getName(), 10, SWT.BOLD));
+    private final static Font TITLE_FONT = new Font(Display.getCurrent(), new FontData(
+            Display.getCurrent().getSystemFont().getFontData()[0].getName(), 10, SWT.BOLD));
 
-	public ElementFigure(String title, String description) {
-		init();
+    public ElementFigure(String title, String description) {
+        init();
 
-		add(createTitleLabel(title));
-		add(createDescriptionLabel(description));
-	}
+        add(createTitleLabel(title));
+        add(createDescriptionLabel(description));
+    }
 
-	private void init() {
-		setBackgroundColor(BACKGROUND_COLOR);
-		setLayoutManager(new ToolbarLayout());
-	}
+    private void init() {
+        setBackgroundColor(BACKGROUND_COLOR);
+        setLayoutManager(new ToolbarLayout());
+    }
 
-	private Label createTitleLabel(String title) {
-		Label label = new Label(title);
-		label.setFont(TITLE_FONT);
-		return label;
-	}
+    private Label createTitleLabel(String title) {
+        Label label = new Label(title);
+        label.setFont(TITLE_FONT);
+        return label;
+    }
 
-	private IFigure createDescriptionLabel(String description) {
-		return new Label(description);
-	}
+    private IFigure createDescriptionLabel(String description) {
+        return new Label(description);
+    }
 }

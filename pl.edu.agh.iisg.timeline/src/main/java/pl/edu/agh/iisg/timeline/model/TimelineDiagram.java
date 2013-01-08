@@ -11,168 +11,167 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.TreeMultimap;
 
 public class TimelineDiagram {
-	private String name;
+    private String name;
 
-	private Long minDateTime;
-	private Long maxDateTime;
-	private Long initialDateTime;
+    private Long minDateTime;
 
-	private List<Axis> axes;
+    private Long maxDateTime;
 
-	private TreeMultimap<Long, AxisElement> elements;
+    private Long initialDateTime;
 
-	private TimelineDiagram() {
+    private List<Axis> axes;
 
-		init();
-	}
+    private TreeMultimap<Long, AxisElement> elements;
 
-	private void init() {
-		axes = new LinkedList<>();
-		elements = TreeMultimap.create();
-	}
+    private TimelineDiagram() {
 
-	protected void validate() {
-		try {
-			Preconditions.checkNotNull(name);
-			Preconditions.checkNotNull(minDateTime);
-			Preconditions.checkNotNull(maxDateTime);
-			Preconditions.checkNotNull(elements);
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException(e);
-		}
-		if (minDateTime > maxDateTime) {
-			throw new IllegalArgumentException(
-					"MinDateTime cannot be greated than MaxDateTime");
-		}
-	}
+        init();
+    }
 
+    private void init() {
+        axes = new LinkedList<>();
+        elements = TreeMultimap.create();
+    }
 
-	public String getName() {
-		return name;
-	}
+    protected void validate() {
+        try {
+            Preconditions.checkNotNull(name);
+            Preconditions.checkNotNull(minDateTime);
+            Preconditions.checkNotNull(maxDateTime);
+            Preconditions.checkNotNull(elements);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(e);
+        }
+        if (minDateTime > maxDateTime) {
+            throw new IllegalArgumentException("MinDateTime cannot be greated than MaxDateTime");
+        }
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Long getMinDateTime() {
-		return minDateTime;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setMinDateTime(Long minDateTime) {
-		this.minDateTime = minDateTime;
-	}
+    public Long getMinDateTime() {
+        return minDateTime;
+    }
 
-	public Long getMaxDateTime() {
-		return maxDateTime;
-	}
+    public void setMinDateTime(Long minDateTime) {
+        this.minDateTime = minDateTime;
+    }
 
-	public void setMaxDateTime(Long maxDateTime) {
-		this.maxDateTime = maxDateTime;
-	}
+    public Long getMaxDateTime() {
+        return maxDateTime;
+    }
 
-	public Long getInitialDateTime() {
-		return initialDateTime;
-	}
+    public void setMaxDateTime(Long maxDateTime) {
+        this.maxDateTime = maxDateTime;
+    }
 
-	public void setInitialDateTime(Long initialDateTime) {
-		this.initialDateTime = initialDateTime;
-	}
+    public Long getInitialDateTime() {
+        return initialDateTime;
+    }
 
-	public boolean addAxis(Axis axis) {
-		Preconditions.checkNotNull(axis);
-		if (!axes.contains(axis)) {
-			return axes.add(axis);
-		}
-		return false;
-	}
+    public void setInitialDateTime(Long initialDateTime) {
+        this.initialDateTime = initialDateTime;
+    }
 
-	public boolean addAxisElement(AxisElement element) {
-		Preconditions.checkNotNull(element);
-		return elements.put(element.getDate(), element);
-	}
+    public boolean addAxis(Axis axis) {
+        Preconditions.checkNotNull(axis);
+        if (!axes.contains(axis)) {
+            return axes.add(axis);
+        }
+        return false;
+    }
 
-	public void removeAxisElement(AxisElement element) {
-		elements.remove(element.getDate(), element);
-	}
+    public boolean addAxisElement(AxisElement element) {
+        Preconditions.checkNotNull(element);
+        return elements.put(element.getDate(), element);
+    }
 
-	public SortedMap<Long, Collection<AxisElement>> getAxisElementsInRange(
-			Long start, Long end) {
-		return elements.asMap().subMap(start, end);
-	}
+    public void removeAxisElement(AxisElement element) {
+        elements.remove(element.getDate(), element);
+    }
 
-	public Collection<AxisElement> getAxisElements() {
-		return elements.values();
-	}
+    public SortedMap<Long, Collection<AxisElement>> getAxisElementsInRange(Long start, Long end) {
+        return elements.asMap().subMap(start, end);
+    }
 
-	public boolean removeAxis(Axis axis) {
-		Preconditions.checkNotNull(axis);
-		return axes.remove(axis);
-	}
+    public Collection<AxisElement> getAxisElements() {
+        return elements.values();
+    }
 
-	public List<Axis> getAxes() {
-		return Collections.unmodifiableList(axes);
-	}
+    public boolean removeAxis(Axis axis) {
+        Preconditions.checkNotNull(axis);
+        return axes.remove(axis);
+    }
 
-	public static Builder builder() {
-		return new Builder();
-	}
+    public List<Axis> getAxes() {
+        return Collections.unmodifiableList(axes);
+    }
 
-	public static class Builder {
+    public static Builder builder() {
+        return new Builder();
+    }
 
-		private TimelineDiagram diagram;
+    public static class Builder {
 
-		private Builder() {
-			diagram = new TimelineDiagram();
-		}
+        private TimelineDiagram diagram;
 
-		public Builder name(String name) {
-			diagram.setName(name);
-			return this;
-		}
+        private Builder() {
+            diagram = new TimelineDiagram();
+        }
 
-		public Builder minDateTime(Date date) {
-			diagram.setMinDateTime(date.getTime());
-			return this;
-		}
+        public Builder name(String name) {
+            diagram.setName(name);
+            return this;
+        }
 
-		public Builder minDateTime(Long date) {
-			diagram.setMinDateTime(date);
-			return this;
-		}
+        public Builder minDateTime(Date date) {
+            diagram.setMinDateTime(date.getTime());
+            return this;
+        }
 
-		public Builder maxDateTime(Date date) {
-			diagram.setMaxDateTime(date.getTime());
-			return this;
-		}
+        public Builder minDateTime(Long date) {
+            diagram.setMinDateTime(date);
+            return this;
+        }
 
-		public Builder maxDateTime(Long date) {
-			diagram.setMaxDateTime(date);
-			return this;
-		}
+        public Builder maxDateTime(Date date) {
+            diagram.setMaxDateTime(date.getTime());
+            return this;
+        }
 
-		public Builder initialDateTime(Long date) {
-			diagram.setInitialDateTime(date);
-			return this;
-		}
+        public Builder maxDateTime(Long date) {
+            diagram.setMaxDateTime(date);
+            return this;
+        }
 
-		public Builder addAxis(Axis axis) {
-			diagram.addAxis(axis);
-			return this;
-		}
+        public Builder initialDateTime(Long date) {
+            diagram.setInitialDateTime(date);
+            return this;
+        }
 
-		public Axis getAxis(int index) {
-			return diagram.getAxes().get(index);
-		}
+        public Builder addAxis(Axis axis) {
+            diagram.addAxis(axis);
+            return this;
+        }
 
-		public Builder addElement(AxisElement element) {
-			diagram.addAxisElement(element);
-			return this;
-		}
+        public Axis getAxis(int index) {
+            return diagram.getAxes().get(index);
+        }
 
-		public TimelineDiagram build() {
-			diagram.validate();
-			return diagram;
-		}
-	}
+        public Builder addElement(AxisElement element) {
+            diagram.addAxisElement(element);
+            return this;
+        }
+
+        public TimelineDiagram build() {
+            diagram.validate();
+            return diagram;
+        }
+    }
 }

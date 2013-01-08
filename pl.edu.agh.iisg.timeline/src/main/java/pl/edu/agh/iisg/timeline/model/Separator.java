@@ -2,17 +2,17 @@ package pl.edu.agh.iisg.timeline.model;
 
 public class Separator {
 
-	private long value;
+    private long value;
 
-	public Separator() {
+    public Separator() {
 
-	}
+    }
 
-	public Separator(long value) {
-		this.value = value;
-	}
+    public Separator(long value) {
+        this.value = value;
+    }
 
-	public long getValue() {
-		return value;
-	}
+    public long getValue() {
+        return value;
+    }
 }

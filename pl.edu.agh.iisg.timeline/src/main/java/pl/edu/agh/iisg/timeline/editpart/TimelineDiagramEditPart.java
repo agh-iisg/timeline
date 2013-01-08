@@ -71,6 +71,21 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         refreshScroll();
     }
 
+    public void notifyScroll(int position) {
+        this.currectScrollPosition = position;
+        refreshScroll();
+    }
+
+    private void refreshScroll() {
+        ModelRefresh refresh = refresher.refresh(currectScrollPosition);
+        if (refresh.shouldRefresh()) {
+            addChildren(refresh.getElementsToAdd());
+            removeChildren(refresh.getElementsToRemove());
+            addChildren(refresh.getSeparatorsToAdd());
+            removeChildren(refresh.getSeparatorsToRemove());
+        }
+    }
+
     @Override
     protected void addChildVisual(EditPart childEditPart, int index) {
         if (childEditPart instanceof AxisEditPart) {
@@ -147,21 +162,6 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private int getYIndexOf(AxisElement element) {
         return positioner.getPositionOf(element);
-    }
-
-    public void notifyScroll(int position) {
-        this.currectScrollPosition = position;
-        refreshScroll();
-    }
-
-    private void refreshScroll() {
-        ModelRefresh refresh = refresher.refresh(currectScrollPosition);
-        if (refresh.shouldRefresh()) {
-            addChildren(refresh.getElementsToAdd());
-            removeChildren(refresh.getElementsToRemove());
-            addChildren(refresh.getSeparatorsToAdd());
-            removeChildren(refresh.getSeparatorsToRemove());
-        }
     }
 
     private <T> void addChildren(Collection<T> models) {

@@ -8,18 +8,18 @@ import pl.edu.agh.iisg.timeline.view.figure.AxisFigure;
 
 public class AxisEditPart extends AbstractGraphicalEditPart {
 
-	public AxisEditPart(Axis model) {
-		this.setModel(model);
-	}
+    public AxisEditPart(Axis model) {
+        this.setModel(model);
+    }
 
-	@Override
-	protected IFigure createFigure() {
-		Axis axis = (Axis) getModel();
-		return new AxisFigure(axis.getName());
-	}
+    @Override
+    protected IFigure createFigure() {
+        Axis axis = (Axis)getModel();
+        return new AxisFigure(axis.getName());
+    }
 
-	@Override
-	protected void createEditPolicies() {
+    @Override
+    protected void createEditPolicies() {
 
-	}
+    }
 }

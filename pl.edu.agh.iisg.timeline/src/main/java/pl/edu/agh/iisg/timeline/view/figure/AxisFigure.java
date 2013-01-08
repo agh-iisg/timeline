@@ -10,45 +10,46 @@ import org.eclipse.draw2d.RectangleFigure;
 
 public class AxisFigure extends Figure {
 
-	public static int LENGTH = 4000;
-	public static int WIDTH = 200;
+    public static int LENGTH = 4000;
 
-	private static int LABEL_HEIGHT = 30;
+    public static int WIDTH = 200;
 
-	public AxisFigure(String name) {
-		init();
+    private static int LABEL_HEIGHT = 30;
 
-		addLabel(name);
-		addLine();
+    public AxisFigure(String name) {
+        init();
 
-	}
+        addLabel(name);
+        addLine();
 
-	private void init() {
-		setLayoutManager(new BorderLayout());
-		setPreferredSize(WIDTH, LENGTH + LABEL_HEIGHT);
-	}
+    }
 
-	private void addLabel(String name) {
-		Label label = new Label(name);
-		add(label);
-		setConstraint(label, BorderLayout.TOP);
-	}
+    private void init() {
+        setLayoutManager(new BorderLayout());
+        setPreferredSize(WIDTH, LENGTH + LABEL_HEIGHT);
+    }
 
-	private void addLine() {
-		Figure figure = new Figure();
-		GridLayout layout = new GridLayout(1, false);
-		layout.marginWidth = WIDTH / 2;
-		figure.setLayoutManager(layout);
-		add(figure);
-		setConstraint(figure, BorderLayout.CENTER);
+    private void addLabel(String name) {
+        Label label = new Label(name);
+        add(label);
+        setConstraint(label, BorderLayout.TOP);
+    }
 
-		RectangleFigure rect = new RectangleFigure();
-		rect.setForegroundColor(ColorConstants.green);
-		rect.setBackgroundColor(ColorConstants.green);
-		rect.setSize(3, 10);
+    private void addLine() {
+        Figure figure = new Figure();
+        GridLayout layout = new GridLayout(1, false);
+        layout.marginWidth = WIDTH / 2;
+        figure.setLayoutManager(layout);
+        add(figure);
+        setConstraint(figure, BorderLayout.CENTER);
 
-		figure.add(rect);
-		figure.setConstraint(rect, new GridData(GridData.FILL_VERTICAL));
-	}
+        RectangleFigure rect = new RectangleFigure();
+        rect.setForegroundColor(ColorConstants.green);
+        rect.setBackgroundColor(ColorConstants.green);
+        rect.setSize(3, 10);
+
+        figure.add(rect);
+        figure.setConstraint(rect, new GridData(GridData.FILL_VERTICAL));
+    }
 
 }

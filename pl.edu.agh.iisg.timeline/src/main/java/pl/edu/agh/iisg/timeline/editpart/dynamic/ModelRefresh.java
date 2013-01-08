@@ -8,46 +8,44 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 
 public class ModelRefresh {
 
-	private final Collection<AxisElement> elementsToAdd;
-	private final Collection<AxisElement> elementsToRemove;
-	private final Collection<Separator> separatorsToAdd;
-	private final Collection<Separator> separatorsToRemove;
+    private final Collection<AxisElement> elementsToAdd;
 
-	public ModelRefresh(Collection<AxisElement> elementsToAdd,
-			Collection<AxisElement> elementsToRemove,
-			Collection<Separator> separatorsToAdd,
-			Collection<Separator> separatorsToRemove) {
-		this.elementsToAdd = elementsToAdd;
-		this.elementsToRemove = elementsToRemove;
-		this.separatorsToAdd = separatorsToAdd;
-		this.separatorsToRemove = separatorsToRemove;
-	}
+    private final Collection<AxisElement> elementsToRemove;
 
-	public Collection<AxisElement> getElementsToAdd() {
-		return elementsToAdd;
-	}
+    private final Collection<Separator> separatorsToAdd;
 
-	public Collection<AxisElement> getElementsToRemove() {
-		return elementsToRemove;
-	}
+    private final Collection<Separator> separatorsToRemove;
 
-	public Collection<Separator> getSeparatorsToAdd() {
-		return separatorsToAdd;
-	}
+    public ModelRefresh(Collection<AxisElement> elementsToAdd, Collection<AxisElement> elementsToRemove,
+            Collection<Separator> separatorsToAdd, Collection<Separator> separatorsToRemove) {
+        this.elementsToAdd = elementsToAdd;
+        this.elementsToRemove = elementsToRemove;
+        this.separatorsToAdd = separatorsToAdd;
+        this.separatorsToRemove = separatorsToRemove;
+    }
 
-	public Collection<Separator> getSeparatorsToRemove() {
-		return separatorsToRemove;
-	}
+    public Collection<AxisElement> getElementsToAdd() {
+        return elementsToAdd;
+    }
 
-	public boolean shouldRefresh() {
-		return !elementsToAdd.isEmpty() || !elementsToRemove.isEmpty()
-				|| !separatorsToAdd.isEmpty() || !separatorsToRemove.isEmpty();
-	}
+    public Collection<AxisElement> getElementsToRemove() {
+        return elementsToRemove;
+    }
 
-	public static ModelRefresh emptyModelRefresh() {
-		return new ModelRefresh(Collections.<AxisElement> emptyList(),
-				Collections.<AxisElement> emptyList(),
-				Collections.<Separator> emptyList(),
-				Collections.<Separator> emptyList());
-	}
+    public Collection<Separator> getSeparatorsToAdd() {
+        return separatorsToAdd;
+    }
+
+    public Collection<Separator> getSeparatorsToRemove() {
+        return separatorsToRemove;
+    }
+
+    public boolean shouldRefresh() {
+        return !elementsToAdd.isEmpty() || !elementsToRemove.isEmpty() || !separatorsToAdd.isEmpty() || !separatorsToRemove.isEmpty();
+    }
+
+    public static ModelRefresh emptyModelRefresh() {
+        return new ModelRefresh(Collections.<AxisElement> emptyList(), Collections.<AxisElement> emptyList(),
+                Collections.<Separator> emptyList(), Collections.<Separator> emptyList());
+    }
 }

@@ -47,7 +47,7 @@ public class DiscretePositioner implements IPositioner {
     }
 
     @Override
-    public void position(Collection<AxisElement> elements) {
+    public void init(Collection<AxisElement> elements) {
         long[] dates = extractDates(elements);
         SortedMap<Long, Integer> groups = groupByIntervals(dates);
         positionInGroups(elements, groups);

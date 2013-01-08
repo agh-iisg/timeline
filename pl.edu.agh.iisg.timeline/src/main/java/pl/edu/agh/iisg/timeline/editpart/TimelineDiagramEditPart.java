@@ -45,7 +45,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private void initElementPositions() {
         Collection<AxisElement> elements = ((TimelineDiagram)getModel()).getAxisElements();
-        positioner.position(elements);
+        positioner.init(elements);
     }
 
     @Override

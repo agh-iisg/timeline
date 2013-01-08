@@ -19,7 +19,7 @@ public interface IPositioner {
      * @param elements
      *            timeline elements
      */
-    void position(Collection<AxisElement> elements);
+    void init(Collection<AxisElement> elements);
 
     int getPositionOf(AxisElement element);
 

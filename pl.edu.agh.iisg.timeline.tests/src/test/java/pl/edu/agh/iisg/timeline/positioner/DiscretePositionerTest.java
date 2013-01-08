@@ -25,7 +25,7 @@ public class DiscretePositionerTest {
 				.description("description2").owner(axis).date(800L).build();
 
 		// when
-		positioner.position(Arrays.asList(element1, element2));
+		positioner.init(Arrays.asList(element1, element2));
 
 		// then
 		assertTrue(positioner.getPositionOf(element1) < positioner

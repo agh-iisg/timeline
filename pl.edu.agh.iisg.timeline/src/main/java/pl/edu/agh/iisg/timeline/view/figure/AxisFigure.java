@@ -8,25 +8,21 @@ import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.RectangleFigure;
 
-public class AxisFigure extends Figure {
+public class AxisFigure extends RectangleFigure {
 
     public static int LENGTH = 4000;
 
     public static int WIDTH = 200;
 
-    private static int LABEL_HEIGHT = 30;
-
     public AxisFigure(String name) {
         init();
-
         addLabel(name);
-        addLine();
-
     }
 
     private void init() {
+        setBackgroundColor(FigureConstants.AXIS_BACKGROUND);
         setLayoutManager(new BorderLayout());
-        setPreferredSize(WIDTH, LENGTH + LABEL_HEIGHT);
+        setPreferredSize(FigureConstants.AXIS_WIDTH, FigureConstants.AXIS_HEIGHT);
     }
 
     private void addLabel(String name) {

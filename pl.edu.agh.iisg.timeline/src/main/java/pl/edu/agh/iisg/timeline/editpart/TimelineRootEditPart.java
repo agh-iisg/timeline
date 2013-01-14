@@ -3,12 +3,12 @@ package pl.edu.agh.iisg.timeline.editpart;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.LayeredPane;
-import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
@@ -42,8 +42,8 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     }
 
     private static Figure createRoot() {
-        Figure root = new LayeredPane();
-        XYLayout layout = new XYLayout();
+        Figure root = new Figure();
+        BorderLayout layout = new BorderLayout();
         root.setLayoutManager(layout);
         return root;
     }
@@ -54,16 +54,13 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
         axesScroll = new ScrollPane();
         axesScroll.setScrollBarVisibility(ScrollPane.NEVER);
         axesScroll.setContents(axesLayer);
-        root.add(axesScroll);
-        root.setConstraint(axesScroll, root.getBounds());
+        root.add(axesScroll, BorderLayout.TOP);
     }
 
     private Layer createScrollLayeredPane(Figure root) {
         Layer scrollLayeredPane = new LayeredPane();
-        scrollLayeredPane.setBorder(new MarginBorder(70, 5, 0, 0));
         elementsScroll = createElementsScroll(scrollLayeredPane);
-        root.add(elementsScroll, "Events");
-        root.setConstraint(elementsScroll, root.getBounds());
+        root.add(elementsScroll, BorderLayout.CENTER);
         return scrollLayeredPane;
     }
 

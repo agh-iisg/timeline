@@ -50,6 +50,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 
     private void createAxesLayer(Figure root) {
         axesLayer = new AxisLayer();
+
         axesScroll = new ScrollPane();
         axesScroll.setScrollBarVisibility(ScrollPane.NEVER);
         axesScroll.setContents(axesLayer);

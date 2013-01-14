@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.view.figure;
+package pl.edu.agh.iisg.timeline;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
 
-public final class FigureConstants {
+public final class VisualConstants {
 
     public static final int AXIS_WIDTH = 322;
 

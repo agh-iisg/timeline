@@ -30,7 +30,7 @@ import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
-    private IPositioner positioner = new DiscretePositioner(1000);
+    private IPositioner positioner = new DiscretePositioner(1000000000);
 
     private IModelRefresher refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
 
@@ -135,7 +135,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         IFigure child = childEditPart.getFigure();
         parent.add(child);
         int y = getYIndexOf((AxisElement)childEditPart.getModel());
-        parent.setConstraint(child, new Rectangle(5, y, TimelineConstants.ELEMENT_WIDTH, 80));
+        parent.setConstraint(child, new Rectangle(0, y, TimelineConstants.ELEMENT_WIDTH, 80));
     }
 
     private void removeAxisElementChildVisual(AxisElementEditPart childEditPart) {

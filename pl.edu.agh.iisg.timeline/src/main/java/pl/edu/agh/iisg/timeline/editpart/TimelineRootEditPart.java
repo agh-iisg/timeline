@@ -5,7 +5,6 @@ import java.beans.PropertyChangeListener;
 
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.LayeredPane;
@@ -15,6 +14,7 @@ import org.eclipse.gef.editparts.SimpleRootEditPart;
 
 import pl.edu.agh.iisg.timeline.view.ElementsLayer;
 import pl.edu.agh.iisg.timeline.view.TimelineScrollPane;
+import pl.edu.agh.iisg.timeline.view.figure.AxisLayer;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
@@ -49,8 +49,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     }
 
     private void createAxesLayer(Figure root) {
-        axesLayer = new Layer();
-        axesLayer.setLayoutManager(new FlowLayout());
+        axesLayer = new AxisLayer();
         axesScroll = new ScrollPane();
         axesScroll.setScrollBarVisibility(ScrollPane.NEVER);
         axesScroll.setContents(axesLayer);

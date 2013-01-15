@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../pom.xml</relativePath>
+    <groupId>pl.edu.agh.iisg.timeline</groupId>
+    <artifactId>timeline-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>pl.edu.agh.iisg.timeline.feature</artifactId>
+  <packaging>eclipse-feature</packaging>
+  
+  <name>Timeline Feature</name>	
+
+</project> 

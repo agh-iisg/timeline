@@ -13,6 +13,8 @@ import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class TimelineView extends ViewPart {
 
+	public static final String TIMELINE_VIEW_ID = "pl.edu.agh.iisg.timeline.view";
+
     private GraphicalViewer viewer;
 
     private TimelineRootEditPart rootEditPart;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/pl.edu.agh.iisg.timeline.feature_0.0.1.qualifier.jar" id="pl.edu.agh.iisg.timeline.feature" version="0.0.1.qualifier">
+      <category name="pl.edu.agh.iisg.timeline"/>
+   </feature>
+   <category-def name="pl.edu.agh.iisg.timeline" label="Timeline editor"/>
+</site>

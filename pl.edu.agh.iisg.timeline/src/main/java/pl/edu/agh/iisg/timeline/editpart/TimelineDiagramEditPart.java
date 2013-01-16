@@ -26,11 +26,12 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
+import pl.edu.agh.iisg.timeline.positioner.Measurer;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
-    private IPositioner positioner = new DiscretePositioner(1000000000);
+    private IPositioner positioner = new DiscretePositioner(1000000000, new Measurer());
 
     private IModelRefresher refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
 

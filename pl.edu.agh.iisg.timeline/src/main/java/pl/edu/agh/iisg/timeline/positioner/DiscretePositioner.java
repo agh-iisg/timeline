@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.Separator;
@@ -26,13 +27,13 @@ import com.google.common.collect.TreeMultimap;
  */
 public class DiscretePositioner implements IPositioner {
 
-    private static final int SEPARATOR_GAP = 50;
-
-    private static final int ELEMENT_GAP = 90;
+    public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_HEIGHT + VisualConstants.SEPARATOR_MARGIN_BOTTOM;
 
     private long start = 0L;
 
     private long interval;
+
+    private IMeasurer measurer;
 
     private TreeMap<Integer, Separator> separators = new TreeMap<>();
 
@@ -42,8 +43,9 @@ public class DiscretePositioner implements IPositioner {
 
     private TreeMultimap<Integer, AxisElement> elementsByPosition = TreeMultimap.create();
 
-    public DiscretePositioner(long interval) {
+    public DiscretePositioner(long interval, IMeasurer measurer) {
         this.interval = interval;
+        this.measurer = measurer;
     }
 
     @Override
@@ -99,7 +101,7 @@ public class DiscretePositioner implements IPositioner {
                 }
                 positions.put(element, posForAxis);
                 elementsByPosition.put(posForAxis, element);
-                posForAxis += ELEMENT_GAP;
+                posForAxis += measurer.getHeightOf(element);
                 pos.put(axis, posForAxis);
             }
             posMax = Collections.max(pos.values());

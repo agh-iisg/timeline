@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
@@ -12,26 +13,29 @@ import pl.edu.agh.iisg.timeline.model.AxisElement;
 
 public class DiscretePositionerTest {
 
-	private DiscretePositioner positioner;
+    private DiscretePositioner positioner;
 
-	@Test
-	public void testPosition() {
-		// given
-		positioner = new DiscretePositioner(1000);
-		Axis axis = new Axis("axis");
-		AxisElement element1 = AxisElement.builder().name("element1")
-				.description("description1").owner(axis).date(500L).build();
-		AxisElement element2 = AxisElement.builder().name("element2")
-				.description("description2").owner(axis).date(800L).build();
+    @Test
+    public void testPosition() {
+        // given
+        positioner = new DiscretePositioner(1000, mockMeasurer());
+        Axis axis = new Axis("axis");
+        AxisElement element1 = AxisElement.builder().name("element1").description("description1").owner(axis).date(500L).build();
+        AxisElement element2 = AxisElement.builder().name("element2").description("description2").owner(axis).date(800L).build();
 
-		// when
-		positioner.init(Arrays.asList(element1, element2));
+        // when
+        positioner.init(Arrays.asList(element1, element2));
 
-		// then
-		assertTrue(positioner.getPositionOf(element1) < positioner
-				.getPositionOf(element2));
-		assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
-		assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getValue() < positioner
-				.getPositionOf(element1));
-	}
+        // then
+        assertTrue(positioner.getPositionOf(element1) < positioner.getPositionOf(element2));
+        assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
+        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getValue() < positioner.getPositionOf(element1));
+    }
+
+    private IMeasurer mockMeasurer() {
+        IMeasurer measurer = EasyMock.createMock(IMeasurer.class);
+        EasyMock.expect(measurer.getHeightOf(EasyMock.anyObject(AxisElement.class))).andReturn(50).anyTimes();
+        EasyMock.replay(measurer);
+        return measurer;
+    }
 }

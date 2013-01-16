@@ -23,4 +23,9 @@ public final class VisualConstants {
     public static final Color AXIS_FONT_COLOR = ColorConstants.black;
 
     public static final Font AXIS_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 12, SWT.NONE);
+
+    public static final int SEPARATOR_HEIGHT = 15;
+
+    public static final int SEPARATOR_MARGIN_BOTTOM = 5;
+
 }

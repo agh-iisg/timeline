@@ -16,24 +16,30 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
+import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.DefaultRangeControl;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.DynamicModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.IModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.ModelRefresh;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
+import pl.edu.agh.iisg.timeline.model.SeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
+import pl.edu.agh.iisg.timeline.positioner.IMeasurer;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.positioner.Measurer;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
-    private IPositioner positioner = new DiscretePositioner(1000000000, new Measurer());
+    private IPositioner positioner;
 
-    private IModelRefresher refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
+    private IModelRefresher refresher;
+
+    private int diagramWidth;
 
     private Map<Axis, IFigure> axisLayers = new HashMap<>();
 
@@ -41,7 +47,25 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     public TimelineDiagramEditPart(TimelineDiagram model) {
         super.setModel(model);
+        init();
         initElementPositions();
+    }
+
+    private void init() {
+        long interval = 1000000000L;
+        IMeasurer measurer = new Measurer();
+        int axis = ((TimelineDiagram)getModel()).getAxes().size();
+        ISeparatorFactory separatorFactory = new SeparatorFactory(axis);
+
+        positioner = new DiscretePositioner(interval, measurer, separatorFactory);
+        refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
+        diagramWidth = calculateDiagramWidth();
+    }
+
+    private int calculateDiagramWidth() {
+        // TODO think about separating TimelineDiagramEditPart into two classes: 1. visual part, 2. controller.
+        int axis = ((TimelineDiagram)getModel()).getAxes().size();
+        return (VisualConstants.AXIS_WIDTH + VisualConstants.AXIS_MARGIN) * axis;
     }
 
     private void initElementPositions() {
@@ -148,11 +172,11 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private void addSeparatorChildVisual(SeparatorEditPart childEditPart) {
         Separator model = (Separator)childEditPart.getModel();
-        int position = positioner.getPositionOfSeparator(model.getValue());
+        int position = positioner.getPositionOfSeparator(model);
         Layer layer = ((TimelineRootEditPart)getRoot()).getSeparatorsLayer();
         IFigure figure = childEditPart.getFigure();
         layer.add(figure);
-        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(1000, 100)));
+        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(diagramWidth, VisualConstants.SEPARATOR_HEIGHT)));
     }
 
     private void removeSeparatorChildVisual(SeparatorEditPart childEditPart) {

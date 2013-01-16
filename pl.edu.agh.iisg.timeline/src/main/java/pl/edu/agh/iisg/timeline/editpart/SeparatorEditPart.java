@@ -17,7 +17,7 @@ public class SeparatorEditPart extends AbstractGraphicalEditPart {
     @Override
     protected IFigure createFigure() {
         Separator separator = (Separator)getModel();
-        return new SeparatorFigure(new Date(separator.getValue()).toString());
+        return new SeparatorFigure(new Date(separator.getValue()).toString(), separator.getAxis());
     }
 
     @Override

@@ -23,7 +23,7 @@ public interface IPositioner {
 
     int getPositionOf(AxisElement element);
 
-    int getPositionOfSeparator(Long separator);
+    int getPositionOfSeparator(Separator separator);
 
     Collection<Separator> getSeparatorsByPosition(int start, int end);
 

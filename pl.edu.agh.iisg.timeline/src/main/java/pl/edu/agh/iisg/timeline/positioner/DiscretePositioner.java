@@ -13,6 +13,7 @@ import java.util.TreeMap;
 import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
 import com.google.common.collect.TreeMultimap;
@@ -33,7 +34,9 @@ public class DiscretePositioner implements IPositioner {
 
     private long interval;
 
-    private IMeasurer measurer;
+    private final IMeasurer measurer;
+
+    private final ISeparatorFactory separatorFactory;
 
     private TreeMap<Integer, Separator> separators = new TreeMap<>();
 
@@ -43,9 +46,10 @@ public class DiscretePositioner implements IPositioner {
 
     private TreeMultimap<Integer, AxisElement> elementsByPosition = TreeMultimap.create();
 
-    public DiscretePositioner(long interval, IMeasurer measurer) {
+    public DiscretePositioner(long interval, IMeasurer measurer, ISeparatorFactory separatorFactory) {
         this.interval = interval;
         this.measurer = measurer;
+        this.separatorFactory = separatorFactory;
     }
 
     @Override
@@ -109,8 +113,8 @@ public class DiscretePositioner implements IPositioner {
     }
 
     private void addSeparator(int position, long date) {
-        int sepPos = position + SEPARATOR_GAP / 2;
-        separators.put(sepPos, new Separator(date));
+        int sepPos = position;
+        separators.put(sepPos, separatorFactory.newSeparator(date));
         separatorPosition.put(date, sepPos);
     }
 
@@ -133,8 +137,8 @@ public class DiscretePositioner implements IPositioner {
     }
 
     @Override
-    public int getPositionOfSeparator(Long separator) {
-        return separatorPosition.get(separator);
+    public int getPositionOfSeparator(Separator separator) {
+        return separatorPosition.get(separator.getValue());
     }
 
     @Override

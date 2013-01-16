@@ -28,4 +28,14 @@ public final class VisualConstants {
 
     public static final int SEPARATOR_MARGIN_BOTTOM = 5;
 
+    public static final int SEPARATOR_LABEL_MARGIN = 5;
+
+    public static final Color SEPARATOR_BACKGROUND = new Color(null, 150, 174, 190);
+
+    public static final Color SEPARATOR_SPACE_BACKGROUND = new Color(null, 201, 215, 224);
+
+    public static final Color SEPARATOR_FONT_COLOR = ColorConstants.white;
+
+    public static final Font SEPARATOR_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
+
 }

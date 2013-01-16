@@ -2,17 +2,20 @@ package pl.edu.agh.iisg.timeline.model;
 
 public class Separator {
 
-    private long value;
+    private final long value;
 
-    public Separator() {
+    private final int axis;
 
-    }
-
-    public Separator(long value) {
+    public Separator(long value, int axis) {
         this.value = value;
+        this.axis = axis;
     }
 
     public long getValue() {
         return value;
+    }
+
+    public int getAxis() {
+        return axis;
     }
 }

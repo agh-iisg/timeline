@@ -8,6 +8,8 @@ import org.eclipse.swt.widgets.Display;
 
 public final class VisualConstants {
 
+    public static final Color BACKGROUND = ColorConstants.white;
+
     public static final int AXIS_WIDTH = 322;
 
     public static final int AXIS_HEIGHT = 80;
@@ -26,7 +28,7 @@ public final class VisualConstants {
 
     public static final int SEPARATOR_HEIGHT = 15;
 
-    public static final int SEPARATOR_MARGIN_BOTTOM = 5;
+    public static final int SEPARATOR_MARGIN_TOP_BOTTOM = 5;
 
     public static final int SEPARATOR_LABEL_MARGIN = 5;
 
@@ -39,7 +41,7 @@ public final class VisualConstants {
     public static final Font SEPARATOR_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
 
     public static final int VERTICAL_LINE_WIDTH = 4;
-    
+
     public static final Color VERTICAL_LINE_COLOR = new Color(null, 194, 193, 193);
 
 }

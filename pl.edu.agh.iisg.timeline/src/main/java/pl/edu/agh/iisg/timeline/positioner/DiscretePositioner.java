@@ -21,14 +21,15 @@ import com.google.common.collect.TreeMultimap;
 /**
  * Positioner for the discrete timeline. It positions the elements in the groups representing the same time on the axis.
  *
- * XXX [leszko] if it works too slow, it can be optimised by using only arrays in the logic.
+ * If it works too slow, it can be optimised by using only arrays in the logic.
  *
  * @author leszko
  *
  */
 public class DiscretePositioner implements IPositioner {
 
-    public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_HEIGHT + VisualConstants.SEPARATOR_MARGIN_BOTTOM;
+    public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT
+            + VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM;
 
     private long start = 0L;
 

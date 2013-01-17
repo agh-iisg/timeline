@@ -63,7 +63,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private int calculateDiagramWidth() {
-        // TODO think about separating TimelineDiagramEditPart into two classes: 1. visual part, 2. controller.
+        // TODO think about separating TimelineDiagramEditPart into two classes:
+        // 1. visual part, 2. controller.
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
         return (VisualConstants.AXIS_WIDTH + VisualConstants.AXIS_MARGIN) * axis;
     }
@@ -174,7 +175,9 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         Layer layer = ((TimelineRootEditPart)getRoot()).getSeparatorsLayer();
         IFigure figure = childEditPart.getFigure();
         layer.add(figure);
-        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(diagramWidth, VisualConstants.SEPARATOR_HEIGHT)));
+        int height = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT
+                + VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM;
+        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(diagramWidth, height)));
     }
 
     private void removeSeparatorChildVisual(SeparatorEditPart childEditPart) {

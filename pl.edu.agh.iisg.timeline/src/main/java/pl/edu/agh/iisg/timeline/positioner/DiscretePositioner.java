@@ -47,6 +47,8 @@ public class DiscretePositioner implements IPositioner {
 
     private TreeMultimap<Integer, AxisElement> elementsByPosition = TreeMultimap.create();
 
+    private int maxPosition;
+
     public DiscretePositioner(long interval, IMeasurer measurer, ISeparatorFactory separatorFactory) {
         this.interval = interval;
         this.measurer = measurer;
@@ -111,6 +113,7 @@ public class DiscretePositioner implements IPositioner {
             }
             posMax = Collections.max(pos.values());
         }
+        maxPosition = posMax;
     }
 
     private void addSeparator(int position, long date) {
@@ -153,5 +156,10 @@ public class DiscretePositioner implements IPositioner {
             result.addAll(col);
         }
         return result;
+    }
+
+    @Override
+    public int getMaxPosition() {
+        return maxPosition;
     }
 }

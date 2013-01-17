@@ -102,6 +102,10 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         refreshScroll();
     }
 
+    public void notifyScrollEnd() {
+        notifyScroll(positioner.getMaxPosition());
+    }
+
     private void refreshScroll() {
         ModelRefresh refresh = refresher.refresh(currectScrollPosition);
         if (refresh.shouldRefresh()) {

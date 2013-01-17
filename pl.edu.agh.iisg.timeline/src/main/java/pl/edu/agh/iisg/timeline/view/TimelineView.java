@@ -3,6 +3,9 @@ package pl.edu.agh.iisg.timeline.view;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.parts.GraphicalViewerImpl;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.widgets.Composite;
@@ -13,7 +16,7 @@ import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class TimelineView extends ViewPart {
 
-	public static final String TIMELINE_VIEW_ID = "pl.edu.agh.iisg.timeline.view";
+    public static final String TIMELINE_VIEW_ID = "pl.edu.agh.iisg.timeline.view";
 
     private GraphicalViewer viewer;
 
@@ -30,6 +33,13 @@ public class TimelineView extends ViewPart {
     }
 
     private void createDiagram(Composite parent) {
+        initViewer(parent);
+        addMouseScroll();
+        addKeyControl();
+
+    }
+
+    private void initViewer(Composite parent) {
         TimelineDiagram timelineDiagram = createEmptyDiagram(parent);
         viewer = new GraphicalViewerImpl();
         viewer.createControl(parent);
@@ -38,10 +48,42 @@ public class TimelineView extends ViewPart {
         viewer.getControl().setBackground(ColorConstants.white);
         viewer.setEditPartFactory(new TimelineEditPartsFactory());
         viewer.setContents(timelineDiagram);
+    }
+
+    private void addMouseScroll() {
         viewer.getControl().addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseScrolled(MouseEvent e) {
-                rootEditPart.scrollVerticalTo(e.count);
+                rootEditPart.scrollVertical(e.count);
+            }
+        });
+    }
+
+    private void addKeyControl() {
+        viewer.getControl().addKeyListener(new KeyAdapter() {
+            private static final int ARROW_STEP = 1;
+
+            private static final int PAGE_STEP = 25;
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.keyCode == SWT.ARROW_DOWN) {
+                    rootEditPart.scrollVertical(-ARROW_STEP);
+                } else if (e.keyCode == SWT.ARROW_UP) {
+                    rootEditPart.scrollVertical(ARROW_STEP);
+                } else if (e.keyCode == SWT.ARROW_RIGHT) {
+                    rootEditPart.scrollHorizontal(-ARROW_STEP);
+                } else if (e.keyCode == SWT.ARROW_LEFT) {
+                    rootEditPart.scrollHorizontal(ARROW_STEP);
+                } else if (e.keyCode == SWT.PAGE_DOWN) {
+                    rootEditPart.scrollVertical(-PAGE_STEP);
+                } else if (e.keyCode == SWT.PAGE_UP) {
+                    rootEditPart.scrollVertical(PAGE_STEP);
+                } else if (e.keyCode == SWT.HOME) {
+                    rootEditPart.scrollVerticalToStart();
+                } else if (e.keyCode == SWT.END) {
+                    rootEditPart.scrollVerticalToEnd();
+                }
             }
         });
     }

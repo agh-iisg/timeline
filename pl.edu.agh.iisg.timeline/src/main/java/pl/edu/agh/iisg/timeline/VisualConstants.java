@@ -38,4 +38,8 @@ public final class VisualConstants {
 
     public static final Font SEPARATOR_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
 
+    public static final int VERTICAL_LINE_WIDTH = 4;
+    
+    public static final Color VERTICAL_LINE_COLOR = new Color(null, 194, 193, 193);
+
 }

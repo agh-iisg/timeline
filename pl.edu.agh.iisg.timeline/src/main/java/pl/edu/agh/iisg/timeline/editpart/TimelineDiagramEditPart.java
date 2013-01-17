@@ -9,7 +9,6 @@ import java.util.Map;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
-import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -31,6 +30,7 @@ import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IMeasurer;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.positioner.Measurer;
+import pl.edu.agh.iisg.timeline.view.ElementsForAxisLayer;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
@@ -149,9 +149,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private IFigure createXYFigure() {
-        Figure figure = new Figure();
-        figure.setLayoutManager(new XYLayout());
-        return figure;
+        return new ElementsForAxisLayer();
     }
 
     private void addAxisElementChildVisual(AxisElementEditPart childEditPart) {

@@ -133,9 +133,29 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
         return separatorsLayer;
     }
 
-    public void scrollVerticalTo(int count) {
+    public void scrollVertical(int count) {
         int SPEED = 20;
         int current = elementsScroll.getViewport().getVerticalRangeModel().getValue();
         elementsScroll.scrollVerticalTo(current - SPEED * count);
+    }
+
+    public void scrollHorizontal(int count) {
+        int SPEED = 20;
+        int current = elementsScroll.getViewport().getHorizontalRangeModel().getValue();
+        elementsScroll.scrollHorizontalTo(current - SPEED * count);
+    }
+
+    public void scrollVerticalToStart() {
+        elementsScroll.scrollVerticalTo(0);
+    }
+
+    public void scrollVerticalToEnd() {
+        for (Object child : getChildren()) {
+            if (child instanceof TimelineDiagramEditPart) {
+                ((TimelineDiagramEditPart)(child)).notifyScrollEnd();
+            }
+        }
+        getViewer().flush();
+        elementsScroll.scrollVerticalTo(Integer.MAX_VALUE);
     }
 }

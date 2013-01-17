@@ -29,4 +29,6 @@ public interface IPositioner {
 
     Collection<AxisElement> getElementsByPosition(int start, int end);
 
+    int getMaxPosition();
+
 }

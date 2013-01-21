@@ -18,15 +18,17 @@ public final class VisualConstants {
 
     public static final int AXIS_LABEL_MARGIN = 10;
 
-    public static final int AXIS_ICON_WIDTH = 31;
+    public static final int AXIS_ICON_WIDTH = 41;
 
-    public static final int AXIS_ICON_HEIGHT = 31;
+    public static final int AXIS_ICON_HEIGHT = 41;
+
+    public static final int AXIS_LABEL_WIDTH = AXIS_WIDTH - AXIS_ICON_WIDTH - 3*AXIS_LABEL_MARGIN;
 
     public static final Color AXIS_BACKGROUND = new Color(null, 194, 193, 193);
 
     public static final Color AXIS_FONT_COLOR = ColorConstants.black;
 
-    public static final Font AXIS_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 12, SWT.NONE);
+    public static final Font AXIS_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
 
     public static final int SEPARATOR_HEIGHT = 15;
 

@@ -44,4 +44,21 @@ public final class VisualConstants {
 
     public static final Color VERTICAL_LINE_COLOR = new Color(null, 194, 193, 193);
 
+    public static final Color ELEMENT_SQUARE_COLOR = new Color(null, 121, 137, 146);
+
+    public static final int ELEMENT_SQUARE_SIZE = 15;
+
+    public static final int ELEMENT_SQUARE_MARGIN = 4;
+
+    public static final Color ELEMENT_BACKGROUND = new Color(null, 222, 222, 221);
+
+    public static final int ELEMENT_LABEL_MARGIN = 9;
+
+    public static final Color ELEMENT_TITLE_LABEL_COLOR = ColorConstants.black;
+
+    public static final Font ELEMENT_TITLE_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 10, SWT.NONE);
+
+    public static final Color ELEMENT_DESCRIPTION_LABEL_COLOR = ColorConstants.black;
+
+    public static final Font ELEMENT_DESCRIPTION_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 9, SWT.NONE);
 }

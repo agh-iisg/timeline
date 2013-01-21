@@ -28,8 +28,7 @@ import com.google.common.collect.TreeMultimap;
  */
 public class DiscretePositioner implements IPositioner {
 
-    public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT
-            + VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM;
+    public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT;
 
     private long start = 0L;
 

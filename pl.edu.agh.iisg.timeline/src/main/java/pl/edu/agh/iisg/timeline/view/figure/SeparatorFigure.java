@@ -1,7 +1,6 @@
 package pl.edu.agh.iisg.timeline.view.figure;
 
 import org.eclipse.draw2d.BorderLayout;
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -11,7 +10,7 @@ import org.eclipse.draw2d.RectangleFigure;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
 
-public class SeparatorFigure extends Figure {
+public class SeparatorFigure extends RectangleFigure {
 
     public SeparatorFigure(String label, int axis) {
         init();
@@ -19,10 +18,13 @@ public class SeparatorFigure extends Figure {
     }
 
     private void init() {
+        setBackgroundColor(VisualConstants.BACKGROUND);
+        setForegroundColor(VisualConstants.BACKGROUND);
         FlowLayout layout = new FlowLayout();
         setLayoutManager(layout);
         layout.setMinorSpacing(0);
-        setBorder(new MarginBorder(0, VisualConstants.AXIS_MARGIN, 0, 0));
+        setBorder(new MarginBorder(VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM, VisualConstants.AXIS_MARGIN,
+                VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM, 0));
     }
 
     private void addParts(String label, int axis) {

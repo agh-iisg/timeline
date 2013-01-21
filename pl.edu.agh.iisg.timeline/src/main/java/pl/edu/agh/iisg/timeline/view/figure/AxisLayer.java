@@ -13,6 +13,7 @@ public class AxisLayer extends Layer {
         layout.setMinorSpacing(VisualConstants.AXIS_MARGIN);
         setLayoutManager(layout);
         int margin = VisualConstants.AXIS_MARGIN;
-        setBorder(new MarginBorder(margin, margin, margin, margin));
+        int bottom = VisualConstants.AXIS_MARGIN - VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM;
+        setBorder(new MarginBorder(margin, margin, bottom, margin));
     }
 }

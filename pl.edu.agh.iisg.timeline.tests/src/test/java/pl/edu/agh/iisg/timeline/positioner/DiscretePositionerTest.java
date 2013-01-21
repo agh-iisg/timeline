@@ -2,13 +2,16 @@ package pl.edu.agh.iisg.timeline.positioner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 
-import org.easymock.Capture;
-import org.easymock.EasyMock;
-import org.easymock.IAnswer;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
@@ -39,22 +42,21 @@ public class DiscretePositionerTest {
     }
 
     private IMeasurer mockMeasurer() {
-        IMeasurer measurer = EasyMock.createMock(IMeasurer.class);
-        EasyMock.expect(measurer.getHeightOf(EasyMock.anyObject(AxisElement.class))).andReturn(50).anyTimes();
-        EasyMock.replay(measurer);
+        IMeasurer measurer = mock(IMeasurer.class);
+        when(measurer.getHeightOf(any(AxisElement.class))).thenReturn(50);
         return measurer;
     }
 
     private ISeparatorFactory mockSeparatorFactory() {
-        ISeparatorFactory separatorFactory = EasyMock.createMock(ISeparatorFactory.class);
-        final Capture<Long> capture = new Capture<Long>();
-        EasyMock.expect(separatorFactory.newSeparator(EasyMock.captureLong(capture))).andAnswer(new IAnswer<Separator>() {
+        ISeparatorFactory separatorFactory = mock(ISeparatorFactory.class);
+        final ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
+        when(separatorFactory.newSeparator(captor.capture())).thenAnswer(new Answer<Separator>() {
+
             @Override
-            public Separator answer() throws Throwable {
-                return new Separator(capture.getValue(), AXIS_NUMBER);
+            public Separator answer(InvocationOnMock invocation) throws Throwable {
+                return new Separator(captor.getValue(), AXIS_NUMBER);
             }
-        }).anyTimes();
-        EasyMock.replay(separatorFactory);
+        });
         return separatorFactory;
     }
 }

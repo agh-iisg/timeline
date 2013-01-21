@@ -9,6 +9,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import pl.edu.agh.iisg.timeline.DataGenerator;
+import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.view.TimelineView;
 
 public class CreateSampleTimelineDiagramHandler extends AbstractHandler {
@@ -36,12 +37,16 @@ public class CreateSampleTimelineDiagramHandler extends AbstractHandler {
 		long elementsCont = Long.parseLong(event.getParameter(ELEMENTS_CNT));
 
 		try {
-			view.setDiagram(DataGenerator.createSampleDiagram(axesCnt, elementsCont));
+			view.setDiagram(getTimelineDiagram(axesCnt, elementsCont));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
+	}
+
+	protected TimelineDiagram getTimelineDiagram(int axesCnt, long elementsCont) throws Exception {
+		return DataGenerator.createSampleDiagram(axesCnt, elementsCont);
 	}
 
 	private final TimelineView openView(

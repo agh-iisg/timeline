@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: pl.edu.agh.iisg.timeline;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.1.SNAPSHOT
 Bundle-Activator: pl.edu.agh.iisg.timeline.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",
  org.eclipse.draw2d;bundle-version="3.7.0",
  org.eclipse.gef;bundle-version="3.7.0"
 Import-Package: org.osgi.framework
-Bundle-Name: %Bundle-Name
+Bundle-Name: Timeline Plug-in
 Bundle-Vendor: %Bundle-Vendor
 Export-Package: pl.edu.agh.iisg.timeline.model
+Bundle-ClassPath: .

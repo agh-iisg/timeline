@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests
+Bundle-Name: Timeline Integration Tests and Sample Data
 Bundle-SymbolicName: pl.edu.agh.iisg.timeline.integration.tests;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.1.SNAPSHOT
 Fragment-Host: pl.edu.agh.iisg.timeline;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: .

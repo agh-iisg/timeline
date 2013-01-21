@@ -15,6 +15,9 @@ public class AxisEditPart extends AbstractGraphicalEditPart {
     @Override
     protected IFigure createFigure() {
         Axis axis = (Axis)getModel();
+        if(axis.getImageDesc() != null) {
+        	return new AxisFigure(axis.getName(), axis.getImageDesc().createImage());
+        }
         return new AxisFigure(axis.getName());
     }
 

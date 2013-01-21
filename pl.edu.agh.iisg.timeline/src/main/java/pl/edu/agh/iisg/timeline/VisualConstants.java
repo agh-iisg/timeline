@@ -18,6 +18,10 @@ public final class VisualConstants {
 
     public static final int AXIS_LABEL_MARGIN = 10;
 
+    public static final int AXIS_ICON_WIDTH = 31;
+
+    public static final int AXIS_ICON_HEIGHT = 31;
+
     public static final Color AXIS_BACKGROUND = new Color(null, 194, 193, 193);
 
     public static final Color AXIS_FONT_COLOR = ColorConstants.black;

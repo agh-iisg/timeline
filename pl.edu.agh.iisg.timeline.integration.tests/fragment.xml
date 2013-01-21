@@ -25,6 +25,19 @@
                name="Elements Count">
          </commandParameter>
       </command>
+      <command
+            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateRealDataTimelineDiagramHandler"
+            id="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
+            name="Create a real data diagram">
+         <commandParameter
+               id="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
+               name="Axes Count">
+         </commandParameter>
+         <commandParameter
+               id="pl.edu.agh.iisg.timeline.create.sample.elementsCnt"
+               name="Elements Count">
+         </commandParameter>
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -88,6 +101,20 @@
                <parameter
                      name="pl.edu.agh.iisg.timeline.create.sample.elementsCnt"
                      value="100000">
+               </parameter>
+            </command>
+            <command
+                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
+                  label="Create diagram with icons and long texts"
+                  mnemonic="r"
+                  style="push">
+               <parameter
+                     name="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
+                     value="3">
+               </parameter>
+               <parameter
+                     name="pl.edu.agh.iisg.timeline.create.sample.elementsCnt"
+                     value="100">
                </parameter>
             </command> 
          </menu>

@@ -1,42 +1,76 @@
 package pl.edu.agh.iisg.timeline.view.figure;
 
-import org.eclipse.draw2d.FlowLayout;
-import org.eclipse.draw2d.Label;
+
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
+import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.text.FlowPage;
+import org.eclipse.draw2d.text.TextFlow;
+import org.eclipse.swt.graphics.Image;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
 
 public class AxisFigure extends RectangleFigure {
 
-    public static int LENGTH = 4000;
+	public static int LENGTH = 4000;
 
-    public static int WIDTH = 200;
+	public static int WIDTH = 200;
 
-    public AxisFigure(String name) {
-        init();
-        addLabel(name);
-    }
+	private TextFlow label;
 
-    private void init() {
-        setLayoutManager(new FlowLayout());
-        setPreferredSize(VisualConstants.AXIS_WIDTH, VisualConstants.AXIS_HEIGHT);
+	public AxisFigure(String name) {
+		this(name, null);
+	}
 
-        setBackgroundColor(VisualConstants.AXIS_BACKGROUND);
-        setForegroundColor(VisualConstants.AXIS_BACKGROUND);
-    }
+	public AxisFigure(String name, Image icon) {
+		init();
+		if (icon != null) {
+			addIcon(icon);
+		}
+		addLabel(name);
+	}
 
-    private void addLabel(String name) {
+	private void init() {
+		setLayoutManager(new GridLayout(2,false));
+		setPreferredSize(new Dimension(VisualConstants.AXIS_WIDTH,
+				VisualConstants.AXIS_HEIGHT));
 
-        // TODO the label should be multiline
-        Label label = new Label(name);
+		setBackgroundColor(VisualConstants.AXIS_BACKGROUND);
+		setForegroundColor(VisualConstants.AXIS_BACKGROUND);
+	}
 
-        label.setForegroundColor(VisualConstants.AXIS_FONT_COLOR);
-        label.setFont(VisualConstants.AXIS_FONT);
+	private void addLabel(String name) {
 
-        int margin = VisualConstants.AXIS_LABEL_MARGIN;
-        label.setBorder(new MarginBorder(margin, margin, margin, margin));
+		// TODO the label should be multiline
+		FlowPage flowPage = new FlowPage();
+		TextFlow label = new TextFlow(name);
 
-        add(label);
-    }
+
+		label.setForegroundColor(VisualConstants.AXIS_FONT_COLOR);
+		label.setFont(VisualConstants.AXIS_FONT);
+
+		int margin = VisualConstants.AXIS_LABEL_MARGIN;
+
+		flowPage.setBorder(new MarginBorder(margin));
+		GridData gridData = new GridData(GridData.FILL, GridData.FILL, false, true);
+
+		add(label);
+		flowPage.add(label);
+		add(flowPage);
+	}
+
+	private void addIcon(Image icon) {
+		ImageFigure iconFigure = new ImageFigure(icon);
+
+		iconFigure.setPreferredSize(VisualConstants.AXIS_ICON_WIDTH, VisualConstants.AXIS_ICON_HEIGHT);
+		iconFigure.setForegroundColor(ColorConstants.white);
+		int margin = VisualConstants.AXIS_LABEL_MARGIN;
+		iconFigure.setBorder(new MarginBorder(margin, margin, 0, 0));
+
+		add(iconFigure);
+	}
 }

@@ -6,4 +6,3 @@ Bundle-Version: 0.0.1.qualifier
 Fragment-Host: pl.edu.agh.iisg.timeline;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
-Require-Bundle: org.junit

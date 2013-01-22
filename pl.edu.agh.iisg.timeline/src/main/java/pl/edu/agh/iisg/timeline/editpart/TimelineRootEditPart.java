@@ -12,9 +12,8 @@ import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 
-import pl.edu.agh.iisg.timeline.view.ElementsLayer;
-import pl.edu.agh.iisg.timeline.view.TimelineScrollPane;
 import pl.edu.agh.iisg.timeline.view.figure.AxisLayer;
+import pl.edu.agh.iisg.timeline.view.figure.ElementsLayer;
 
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
@@ -65,17 +64,18 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     }
 
     private ScrollPane createElementsScroll(Layer layer) {
-        TimelineScrollPane scrollPane = new TimelineScrollPane(layer);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContents(layer);
         addScrollListeners(scrollPane);
         return scrollPane;
     }
 
-    private void addScrollListeners(TimelineScrollPane scrollPane) {
+    private void addScrollListeners(ScrollPane scrollPane) {
         addHorizontalScrollListener(scrollPane);
         addVerticalScrollListener(scrollPane);
     }
 
-    private void addHorizontalScrollListener(TimelineScrollPane scrollPane) {
+    private void addHorizontalScrollListener(ScrollPane scrollPane) {
         scrollPane.getViewport().getVerticalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
             private static final String SCROLL_PROPERTY_NAME = "value";
 
@@ -88,7 +88,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
         });
     }
 
-    private void addVerticalScrollListener(TimelineScrollPane scrollPane) {
+    private void addVerticalScrollListener(ScrollPane scrollPane) {
         scrollPane.getViewport().getHorizontalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
 
             private static final String SCROLL_PROPERTY_NAME = "value";

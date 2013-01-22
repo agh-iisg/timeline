@@ -9,13 +9,10 @@ import java.util.Map;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Layer;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
-import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.DefaultRangeControl;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.DynamicModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.IModelRefresher;
@@ -29,10 +26,9 @@ import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.util.DateConverter;
-import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
 import pl.edu.agh.iisg.timeline.util.ElementMeasurer;
-import pl.edu.agh.iisg.timeline.view.ElementsForAxisLayer;
-import pl.edu.agh.iisg.timeline.view.TimelineConstants;
+import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
+import pl.edu.agh.iisg.timeline.view.figure.ElementsForAxisLayer;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
@@ -41,8 +37,6 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     private IModelRefresher refresher;
 
     private DateConverter converter;
-
-    private int diagramWidth;
 
     private Map<Axis, IFigure> axisLayers = new HashMap<>();
 
@@ -63,14 +57,6 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         positioner = new DiscretePositioner(interval, measurer, separatorFactory);
         refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
         converter = new DateConverter(interval);
-        diagramWidth = calculateDiagramWidth();
-    }
-
-    private int calculateDiagramWidth() {
-        // TODO think about separating TimelineDiagramEditPart into two classes:
-        // 1. visual part, 2. controller.
-        int axis = ((TimelineDiagram)getModel()).getAxes().size();
-        return (VisualConstants.AXIS_WIDTH + VisualConstants.AXIS_MARGIN) * axis;
     }
 
     private void initElementPositions() {
@@ -167,7 +153,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         IFigure child = childEditPart.getFigure();
         parent.add(child);
         int y = getYIndexOf((AxisElement)childEditPart.getModel());
-        parent.setConstraint(child, new Rectangle(0, y, TimelineConstants.ELEMENT_WIDTH, -1));
+        parent.setConstraint(child, new Rectangle(0, y, -1, -1));
     }
 
     private void removeAxisElementChildVisual(AxisElementEditPart childEditPart) {
@@ -183,9 +169,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         Layer layer = ((TimelineRootEditPart)getRoot()).getSeparatorsLayer();
         IFigure figure = childEditPart.getFigure();
         layer.add(figure);
-        int height = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT
-                + VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM;
-        layer.setConstraint(figure, new Rectangle(new Point(0, position), new Dimension(diagramWidth, height)));
+        layer.setConstraint(figure, new Rectangle(0, position, -1, -1));
     }
 
     private void removeSeparatorChildVisual(SeparatorEditPart childEditPart) {

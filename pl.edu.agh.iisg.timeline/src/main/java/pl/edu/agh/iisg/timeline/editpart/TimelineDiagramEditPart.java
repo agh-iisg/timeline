@@ -49,7 +49,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private void init() {
-        long interval = 1000000000L;
+        long msInDay = 86400000L;
+        long interval = msInDay;
         IElementMeasurer measurer = ElementMeasurer.getInstance();
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
         ISeparatorFactory separatorFactory = new SeparatorFactory(axis);

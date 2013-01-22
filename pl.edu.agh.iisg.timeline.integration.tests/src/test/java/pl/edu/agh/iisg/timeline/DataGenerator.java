@@ -54,15 +54,16 @@ public class DataGenerator {
 
         diagram.name("Real data timeline diagram with " + axesCnt + " axes and " + totalElementsCnt + " elements.");
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy:H");
 
-        long interval = 24 * 60 * 60 * 1000l;
-        long initialDateTime1 = formatter.parse("12/05/2012").getTime();
-        long initialDateTime2 = formatter.parse("23/08/2012").getTime();
-        long initialDateTime3 = formatter.parse("04/07/2012").getTime();
+        long hour = 60 * 60 * 1000l;
+        long day = 24 * hour;
+        long initialDateTime1 = formatter.parse("12/05/2012:2").getTime();
+        long initialDateTime2 = formatter.parse("23/08/2012:3").getTime();
+        long initialDateTime3 = formatter.parse("04/07/2012:4").getTime();
 
         diagram.minDateTime(initialDateTime1);
-        diagram.maxDateTime(initialDateTime1 + 1000 * interval);
+        diagram.maxDateTime(initialDateTime1 + 1000 * day);
         diagram.initialDateTime(initialDateTime1);
 
         Axis.Builder axis1 = Axis.builder();
@@ -76,8 +77,8 @@ public class DataGenerator {
         axis1.imageDesc(imgDesc1);
         diagram.addAxis(axis1.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, interval, 0, diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, interval, 0, diagram);
+        addAxisElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, day, 0, diagram);
+        addAxisElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, day, 0, diagram);
 
         Axis.Builder axis2 = Axis.builder();
         axis2.name(Messages.DataGenerator_SampleAxisName1);
@@ -85,9 +86,9 @@ public class DataGenerator {
         axis2.imageDesc(imgDesc2);
         diagram.addAxis(axis2.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime2, interval, 1, diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * interval,
-                interval, 1, diagram);
+        addAxisElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime1, day, 1, diagram);
+        addAxisElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * hour, day, 1,
+                diagram);
 
         Axis.Builder axis3 = Axis.builder();
         axis3.name(Messages.DataGenerator_SampleAxisName2);
@@ -95,10 +96,9 @@ public class DataGenerator {
         axis3.imageDesc(imgDesc3);
         diagram.addAxis(axis3.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, interval, 2,
+        addAxisElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, day, 2, diagram);
+        addAxisElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + hour, day, 2,
                 diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + interval,
-                interval, 2, diagram);
 
         final String[] events = { Messages.DataGenerator_SampleElement13, Messages.DataGenerator_SampleElement14,
             Messages.DataGenerator_SampleElement15, Messages.DataGenerator_SampleElement16, Messages.DataGenerator_SampleElement17 };
@@ -106,12 +106,12 @@ public class DataGenerator {
         final String[] descriptions = { Messages.DataGenerator_SampleElement18, Messages.DataGenerator_SampleElement19,
             Messages.DataGenerator_SampleElement20, Messages.DataGenerator_SampleElement21, Messages.DataGenerator_SampleElement22 };
 
-        final long[] dates = { initialDateTime1 + 60 * interval, initialDateTime2 + 20 * interval, initialDateTime3 + 60 * interval };
+        final long[] dates = { initialDateTime1 + 60 * day, initialDateTime2 + 20 * day, initialDateTime3 + 60 * day };
 
         for (int i = 0; i < totalElementsCnt - 6; i++) {
-            long date = dates[i % 3] + interval * (i % 30);
+            long date = dates[i % 3] + hour * (i % 30);
             dates[i % 3] = date;
-            addAxisElement(events[i % events.length], descriptions[i % descriptions.length], date, interval, i % 3, diagram);
+            addAxisElement(events[i % events.length], descriptions[i % descriptions.length], date, day, i % 3, diagram);
         }
 
         return diagram.build();

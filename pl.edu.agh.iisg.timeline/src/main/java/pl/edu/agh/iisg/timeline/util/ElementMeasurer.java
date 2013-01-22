@@ -34,7 +34,7 @@ public class ElementMeasurer implements IElementMeasurer {
 
     @Override
     public int getHeightOfDescription(String desc) {
-        int lines = descSplitter.split(desc).length;
+        int lines = Math.max(1, descSplitter.split(desc).length);
         int marginVertical = VisualConstants.ELEMENT_DESC_LABEL_MARGIN;
         int lineHeight = VisualConstants.ELEMENT_DESC_LABEL_LINE_HEIGHT;
         return (lines * lineHeight) + 2 * marginVertical;

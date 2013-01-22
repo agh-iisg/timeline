@@ -103,7 +103,7 @@ public class DataGenerator {
         final String[] events = { Messages.DataGenerator_SampleElement13, Messages.DataGenerator_SampleElement14,
             Messages.DataGenerator_SampleElement15, Messages.DataGenerator_SampleElement16, Messages.DataGenerator_SampleElement17 };
 
-        final String[] descriptions = { Messages.DataGenerator_SampleElement18, Messages.DataGenerator_SampleElement19,
+        final String[] descriptions = { "", Messages.DataGenerator_SampleElement19,
             Messages.DataGenerator_SampleElement20, Messages.DataGenerator_SampleElement21, Messages.DataGenerator_SampleElement22 };
 
         final long[] dates = { initialDateTime1 + 60 * day, initialDateTime2 + 20 * day, initialDateTime3 + 60 * day };

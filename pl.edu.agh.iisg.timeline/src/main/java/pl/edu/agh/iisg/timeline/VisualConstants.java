@@ -6,6 +6,8 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
 
+import pl.edu.agh.iisg.timeline.util.FontsLoader;
+
 public final class VisualConstants {
 
     public static final Color BACKGROUND = ColorConstants.white;
@@ -79,4 +81,18 @@ public final class VisualConstants {
     public static final int ELEMENT_DESC_CHARS_PER_LINE = 50;
 
     public static final int ELEMENT_MARGIN = 4;
+
+    private static final String FONT_DIR = "fonts";
+
+    private static void loadFonts() {
+        try {
+            FontsLoader.loadFromDirectory(FONT_DIR);
+        } catch (Exception e) {
+            // do nothing, other font will be used.
+        }
+    }
+
+    static {
+        loadFonts();
+    }
 }

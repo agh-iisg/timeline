@@ -17,6 +17,7 @@ import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
+import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
 
 public class DiscretePositionerTest {
 
@@ -41,8 +42,8 @@ public class DiscretePositionerTest {
         assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getValue() < positioner.getPositionOf(element1));
     }
 
-    private IMeasurer mockMeasurer() {
-        IMeasurer measurer = mock(IMeasurer.class);
+    private IElementMeasurer mockMeasurer() {
+        IElementMeasurer measurer = mock(IElementMeasurer.class);
         when(measurer.getHeightOf(any(AxisElement.class))).thenReturn(50);
         return measurer;
     }

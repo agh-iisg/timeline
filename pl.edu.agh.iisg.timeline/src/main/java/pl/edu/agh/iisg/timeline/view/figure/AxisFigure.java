@@ -1,6 +1,5 @@
 package pl.edu.agh.iisg.timeline.view.figure;
 
-
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.MarginBorder;
@@ -13,55 +12,50 @@ import pl.edu.agh.iisg.timeline.VisualConstants;
 
 public class AxisFigure extends RectangleFigure {
 
-	public static int LENGTH = 4000;
+    public AxisFigure(String name) {
+        this(name, null);
+    }
 
-	public static int WIDTH = 200;
+    public AxisFigure(String name, Image icon) {
+        init();
+        if (icon != null) {
+            addIcon(icon);
+        }
+        addLabel(name);
+    }
 
-	public AxisFigure(String name) {
-		this(name, null);
-	}
+    private void init() {
+        FlowLayout layout = new FlowLayout();
+        layout.setMinorSpacing(0);
+        setLayoutManager(layout);
+        setPreferredSize(new Dimension(VisualConstants.AXIS_WIDTH, VisualConstants.AXIS_HEIGHT));
 
-	public AxisFigure(String name, Image icon) {
-		init();
-		if (icon != null) {
-			addIcon(icon);
-		}
-		addLabel(name);
-	}
+        setBackgroundColor(VisualConstants.AXIS_BACKGROUND);
+        setForegroundColor(VisualConstants.AXIS_BACKGROUND);
+    }
 
-	private void init() {
-		FlowLayout layout = new FlowLayout();
-		layout.setMinorSpacing(0);
-		setLayoutManager(layout);
-		setPreferredSize(new Dimension(VisualConstants.AXIS_WIDTH,
-				VisualConstants.AXIS_HEIGHT));
+    private void addLabel(String name) {
+        AxisFlowPage flowPage = new AxisFlowPage();
+        TextFlow label = new TextFlow(name);
 
-		setBackgroundColor(VisualConstants.AXIS_BACKGROUND);
-		setForegroundColor(VisualConstants.AXIS_BACKGROUND);
-	}
+        label.setForegroundColor(VisualConstants.AXIS_FONT_COLOR);
+        label.setFont(VisualConstants.AXIS_FONT);
 
-	private void addLabel(String name) {
-		AxisFlowPage flowPage = new AxisFlowPage();
-		TextFlow label = new TextFlow(name);
+        int margin = VisualConstants.AXIS_LABEL_MARGIN;
 
-		label.setForegroundColor(VisualConstants.AXIS_FONT_COLOR);
-		label.setFont(VisualConstants.AXIS_FONT);
+        flowPage.setBorder(new MarginBorder(margin - 3, margin, margin, margin));
 
-		int margin = VisualConstants.AXIS_LABEL_MARGIN;
+        flowPage.add(label);
+        add(flowPage);
+    }
 
-		flowPage.setBorder(new MarginBorder(margin - 3, margin, margin, margin));
+    private void addIcon(Image icon) {
+        ImageFigure iconFigure = new ImageFigure(icon);
 
-		flowPage.add(label);
-		add(flowPage);
-	}
+        iconFigure.setPreferredSize(VisualConstants.AXIS_ICON_WIDTH, VisualConstants.AXIS_ICON_HEIGHT);
+        int margin = VisualConstants.AXIS_LABEL_MARGIN;
+        iconFigure.setBorder(new MarginBorder(margin, margin, 0, 0));
 
-	private void addIcon(Image icon) {
-		ImageFigure iconFigure = new ImageFigure(icon);
-
-		iconFigure.setPreferredSize(VisualConstants.AXIS_ICON_WIDTH, VisualConstants.AXIS_ICON_HEIGHT);
-		int margin = VisualConstants.AXIS_LABEL_MARGIN;
-		iconFigure.setBorder(new MarginBorder(margin, margin, 0, 0));
-
-		add(iconFigure);
-	}
+        add(iconFigure);
+    }
 }

@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.view;
+package pl.edu.agh.iisg.timeline.view.figure;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureListener;

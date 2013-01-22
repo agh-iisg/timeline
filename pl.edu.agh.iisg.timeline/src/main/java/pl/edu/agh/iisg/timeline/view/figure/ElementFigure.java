@@ -9,6 +9,10 @@ import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
+import pl.edu.agh.iisg.timeline.util.ElementMeasurer;
+import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
+import pl.edu.agh.iisg.timeline.util.ILineSplitter;
+import pl.edu.agh.iisg.timeline.util.LineSplitter;
 
 public class ElementFigure extends Figure {
 
@@ -22,7 +26,7 @@ public class ElementFigure extends Figure {
 
         addSquarePoint();
         addTitle(title);
-        addDescriptionIfNotEmpty(description);
+        addDescIfNotEmpty(description);
     }
 
     private void init() {
@@ -30,8 +34,9 @@ public class ElementFigure extends Figure {
     }
 
     private void initHeights(String title, String description) {
-        titleHeight = titleHeight(title);
-        descriptionHeight = descriptionHeight(description);
+        IElementMeasurer measurer = ElementMeasurer.getInstance();
+        titleHeight = measurer.getHeightOfTitle(title);
+        descriptionHeight = measurer.getHeightOfDescription(description);
     }
 
     private void addSquarePoint() {
@@ -78,17 +83,23 @@ public class ElementFigure extends Figure {
         RectangleFigure title = new RectangleFigure();
         title.setBackgroundColor(VisualConstants.ELEMENT_BACKGROUND);
         title.setForegroundColor(VisualConstants.ELEMENT_BACKGROUND);
-        int margin = VisualConstants.ELEMENT_LABEL_MARGIN;
+        int margin = VisualConstants.ELEMENT_LABEL_MARGIN_LEFT;
         title.setBorder(new MarginBorder(0, margin, 0, margin));
         title.setLayoutManager(new BorderLayout());
         return title;
     }
 
     private Label createTitleLabel(String text) {
-        Label label = new Label(text);
+        Label label = new Label(titleToManyLines(text));
         label.setForegroundColor(VisualConstants.ELEMENT_TITLE_LABEL_COLOR);
         label.setFont(VisualConstants.ELEMENT_TITLE_FONT);
         return label;
+    }
+
+    private String titleToManyLines(String text) {
+        ILineSplitter splitter = new LineSplitter(VisualConstants.ELEMENT_TITLE_CHARS_PER_LINE);
+        return toManyLines(text, splitter);
+
     }
 
     private void addTitleFigure(RectangleFigure title) {
@@ -99,38 +110,44 @@ public class ElementFigure extends Figure {
         setConstraint(title, new Rectangle(offsetX, offsetY, width, titleHeight));
     }
 
-    private void addDescriptionIfNotEmpty(String text) {
+    private void addDescIfNotEmpty(String text) {
         if (text != null && !text.isEmpty()) {
-            addDescription(text);
+            addDesc(text);
         }
     }
 
-    private void addDescription(String text) {
-        RectangleFigure description = createDescriptionBackground();
-        Label label = createDescriptionLabel(text);
+    private void addDesc(String text) {
+        RectangleFigure description = createDescBackground();
+        Label label = createDescLabel(text);
 
         description.add(label, BorderLayout.LEFT);
-        addDescriptionFigure(description);
+        addDescFigure(description);
     }
 
-    private RectangleFigure createDescriptionBackground() {
+    private RectangleFigure createDescBackground() {
         RectangleFigure desc = new RectangleFigure();
         desc.setBackgroundColor(VisualConstants.BACKGROUND);
         desc.setForegroundColor(VisualConstants.ELEMENT_BACKGROUND);
-        int margin = VisualConstants.ELEMENT_LABEL_MARGIN;
-        desc.setBorder(new MarginBorder(0, margin, 0, margin));
+        int marginHorizontal = VisualConstants.ELEMENT_LABEL_MARGIN_LEFT;
+        int marginVertical = VisualConstants.ELEMENT_DESC_LABEL_MARGIN;
+        desc.setBorder(new MarginBorder(marginVertical, marginHorizontal, marginVertical, marginHorizontal));
         desc.setLayoutManager(new BorderLayout());
         return desc;
     }
 
-    private Label createDescriptionLabel(String text) {
-        Label label = new Label(text);
-        label.setForegroundColor(VisualConstants.ELEMENT_DESCRIPTION_LABEL_COLOR);
-        label.setFont(VisualConstants.ELEMENT_DESCRIPTION_FONT);
+    private Label createDescLabel(String text) {
+        Label label = new Label(descToManyLines(text));
+        label.setForegroundColor(VisualConstants.ELEMENT_DESC_LABEL_COLOR);
+        label.setFont(VisualConstants.ELEMENT_DESC_FONT);
         return label;
     }
 
-    private void addDescriptionFigure(RectangleFigure description) {
+    private String descToManyLines(String text) {
+        ILineSplitter splitter = new LineSplitter(VisualConstants.ELEMENT_DESC_CHARS_PER_LINE);
+        return toManyLines(text, splitter);
+    }
+
+    private void addDescFigure(RectangleFigure description) {
         add(description);
         int offsetX = VisualConstants.ELEMENT_SQUARE_SIZE + VisualConstants.ELEMENT_SQUARE_MARGIN;
         int offsetY = VisualConstants.ELEMENT_SQUARE_MARGIN + titleHeight;
@@ -138,23 +155,12 @@ public class ElementFigure extends Figure {
         setConstraint(description, new Rectangle(offsetX, offsetY, width, descriptionHeight));
     }
 
-    /**
-     * XXX [leszko] to be changed and put somewhere else.
-     *
-     * @param name
-     * @return
-     */
-    private int titleHeight(String name) {
-        return 15;
-    }
-
-    /**
-     * XXX [leszko] to be changed and put somewhere else.
-     *
-     * @param name
-     * @return
-     */
-    private int descriptionHeight(String name) {
-        return 16;
+    private String toManyLines(String text, ILineSplitter splitter) {
+        String[] lines = splitter.split(text);
+        StringBuilder res = new StringBuilder();
+        for (String line : lines) {
+            res.append(line + "\n");
+        }
+        return res.toString().trim();
     }
 }

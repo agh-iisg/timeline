@@ -128,8 +128,9 @@ public class ElementFigure extends Figure {
         RectangleFigure desc = new RectangleFigure();
         desc.setBackgroundColor(VisualConstants.BACKGROUND);
         desc.setForegroundColor(VisualConstants.ELEMENT_BACKGROUND);
-        int margin = VisualConstants.ELEMENT_LABEL_MARGIN_LEFT;
-        desc.setBorder(new MarginBorder(0, margin, 0, margin));
+        int marginHorizontal = VisualConstants.ELEMENT_LABEL_MARGIN_LEFT;
+        int marginVertical = VisualConstants.ELEMENT_DESC_LABEL_MARGIN;
+        desc.setBorder(new MarginBorder(marginVertical, marginHorizontal, marginVertical, marginHorizontal));
         desc.setLayoutManager(new BorderLayout());
         return desc;
     }

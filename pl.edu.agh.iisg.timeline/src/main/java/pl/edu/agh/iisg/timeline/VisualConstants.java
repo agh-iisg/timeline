@@ -60,9 +60,7 @@ public final class VisualConstants {
 
     public static final int ELEMENT_LABEL_MARGIN_LEFT = 9;
 
-    public static final int ELEMENT_TITLE_LABEL_MARGIN_UP = 3;
-
-    public static final int ELEMENT_TITLE_LABEL_LINE_HEIGHT = 13;
+    public static final int ELEMENT_TITLE_LABEL_LINE_HEIGHT = 15;
 
     public static final Color ELEMENT_TITLE_LABEL_COLOR = ColorConstants.black;
 
@@ -70,15 +68,15 @@ public final class VisualConstants {
 
     public static final int ELEMENT_TITLE_CHARS_PER_LINE = 50;
 
-    public static final int ELEMENT_DESC_LABEL_MARGIN_DOWN = 5;
+    public static final int ELEMENT_DESC_LABEL_MARGIN = 2;
 
-    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 15;
+    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 14;
 
     public static final Color ELEMENT_DESC_LABEL_COLOR = ColorConstants.black;
 
     public static final Font ELEMENT_DESC_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 8, SWT.NONE);
 
-    public static final int ELEMENT_DESC_CHARS_PER_LINE = 10;
+    public static final int ELEMENT_DESC_CHARS_PER_LINE = 50;
 
     public static final int ELEMENT_MARGIN = 4;
 }

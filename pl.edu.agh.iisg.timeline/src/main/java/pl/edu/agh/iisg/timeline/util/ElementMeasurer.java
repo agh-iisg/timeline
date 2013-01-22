@@ -28,16 +28,15 @@ public class ElementMeasurer implements IElementMeasurer {
     @Override
     public int getHeightOfTitle(String title) {
         int lines = titleSplitter.split(title).length;
-        int up = VisualConstants.ELEMENT_TITLE_LABEL_MARGIN_UP;
         int lineHeight = VisualConstants.ELEMENT_TITLE_LABEL_LINE_HEIGHT;
-        return up + (lines * lineHeight);
+        return lines * lineHeight;
     }
 
     @Override
     public int getHeightOfDescription(String desc) {
         int lines = descSplitter.split(desc).length;
-        int down = VisualConstants.ELEMENT_DESC_LABEL_MARGIN_DOWN;
+        int marginVertical = VisualConstants.ELEMENT_DESC_LABEL_MARGIN;
         int lineHeight = VisualConstants.ELEMENT_DESC_LABEL_LINE_HEIGHT;
-        return (lines * lineHeight) + down;
+        return (lines * lineHeight) + 2 * marginVertical;
     }
 }

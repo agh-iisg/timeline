@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>pl.edu.agh.iisg.timeline.repository</name>
+  <projects>
+    <project>pl.edu.agh.iisg.timeline</project>
+    <project>pl.edu.agh.iisg.timeline.feature</project>
+    <project>pl.edu.agh.iisg.timeline.integration.tests</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

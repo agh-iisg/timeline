@@ -27,10 +27,10 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.model.SeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
-import pl.edu.agh.iisg.timeline.positioner.IMeasurer;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
-import pl.edu.agh.iisg.timeline.positioner.Measurer;
 import pl.edu.agh.iisg.timeline.util.DateConverter;
+import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
+import pl.edu.agh.iisg.timeline.util.ElementMeasurer;
 import pl.edu.agh.iisg.timeline.view.ElementsForAxisLayer;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
@@ -56,7 +56,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private void init() {
         long interval = 1000000000L;
-        IMeasurer measurer = new Measurer();
+        IElementMeasurer measurer = ElementMeasurer.getInstance();
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
         ISeparatorFactory separatorFactory = new SeparatorFactory(axis);
 
@@ -167,7 +167,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         IFigure child = childEditPart.getFigure();
         parent.add(child);
         int y = getYIndexOf((AxisElement)childEditPart.getModel());
-        parent.setConstraint(child, new Rectangle(0, y, TimelineConstants.ELEMENT_WIDTH, 80));
+        parent.setConstraint(child, new Rectangle(0, y, TimelineConstants.ELEMENT_WIDTH, -1));
     }
 
     private void removeAxisElementChildVisual(AxisElementEditPart childEditPart) {

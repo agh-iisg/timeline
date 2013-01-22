@@ -24,7 +24,7 @@ public final class VisualConstants {
 
     public static final int AXIS_ICON_HEIGHT = 41;
 
-    public static final int AXIS_LABEL_WIDTH = AXIS_WIDTH - AXIS_ICON_WIDTH - 3*AXIS_LABEL_MARGIN;
+    public static final int AXIS_LABEL_WIDTH = AXIS_WIDTH - AXIS_ICON_WIDTH - 3 * AXIS_LABEL_MARGIN;
 
     public static final Color AXIS_BACKGROUND = new Color(null, 194, 193, 193);
 
@@ -58,13 +58,27 @@ public final class VisualConstants {
 
     public static final Color ELEMENT_BACKGROUND = new Color(null, 222, 222, 221);
 
-    public static final int ELEMENT_LABEL_MARGIN = 9;
+    public static final int ELEMENT_LABEL_MARGIN_LEFT = 9;
+
+    public static final int ELEMENT_TITLE_LABEL_MARGIN_UP = 3;
+
+    public static final int ELEMENT_TITLE_LABEL_LINE_HEIGHT = 13;
 
     public static final Color ELEMENT_TITLE_LABEL_COLOR = ColorConstants.black;
 
-    public static final Font ELEMENT_TITLE_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 10, SWT.NONE);
+    public static final Font ELEMENT_TITLE_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
 
-    public static final Color ELEMENT_DESCRIPTION_LABEL_COLOR = ColorConstants.black;
+    public static final int ELEMENT_TITLE_CHARS_PER_LINE = 50;
 
-    public static final Font ELEMENT_DESCRIPTION_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 9, SWT.NONE);
+    public static final int ELEMENT_DESC_LABEL_MARGIN_DOWN = 5;
+
+    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 15;
+
+    public static final Color ELEMENT_DESC_LABEL_COLOR = ColorConstants.black;
+
+    public static final Font ELEMENT_DESC_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 8, SWT.NONE);
+
+    public static final int ELEMENT_DESC_CHARS_PER_LINE = 10;
+
+    public static final int ELEMENT_MARGIN = 4;
 }

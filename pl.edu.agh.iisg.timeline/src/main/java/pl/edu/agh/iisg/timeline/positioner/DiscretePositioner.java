@@ -15,6 +15,7 @@ import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
+import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
 
 import com.google.common.collect.TreeMultimap;
 
@@ -34,7 +35,7 @@ public class DiscretePositioner implements IPositioner {
 
     private long interval;
 
-    private final IMeasurer measurer;
+    private final IElementMeasurer measurer;
 
     private final ISeparatorFactory separatorFactory;
 
@@ -48,7 +49,7 @@ public class DiscretePositioner implements IPositioner {
 
     private int maxPosition;
 
-    public DiscretePositioner(long interval, IMeasurer measurer, ISeparatorFactory separatorFactory) {
+    public DiscretePositioner(long interval, IElementMeasurer measurer, ISeparatorFactory separatorFactory) {
         this.interval = interval;
         this.measurer = measurer;
         this.separatorFactory = separatorFactory;
@@ -107,7 +108,9 @@ public class DiscretePositioner implements IPositioner {
                 }
                 positions.put(element, posForAxis);
                 elementsByPosition.put(posForAxis, element);
-                posForAxis += measurer.getHeightOf(element);
+                int spaceForElement = measurer.getHeightOf(element) + VisualConstants.ELEMENT_MARGIN
+                        + VisualConstants.ELEMENT_SQUARE_MARGIN;
+                posForAxis += spaceForElement;
                 pos.put(axis, posForAxis);
             }
             posMax = Collections.max(pos.values());

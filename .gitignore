@@ -12,11 +12,9 @@ target/
 *.swp
 *~.nib
 local.properties
-.classpath
 .settings/
 .loadpath
 .checkstyle
-.project
 
 # External tool builders
 .externalToolBuilders/

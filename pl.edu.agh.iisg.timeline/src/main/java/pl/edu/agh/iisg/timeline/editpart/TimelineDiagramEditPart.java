@@ -30,6 +30,7 @@ import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.positioner.IMeasurer;
 import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.positioner.Measurer;
+import pl.edu.agh.iisg.timeline.util.DateConverter;
 import pl.edu.agh.iisg.timeline.view.ElementsForAxisLayer;
 import pl.edu.agh.iisg.timeline.view.TimelineConstants;
 
@@ -38,6 +39,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     private IPositioner positioner;
 
     private IModelRefresher refresher;
+
+    private DateConverter converter;
 
     private int diagramWidth;
 
@@ -59,6 +62,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
         positioner = new DiscretePositioner(interval, measurer, separatorFactory);
         refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
+        converter = new DateConverter(interval);
         diagramWidth = calculateDiagramWidth();
     }
 
@@ -206,5 +210,9 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
             EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(model);
             removeChild(editPart);
         }
+    }
+
+    public DateConverter getConverter() {
+        return converter;
     }
 }

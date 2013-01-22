@@ -3,7 +3,7 @@ package pl.edu.agh.iisg.timeline.util;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class TimelineDateConverter {
+public class DateConverter {
 
 	private static final long DAY_INTERVAL = 1000 * 24 * 60 * 60;
 	private static final long MONTH_INTERVAL = 30 * DAY_INTERVAL;
@@ -20,11 +20,11 @@ public class TimelineDateConverter {
 
 	private long interval;
 
-	public TimelineDateConverter(long interval) {
+	public DateConverter(long interval) {
 		this.interval = interval;
 	}
 
-	public String getAsString(long date) {
+	public String asString(long date) {
 		Locale locale = new Locale(DATE_LOCALE);
 
 		// full pattern: "EEEE, d MMM yyyy 'godz.' hh:mm";

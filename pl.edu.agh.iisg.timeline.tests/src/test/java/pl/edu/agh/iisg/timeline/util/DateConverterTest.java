@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class TimelineDateConverterTest {
+public class DateConverterTest {
 
 	private static final long DAY_INTERVAL = 1000 * 24 * 60 * 60;
 	private static final long MONTH_INTERVAL = 30 * DAY_INTERVAL;
@@ -38,14 +38,14 @@ public class TimelineDateConverterTest {
 	public void testGetAsStringWithDayInterval() {
 
 		//given
-		TimelineDateConverter converter1 = new TimelineDateConverter(
+		DateConverter converter1 = new DateConverter(
 				DAY_INTERVAL - 1);
-		TimelineDateConverter converter2 = new TimelineDateConverter(
+		DateConverter converter2 = new DateConverter(
 				DAY_INTERVAL);
 
 		//when
-		String resultFull = converter1.getAsString(dateToTest);
-		String resultDay = converter2.getAsString(dateToTest);
+		String resultFull = converter1.asString(dateToTest);
+		String resultDay = converter2.asString(dateToTest);
 
 		//then
 		assertEquals(resultFull, DATE_FULL_FORMAT);
@@ -59,14 +59,14 @@ public class TimelineDateConverterTest {
 	public void testGetAsStringWithMonthInterval() {
 
 		//given
-		TimelineDateConverter converter1 = new TimelineDateConverter(
+		DateConverter converter1 = new DateConverter(
 				MONTH_INTERVAL - 1);
-		TimelineDateConverter converter2 = new TimelineDateConverter(
+		DateConverter converter2 = new DateConverter(
 				MONTH_INTERVAL);
 
 		//when
-		String resultDay = converter1.getAsString(dateToTest);
-		String resultMonth = converter2.getAsString(dateToTest);
+		String resultDay = converter1.asString(dateToTest);
+		String resultMonth = converter2.asString(dateToTest);
 
 		//then
 		assertEquals(resultDay, DATE_DAY_FORMAT);
@@ -81,13 +81,13 @@ public class TimelineDateConverterTest {
 	public void testGetAsStringWithYearInterval() {
 
 		//given
-		TimelineDateConverter converter1 = new TimelineDateConverter(
+		DateConverter converter1 = new DateConverter(
 				YEAR_INTERVAL - 1);
-		TimelineDateConverter converter2 = new TimelineDateConverter(
+		DateConverter converter2 = new DateConverter(
 				YEAR_INTERVAL);
 		//when
-		String resultMonth = converter1.getAsString(dateToTest);
-		String resultYear = converter2.getAsString(dateToTest);
+		String resultMonth = converter1.asString(dateToTest);
+		String resultYear = converter2.asString(dateToTest);
 
 		//then
 		assertEquals(resultMonth, DATE_MONTH_FORMAT);

@@ -1,11 +1,10 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
-import java.util.Date;
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import pl.edu.agh.iisg.timeline.model.Separator;
+import pl.edu.agh.iisg.timeline.util.DateConverter;
 import pl.edu.agh.iisg.timeline.view.figure.SeparatorFigure;
 
 public class SeparatorEditPart extends AbstractGraphicalEditPart {
@@ -17,7 +16,8 @@ public class SeparatorEditPart extends AbstractGraphicalEditPart {
     @Override
     protected IFigure createFigure() {
         Separator separator = (Separator)getModel();
-        return new SeparatorFigure(new Date(separator.getValue()).toString(), separator.getAxis());
+        DateConverter converter = ((TimelineDiagramEditPart)getParent()).getConverter();
+        return new SeparatorFigure(converter.asString(separator.getValue()), separator.getAxis());
     }
 
     @Override

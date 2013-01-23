@@ -32,7 +32,7 @@ public final class VisualConstants {
 
     public static final Color AXIS_FONT_COLOR = ColorConstants.black;
 
-    public static final Font AXIS_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 9, SWT.NONE);
+    public static final Font AXIS_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 10, SWT.NONE);
 
     public static final int SEPARATOR_HEIGHT = 15;
 
@@ -54,7 +54,7 @@ public final class VisualConstants {
 
     public static final Color ELEMENT_SQUARE_COLOR = new Color(null, 121, 137, 146);
 
-    public static final int ELEMENT_SQUARE_SIZE = 15;
+    public static final int ELEMENT_SQUARE_SIZE = 16;
 
     public static final int ELEMENT_SQUARE_MARGIN = 4;
 
@@ -62,7 +62,7 @@ public final class VisualConstants {
 
     public static final int ELEMENT_LABEL_MARGIN_LEFT = 9;
 
-    public static final int ELEMENT_TITLE_LABEL_LINE_HEIGHT = 15;
+    public static final int ELEMENT_TITLE_LABEL_LINE_HEIGHT = 16;
 
     public static final Color ELEMENT_TITLE_LABEL_COLOR = ColorConstants.black;
 
@@ -72,7 +72,7 @@ public final class VisualConstants {
 
     public static final int ELEMENT_DESC_LABEL_MARGIN = 2;
 
-    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 14;
+    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 15;
 
     public static final Color ELEMENT_DESC_LABEL_COLOR = ColorConstants.black;
 

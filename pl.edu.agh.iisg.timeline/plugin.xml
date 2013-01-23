@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="pl.edu.agh.iisg.timeline.view.TimelineView"
-            id="pl.edu.agh.iisg.timeline.view"
-            name="%view.name"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
          id="pl.edu.agh.iisg.timeline.app"
          name="%extension.name"
          point="org.eclipse.core.runtime.applications">

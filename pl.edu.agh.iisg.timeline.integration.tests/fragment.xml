@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <fragment>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="pl.edu.agh.iisg.timeline.integration.TimelineViewTest"
-            id="pl.edu.agh.iisg.timeline.integration.tests.view2"
-            name="Timeline View Test"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateSampleTimelineDiagramHandler"
@@ -146,6 +137,15 @@
             </command>
          </menu>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="pl.edu.agh.iisg.timeline.integration.TimelineView"
+            id="pl.edu.agh.iisg.timeline.view"
+            name="%view.name"
+            restorable="true">
+      </view>
    </extension>
 
 </fragment>

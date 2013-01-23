@@ -68,7 +68,7 @@ public final class VisualConstants {
 
     public static final Font ELEMENT_TITLE_FONT = new Font(Display.getDefault(), "Franklin Gothic Demi", 10, SWT.NONE);
 
-    public static final int ELEMENT_TITLE_CHARS_PER_LINE = 50;
+    public static final int ELEMENT_TITLE_CHARS_PER_LINE = 48;
 
     public static final int ELEMENT_DESC_LABEL_MARGIN = 2;
 
@@ -78,7 +78,7 @@ public final class VisualConstants {
 
     public static final Font ELEMENT_DESC_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 10, SWT.NONE);
 
-    public static final int ELEMENT_DESC_CHARS_PER_LINE = 50;
+    public static final int ELEMENT_DESC_CHARS_PER_LINE = 48;
 
     public static final int ELEMENT_MARGIN = 4;
 

@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="pl.edu.agh.iisg.timeline.TimelineViewTest"
+            class="pl.edu.agh.iisg.timeline.integration.TimelineViewTest"
             id="pl.edu.agh.iisg.timeline.integration.tests.view2"
             name="Timeline View Test"
             restorable="true">
@@ -13,7 +13,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateSampleTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateSampleTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.integration.tests.create"
             name="Create a sample diagram">
          <commandParameter
@@ -26,7 +26,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateRealDataTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateRealDataTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
             name="Create a real data diagram">
          <commandParameter
@@ -39,7 +39,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateLongTextsAndIconsTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateLongTextsAndIconsTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.integration.tests.create.long.labels.icons"
             name="Create long texts and icons diagram">
          <commandParameter

@@ -1,9 +1,9 @@
-package pl.edu.agh.iisg.timeline.util;
+package pl.edu.agh.iisg.timeline.integration.util;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
-    private static final String BUNDLE_NAME = "pl.edu.agh.iisg.timeline.util.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "pl.edu.agh.iisg.timeline.integration.util.messages"; //$NON-NLS-1$
 
     public static String DataGenerator__SampleAxisName20;
 

@@ -1,6 +1,6 @@
-package pl.edu.agh.iisg.timeline.handler;
+package pl.edu.agh.iisg.timeline.integration.handler;
 
-import pl.edu.agh.iisg.timeline.DataGenerator;
+import pl.edu.agh.iisg.timeline.integration.DataGenerator;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class CreateRealDataTimelineDiagramHandler extends

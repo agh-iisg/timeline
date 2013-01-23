@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline;
+package pl.edu.agh.iisg.timeline.integration;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,10 +7,11 @@ import java.text.SimpleDateFormat;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import pl.edu.agh.iisg.timeline.Activator;
+import pl.edu.agh.iisg.timeline.integration.util.Messages;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.util.Messages;
 
 public class DataGenerator {
 

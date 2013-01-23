@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.handler;
+package pl.edu.agh.iisg.timeline.integration.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -8,7 +8,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import pl.edu.agh.iisg.timeline.DataGenerator;
+import pl.edu.agh.iisg.timeline.integration.DataGenerator;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.view.TimelineView;
 

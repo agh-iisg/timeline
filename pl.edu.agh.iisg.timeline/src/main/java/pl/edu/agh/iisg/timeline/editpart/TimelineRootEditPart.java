@@ -66,6 +66,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     private ScrollPane createElementsScroll(Layer layer) {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContents(layer);
+        scrollPane.setScrollBarVisibility(ScrollPane.NEVER);
         addScrollListeners(scrollPane);
         return scrollPane;
     }

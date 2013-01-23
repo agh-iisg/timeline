@@ -17,8 +17,8 @@ public class DateConverterTest {
 	private static final long YEAR_INTERVAL = 365 * DAY_INTERVAL;
 
 	private static final String DATE_TO_TEST = "07/11/1990";
-	private static final String DATE_FULL_FORMAT = "\u015Aroda, 7 lis 1990 godz. 12:00";
-	private static final String DATE_DAY_FORMAT = "\u015Aroda, 7 lis 1990";
+	private static final String DATE_FULL_FORMAT = "Œroda, 7 listopada 1990 godz. 12:00";
+	private static final String DATE_DAY_FORMAT = "Œroda, 7 listopada 1990";
 	private static final String DATE_MONTH_FORMAT = "Listopad 1990";
 	private static final String DATE_YEAR_FORMAT = "1990";
 

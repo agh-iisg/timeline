@@ -72,11 +72,11 @@ public final class VisualConstants {
 
     public static final int ELEMENT_DESC_LABEL_MARGIN = 2;
 
-    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 16;
+    public static final int ELEMENT_DESC_LABEL_LINE_HEIGHT = 17;
 
     public static final Color ELEMENT_DESC_LABEL_COLOR = ColorConstants.black;
 
-    public static final Font ELEMENT_DESC_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 9, SWT.NONE);
+    public static final Font ELEMENT_DESC_FONT = new Font(Display.getDefault(), "Franklin Gothic Book", 10, SWT.NONE);
 
     public static final int ELEMENT_DESC_CHARS_PER_LINE = 50;
 

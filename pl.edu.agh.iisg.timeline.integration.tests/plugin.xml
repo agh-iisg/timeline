@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
-<fragment>
+<plugin>
    <extension
          id="pl.edu.agh.iisg.timeline.app"
          name="%extension.name"
@@ -13,6 +13,46 @@
                class="pl.edu.agh.iisg.timeline.integration.TimelineApplication">
          </run>
       </application>
+   </extension>
+   <extension
+         id="Timeline_Editor"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="pl.edu.agh.iisg.timeline.app"
+            name="%product.name">
+         <property
+               name="windowImages"
+               value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
+         </property>
+         <property
+               name="aboutText"
+               value="%productBlurb">
+         </property>
+         <property
+               name="aboutImage"
+               value="eclipse_lg.gif">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="C8D5EA">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="0,280,455,15">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,220,441,20">
+         </property>
+         <property
+               name="appName"
+               value="%product.name">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
    </extension>
       <extension
          point="org.eclipse.ui.perspectives">
@@ -156,4 +196,4 @@
       </view>
    </extension>
 
-</fragment>
+</plugin>

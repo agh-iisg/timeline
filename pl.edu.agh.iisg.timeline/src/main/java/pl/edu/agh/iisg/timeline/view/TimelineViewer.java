@@ -18,24 +18,21 @@ public class TimelineViewer extends GraphicalViewerImpl {
 
     public TimelineViewer(Composite parent) {
         super();
-        createDiagram(parent);
+        init(parent);
     }
 
-    private void createDiagram(Composite parent) {
+    private void init(Composite parent) {
         initViewer(parent);
         addMouseScroll();
         addKeyControl();
-
     }
 
     private void initViewer(Composite parent) {
-        TimelineDiagram timelineDiagram = createEmptyDiagram(parent);
         createControl(parent);
         rootEditPart = new TimelineRootEditPart();
         setRootEditPart(rootEditPart);
         getControl().setBackground(ColorConstants.white);
         setEditPartFactory(new TimelineEditPartsFactory());
-        setContents(timelineDiagram);
     }
 
     private void addMouseScroll() {
@@ -74,11 +71,6 @@ public class TimelineViewer extends GraphicalViewerImpl {
                 }
             }
         });
-    }
-
-    private TimelineDiagram createEmptyDiagram(Composite parent) {
-        TimelineDiagram diagram = TimelineDiagram.builder().name("Timeline").minDateTime(1L).maxDateTime(10L).initialDateTime(5L).build();
-        return diagram;
     }
 
     public void setDiagram(TimelineDiagram diagram) {

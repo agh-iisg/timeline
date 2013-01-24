@@ -108,22 +108,8 @@
                </parameter>
             </command>
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create.long.labels.icons"
-                  label="Create diagram with icons and long texts"
-                  mnemonic="L"
-                  style="push">
-               <parameter
-                     name="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
-                     value="3">
-               </parameter>
-               <parameter
-                     name="pl.edu.agh.iisg.timeline.create.sample.elementsCnt"
-                     value="100">
-               </parameter>
-            </command>
-            <command
                   commandId="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
-                  label="Create real data diagram"
+                  label="Create a real data diagram"
                   mnemonic="r"
                   style="push">
                <parameter

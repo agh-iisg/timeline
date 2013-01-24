@@ -9,56 +9,53 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import pl.edu.agh.iisg.timeline.integration.DataGenerator;
+import pl.edu.agh.iisg.timeline.integration.TimelineView;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.view.TimelineView;
 
 public class CreateSampleTimelineDiagramHandler extends AbstractHandler {
 
-	private static final String VIEW_ID = "pl.edu.agh.iisg.timeline.view";
-	private static final String AXES_CNT = "pl.edu.agh.iisg.timeline.create.sample.axesCnt";
-	private static final String ELEMENTS_CNT = "pl.edu.agh.iisg.timeline.create.sample.elementsCnt";
+    private static final String VIEW_ID = "pl.edu.agh.iisg.timeline.view";
 
+    private static final String AXES_CNT = "pl.edu.agh.iisg.timeline.create.sample.axesCnt";
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow window = HandlerUtil
-				.getActiveWorkbenchWindowChecked(event);
-		TimelineView view = null;
-		try {
-			view = openView(window);
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-		if (view == null) {
-			return null;
-		}
+    private static final String ELEMENTS_CNT = "pl.edu.agh.iisg.timeline.create.sample.elementsCnt";
 
-		int axesCnt = Integer.parseInt(event.getParameter(AXES_CNT));
-		long elementsCont = Long.parseLong(event.getParameter(ELEMENTS_CNT));
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+        TimelineView view = null;
+        try {
+            view = openView(window);
+        } catch (PartInitException e) {
+            e.printStackTrace();
+        }
+        if (view == null) {
+            return null;
+        }
 
-		try {
-			view.setDiagram(getTimelineDiagram(axesCnt, elementsCont));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        int axesCnt = Integer.parseInt(event.getParameter(AXES_CNT));
+        long elementsCont = Long.parseLong(event.getParameter(ELEMENTS_CNT));
 
-		return null;
-	}
+        try {
+            view.setDiagram(getTimelineDiagram(axesCnt, elementsCont));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	protected TimelineDiagram getTimelineDiagram(int axesCnt, long elementsCont) throws Exception {
-		return DataGenerator.createSampleDiagram(axesCnt, elementsCont);
-	}
+        return null;
+    }
 
-	private final TimelineView openView(
-			final IWorkbenchWindow activeWorkbenchWindow)
-			throws PartInitException {
+    protected TimelineDiagram getTimelineDiagram(int axesCnt, long elementsCont) throws Exception {
+        return DataGenerator.createSampleDiagram(axesCnt, elementsCont);
+    }
 
-		final IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		if (activePage == null) {
-			return null;
-		}
-		return (TimelineView) activePage.showView(VIEW_ID, null,
-				IWorkbenchPage.VIEW_ACTIVATE);
+    private final TimelineView openView(final IWorkbenchWindow activeWorkbenchWindow) throws PartInitException {
 
-	}
+        final IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+        if (activePage == null) {
+            return null;
+        }
+        return (TimelineView)activePage.showView(VIEW_ID, null, IWorkbenchPage.VIEW_ACTIVATE);
+
+    }
 }

@@ -2,6 +2,28 @@
 <?eclipse version="3.4"?>
 <fragment>
    <extension
+         id="pl.edu.agh.iisg.timeline.app"
+         name="%extension.name"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="pl.edu.agh.iisg.timeline.integration.TimelineApplication">
+         </run>
+      </application>
+   </extension>
+      <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="pl.edu.agh.iisg.timeline.integration.TimelinePerspective"
+            fixed="true"
+            id="pl.edu.agh.iisg.timeline.perspective"
+            name="%perspective.name">
+      </perspective>
+   </extension>
+   <extension
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateSampleTimelineDiagramHandler"

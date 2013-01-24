@@ -1,9 +1,10 @@
-package pl.edu.agh.iisg.timeline;
+package pl.edu.agh.iisg.timeline.integration;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+
 
 public class TimelineApplication implements IApplication {
 

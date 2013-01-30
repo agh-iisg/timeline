@@ -4,7 +4,7 @@
   <projects>
     <project>pl.edu.agh.iisg.timeline</project>
     <project>pl.edu.agh.iisg.timeline.feature</project>
-    <project>pl.edu.agh.iisg.timeline.integration.tests</project>
+    <project>pl.edu.agh.iisg.timeline.example</project>
   </projects>
   <buildSpec>
     <buildCommand>

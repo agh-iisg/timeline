@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Timeline Integration Tests and Sample Data
-Bundle-SymbolicName: pl.edu.agh.iisg.timeline.integration.tests;singleton:=true
+Bundle-SymbolicName: pl.edu.agh.iisg.timeline.example;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: pl.edu.agh.iisg.timeline.integration.Activator
 Bundle-ActivationPolicy: lazy

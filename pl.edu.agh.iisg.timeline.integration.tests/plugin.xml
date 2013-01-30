@@ -67,7 +67,7 @@
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateSampleTimelineDiagramHandler"
-            id="pl.edu.agh.iisg.timeline.integration.tests.create"
+            id="pl.edu.agh.iisg.timeline.example.create"
             name="Create a sample diagram">
          <commandParameter
                id="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
@@ -80,7 +80,7 @@
       </command>
       <command
             defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateRealDataTimelineDiagramHandler"
-            id="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
+            id="pl.edu.agh.iisg.timeline.example.create.real.data"
             name="Create a real data diagram">
          <commandParameter
                id="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
@@ -93,7 +93,7 @@
       </command>
       <command
             defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateLongTextsAndIconsTimelineDiagramHandler"
-            id="pl.edu.agh.iisg.timeline.integration.tests.create.long.labels.icons"
+            id="pl.edu.agh.iisg.timeline.example.create.long.labels.icons"
             name="Create long texts and icons diagram">
          <commandParameter
                id="pl.edu.agh.iisg.timeline.create.sample.axesCnt"
@@ -114,7 +114,7 @@
                label="Timeline"
                mnemonic="T">
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create"
+                  commandId="pl.edu.agh.iisg.timeline.example.create"
                   label="Create a small diagram"
                   mnemonic="s"
                   style="push">
@@ -128,7 +128,7 @@
                </parameter>
             </command>
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create"
+                  commandId="pl.edu.agh.iisg.timeline.example.create"
                   label="Create a medium diagram"
                   mnemonic="m"
                   style="push">
@@ -142,7 +142,7 @@
                </parameter>
             </command>
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create"
+                  commandId="pl.edu.agh.iisg.timeline.example.create"
                   label="Create a large diagram"
                   mnemonic="l"
                   style="push">
@@ -156,7 +156,7 @@
                </parameter>
             </command>
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create"
+                  commandId="pl.edu.agh.iisg.timeline.example.create"
                   label="Create a huge diagram"
                   mnemonic="h"
                   style="push">
@@ -170,7 +170,7 @@
                </parameter>
             </command>
             <command
-                  commandId="pl.edu.agh.iisg.timeline.integration.tests.create.real.data"
+                  commandId="pl.edu.agh.iisg.timeline.example.create.real.data"
                   label="Create a real data diagram"
                   mnemonic="r"
                   style="push">

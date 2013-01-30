@@ -33,7 +33,7 @@
          unpack="false"/>
 
    <plugin
-         id="pl.edu.agh.iisg.timeline.integration.tests"
+         id="pl.edu.agh.iisg.timeline.example"
          download-size="0"
          install-size="0"
          version="0.0.0"

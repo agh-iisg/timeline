@@ -10,9 +10,9 @@
 	<version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>pl.edu.agh.iisg.timeline.integration.tests</artifactId>
+  <artifactId>pl.edu.agh.iisg.timeline.example</artifactId>
   <packaging>eclipse-plugin</packaging>
 
-  <name>Timeline Integration Tests and Sample Data</name>
- 
+  <name>Timeline Demo</name>
+
 </project>

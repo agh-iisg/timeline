@@ -11,7 +11,7 @@ public class Element implements Comparable<Element> {
 
     private Axis owner;
 
-    private String name;
+    private String title;
 
     private String description;
 
@@ -23,7 +23,7 @@ public class Element implements Comparable<Element> {
 
     public Element(Axis owner, String name, String description, Long date, Long duration) {
         this.owner = owner;
-        this.name = name;
+        this.title = name;
         this.description = description;
         this.date = date;
         this.duration = duration;
@@ -47,13 +47,13 @@ public class Element implements Comparable<Element> {
         this.owner = owner;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        Preconditions.checkNotNull(name);
-        this.name = name;
+    public void setTitle(String title) {
+        Preconditions.checkNotNull(title);
+        this.title = title;
     }
 
     public String getDescription() {
@@ -97,7 +97,7 @@ public class Element implements Comparable<Element> {
         if (res != 0) {
             return res;
         }
-        res = name.compareTo(o.name);
+        res = title.compareTo(o.title);
         if (res != 0) {
             return res;
         }
@@ -116,7 +116,7 @@ public class Element implements Comparable<Element> {
     public boolean equals(Object arg) {
         if (arg instanceof Element) {
             final Element that = (Element)arg;
-            return equal(owner, that.owner) && equal(name, that.name) && equal(description, that.description) && equal(date, that.date)
+            return equal(owner, that.owner) && equal(title, that.title) && equal(description, that.description) && equal(date, that.date)
                     && equal(duration, that.duration);
         } else {
             return false;
@@ -126,7 +126,7 @@ public class Element implements Comparable<Element> {
 
     @Override
     public int hashCode() {
-        return hash(owner, name, description, date, duration);
+        return hash(owner, title, description, date, duration);
     }
 
     // END Overridden Methods

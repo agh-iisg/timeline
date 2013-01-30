@@ -15,7 +15,7 @@ public class ElementEditPart extends AbstractGraphicalEditPart {
     @Override
     protected IFigure createFigure() {
         Element model = (Element)getModel();
-        return new ElementFigure(model.getName(), model.getDescription());
+        return new ElementFigure(model.getTitle(), model.getDescription());
     }
 
     @Override

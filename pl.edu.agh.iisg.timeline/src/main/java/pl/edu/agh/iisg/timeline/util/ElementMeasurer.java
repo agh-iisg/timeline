@@ -20,7 +20,7 @@ public class ElementMeasurer implements IElementMeasurer {
 
     @Override
     public int getHeightOf(Element element) {
-        String title = element.getName();
+        String title = element.getTitle();
         String desc = element.getDescription();
         return getHeightOfTitle(title) + getHeightOfDesc(desc);
     }

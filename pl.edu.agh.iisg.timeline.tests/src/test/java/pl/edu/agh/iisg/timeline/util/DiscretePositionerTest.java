@@ -31,8 +31,8 @@ public class DiscretePositionerTest {
         // given
         positioner = new DiscretePositioner(1000, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");
-        Element element1 = Element.builder().name("element1").description("description1").owner(axis).date(500L).build();
-        Element element2 = Element.builder().name("element2").description("description2").owner(axis).date(800L).build();
+        Element element1 = Element.builder().title("element1").description("description1").axis(axis).date(500L).build();
+        Element element2 = Element.builder().title("element2").description("description2").axis(axis).date(800L).build();
 
         // when
         positioner.init(Arrays.asList(element1, element2));
@@ -40,7 +40,7 @@ public class DiscretePositionerTest {
         // then
         assertTrue(positioner.getPositionOf(element1) < positioner.getPositionOf(element2));
         assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
-        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getValue() < positioner.getPositionOf(element1));
+        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getDate() < positioner.getPositionOf(element1));
     }
 
     private IElementMeasurer mockMeasurer() {

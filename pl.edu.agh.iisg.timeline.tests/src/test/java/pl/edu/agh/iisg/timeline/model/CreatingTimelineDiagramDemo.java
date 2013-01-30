@@ -23,7 +23,7 @@ public class CreatingTimelineDiagramDemo {
     public void createDiagramPerformanceTest() {
         Stopwatch watch = new Stopwatch();
         watch.start();
-        TimelineDiagram diagram = TimelineDiagram.builder().minDateTime(1L).name("name").maxDateTime(2L).build();
+        TimelineDiagram diagram = new TimelineDiagram();
 
         for (int i = 0; i < AXES_COUNT; i++) {
             Axis axis = createSampleAxis();
@@ -44,7 +44,7 @@ public class CreatingTimelineDiagramDemo {
     }
 
     private Element createSampleElement(Axis owner) {
-        Element element = Element.builder().owner(owner).name(String.format("element %d", elementsCounter++)).date(rand.nextLong())
+        Element element = Element.builder().axis(owner).title(String.format("element %d", elementsCounter++)).date(rand.nextLong())
                 .build();
         return element;
     }

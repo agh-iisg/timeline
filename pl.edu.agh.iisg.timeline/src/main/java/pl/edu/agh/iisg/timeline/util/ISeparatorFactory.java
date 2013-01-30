@@ -4,6 +4,6 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 
 public interface ISeparatorFactory {
 
-    Separator newSeparator(long value);
+    Separator newSeparator(long date);
 
 }

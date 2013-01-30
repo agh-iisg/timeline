@@ -10,21 +10,18 @@ public class Axis {
 
     private ImageDescriptor imageDesc;
 
+    public Axis(String name) {
+        setName(name);
+        validate();
+    }
+
     public Axis(String name, ImageDescriptor imageDesc) {
         this(name);
         setImageDesc(imageDesc);
+        validate();
     }
 
-    public Axis(String name) {
-        this();
-        setName(name);
-    }
-
-    protected Axis() {
-
-    }
-
-    protected void validate() {
+    private void validate() {
         Preconditions.checkNotNull(name);
     }
 
@@ -50,26 +47,26 @@ public class Axis {
     }
 
     public static class Builder {
-        private Axis axis;
+        private String name = null;
+
+        private ImageDescriptor imageDesc = null;
 
         private Builder() {
-            axis = new Axis();
+
         }
 
         public Builder name(String name) {
-            axis.setName(name);
+            this.name = name;
             return this;
         }
 
         public Builder imageDesc(ImageDescriptor imageDesc) {
-            axis.setImageDesc(imageDesc);
+            this.imageDesc = imageDesc;
             return this;
         }
 
         public Axis build() {
-            axis.validate();
-            return axis;
+            return new Axis(name, imageDesc);
         }
     }
-
 }

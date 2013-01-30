@@ -17,42 +17,36 @@ public class DataGenerator {
     public static TimelineDiagram createSampleDiagram(final int axesCnt, final long totalElementsCnt, final long minDateTime,
             final long maxDateTime, final long initialDateTime) {
 
-        TimelineDiagram.Builder diagram = TimelineDiagram.builder();
-
-        diagram.name("Sample timeline diagram with " + axesCnt + " axes and " + totalElementsCnt + " elements.");
-
-        diagram.minDateTime(minDateTime);
-        diagram.maxDateTime(maxDateTime);
-        diagram.initialDateTime(initialDateTime);
+        TimelineDiagram diagram = new TimelineDiagram();
 
         long interval = (maxDateTime - minDateTime) / totalElementsCnt;
+
+        Axis axes[] = new Axis[axesCnt];
 
         for (int axisIdx = 0; axisIdx < axesCnt; axisIdx++) {
             Axis.Builder axis = Axis.builder();
             axis.name("Axis no.: " + axisIdx);
-            diagram.addAxis(axis.build());
+            axes[axisIdx] = axis.build();
+            diagram.addAxis(axes[axisIdx]);
         }
 
         for (long elementIdx = 0; elementIdx < totalElementsCnt; elementIdx++) {
             Element.Builder element = Element.builder();
-            element.name("Element no.: " + elementIdx);
+            element.title("Element no.: " + elementIdx);
             element.description("This is element with index: " + elementIdx);
             element.date(minDateTime + interval * elementIdx);
-            element.setDuration(interval);
-            element.owner(diagram.getAxis((int)elementIdx % axesCnt));
+            element.axis(axes[((int)elementIdx % axesCnt)]);
 
             diagram.addElement(element.build());
 
         }
 
-        return diagram.build();
+        return diagram;
 
     }
 
     public static TimelineDiagram createRealDataDiagram(int axesCnt, long totalElementsCnt, boolean useLongLabels) throws ParseException {
-        TimelineDiagram.Builder diagram = TimelineDiagram.builder();
-
-        diagram.name("Real data timeline diagram with " + axesCnt + " axes and " + totalElementsCnt + " elements.");
+        TimelineDiagram diagram = new TimelineDiagram();
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy:H");
 
@@ -62,42 +56,41 @@ public class DataGenerator {
         long initialDateTime2 = formatter.parse("23/08/2012:3").getTime();
         long initialDateTime3 = formatter.parse("04/07/2012:4").getTime();
 
-        diagram.minDateTime(initialDateTime1);
-        diagram.maxDateTime(initialDateTime1 + 1000 * day);
-        diagram.initialDateTime(initialDateTime1);
-
-        Axis.Builder axis1 = Axis.builder();
+        Axis.Builder axis1Builder = Axis.builder();
 
         if (useLongLabels) {
-            axis1.name(Messages.DataGenerator__SampleAxisName20);
+            axis1Builder.name(Messages.DataGenerator__SampleAxisName20);
         } else {
-            axis1.name(Messages.DataGenerator__SampleAxisName21);
+            axis1Builder.name(Messages.DataGenerator__SampleAxisName21);
         }
         ImageDescriptor imgDesc1 = AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "images/icon1.png");
-        axis1.imageDesc(imgDesc1);
-        diagram.addAxis(axis1.build());
+        axis1Builder.imageDesc(imgDesc1);
+        Axis axis1 = axis1Builder.build();
+        diagram.addAxis(axis1);
 
-        addElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, day, 0, diagram);
-        addElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, day, 0, diagram);
+        addElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, day, axis1, diagram);
+        addElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, day, axis1, diagram);
 
-        Axis.Builder axis2 = Axis.builder();
-        axis2.name(Messages.DataGenerator_SampleAxisName1);
+        Axis.Builder axis2Builder = Axis.builder();
+        axis2Builder.name(Messages.DataGenerator_SampleAxisName1);
         ImageDescriptor imgDesc2 = AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "images/icon2.png");
-        axis2.imageDesc(imgDesc2);
-        diagram.addAxis(axis2.build());
+        axis2Builder.imageDesc(imgDesc2);
+        Axis axis2 = axis2Builder.build();
+        diagram.addAxis(axis2);
 
-        addElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime1, day, 1, diagram);
-        addElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * hour, day, 1,
+        addElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime1, day, axis2, diagram);
+        addElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * hour, day, axis2,
                 diagram);
 
-        Axis.Builder axis3 = Axis.builder();
-        axis3.name(Messages.DataGenerator_SampleAxisName2);
+        Axis.Builder axis3Builder = Axis.builder();
+        axis3Builder.name(Messages.DataGenerator_SampleAxisName2);
         ImageDescriptor imgDesc3 = AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "images/icon3.png");
-        axis3.imageDesc(imgDesc3);
-        diagram.addAxis(axis3.build());
+        axis3Builder.imageDesc(imgDesc3);
+        Axis axis3 = axis3Builder.build();
+        diagram.addAxis(axis3);
 
-        addElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, day, 2, diagram);
-        addElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + hour, day, 2,
+        addElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, day, axis3, diagram);
+        addElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + hour, day, axis3,
                 diagram);
 
         final String[] events = { Messages.DataGenerator_SampleElement13, Messages.DataGenerator_SampleElement14,
@@ -108,13 +101,15 @@ public class DataGenerator {
 
         final long[] dates = { initialDateTime1 + 60 * day, initialDateTime2 + 20 * day, initialDateTime3 + 60 * day };
 
+        Axis axes[] = { axis1, axis2, axis3 };
+
         for (int i = 0; i < totalElementsCnt - 6; i++) {
             long date = dates[i % 3] + hour * (i % 30);
             dates[i % 3] = date;
-            addElement(events[i % events.length], descriptions[i % descriptions.length], date, day, i % 3, diagram);
+            addElement(events[i % events.length], descriptions[i % descriptions.length], date, day, axes[i % 3], diagram);
         }
 
-        return diagram.build();
+        return diagram;
     }
 
     public static TimelineDiagram createSampleDiagram(int axesCnt, long totalElementsCnt) throws Exception {
@@ -126,14 +121,12 @@ public class DataGenerator {
         return createSampleDiagram(axesCnt, totalElementsCnt, minDateTime, maxDateTime, initialDateTime);
     }
 
-    private static void addElement(String name, String description, long date, long duration, int axisNumber,
-            TimelineDiagram.Builder diagram) {
+    private static void addElement(String name, String description, long date, long duration, Axis axis, TimelineDiagram diagram) {
         Element.Builder element = Element.builder();
-        element.name(name);
+        element.title(name);
         element.description(description);
         element.date(date);
-        element.setDuration(duration);
-        element.owner(diagram.getAxis(axisNumber));
+        element.axis(axis);
 
         diagram.addElement(element.build());
     }

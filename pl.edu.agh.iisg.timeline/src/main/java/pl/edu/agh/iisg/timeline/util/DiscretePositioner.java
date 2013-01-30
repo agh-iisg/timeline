@@ -142,7 +142,7 @@ public class DiscretePositioner implements IPositioner {
 
     @Override
     public int getPositionOfSeparator(Separator separator) {
-        return separatorPosition.get(separator.getValue());
+        return separatorPosition.get(separator.getDate());
     }
 
     @Override

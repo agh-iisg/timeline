@@ -17,7 +17,7 @@ public class SeparatorEditPart extends AbstractGraphicalEditPart {
     protected IFigure createFigure() {
         Separator separator = (Separator)getModel();
         DateConverter converter = ((TimelineDiagramEditPart)getParent()).getConverter();
-        return new SeparatorFigure(converter.asString(separator.getValue()), separator.getAxis());
+        return new SeparatorFigure(converter.asString(separator.getDate()), separator.getAxis());
     }
 
     @Override

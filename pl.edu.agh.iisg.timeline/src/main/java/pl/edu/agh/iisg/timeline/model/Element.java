@@ -9,7 +9,7 @@ import com.google.common.base.Preconditions;
 
 public class Element implements Comparable<Element> {
 
-    private Axis owner;
+    private Axis axis;
 
     private String title;
 
@@ -17,34 +17,20 @@ public class Element implements Comparable<Element> {
 
     private Long date;
 
-    private Long duration;
-
-    // BEGIN Constructors
-
-    public Element(Axis owner, String name, String description, Long date, Long duration) {
-        this.owner = owner;
+    public Element(Axis axis, String name, String description, Long date) {
+        this.axis = axis;
         this.title = name;
         this.description = description;
         this.date = date;
-        this.duration = duration;
-        init();
     }
-
-    private void init() {
-
-    }
-
-    // END Constructors
-
-    // BEGIN Getters & Setters
 
     public Axis getAxis() {
-        return owner;
+        return axis;
     }
 
-    public void setOwner(Axis owner) {
+    public void setAxis(Axis owner) {
         Preconditions.checkNotNull(owner);
-        this.owner = owner;
+        this.axis = owner;
     }
 
     public String getTitle() {
@@ -78,17 +64,11 @@ public class Element implements Comparable<Element> {
         this.date = date.getTime();
     }
 
-    public Long getDuration() {
-        return duration;
+    protected void validate() {
+        Preconditions.checkNotNull(axis);
+        Preconditions.checkNotNull(title);
+        Preconditions.checkNotNull(date);
     }
-
-    public void setDuration(Long duration) {
-        this.duration = duration;
-    }
-
-    // END Getters & Setters
-
-    // BEGIN Overridden Methods
 
     @Override
     public int compareTo(Element o) {
@@ -105,19 +85,14 @@ public class Element implements Comparable<Element> {
         if (res != 0) {
             return res;
         }
-        res = duration.compareTo(o.duration);
-        if (res != 0) {
-            return res;
-        }
-        return owner.hashCode() - o.owner.hashCode();
+        return axis.hashCode() - o.axis.hashCode();
     }
 
     @Override
     public boolean equals(Object arg) {
         if (arg instanceof Element) {
             final Element that = (Element)arg;
-            return equal(owner, that.owner) && equal(title, that.title) && equal(description, that.description) && equal(date, that.date)
-                    && equal(duration, that.duration);
+            return equal(axis, that.axis) && equal(title, that.title) && equal(description, that.description) && equal(date, that.date);
         } else {
             return false;
         }
@@ -126,35 +101,30 @@ public class Element implements Comparable<Element> {
 
     @Override
     public int hashCode() {
-        return hash(owner, title, description, date, duration);
+        return hash(axis, title, description, date);
     }
 
-    // END Overridden Methods
-
-    // BEGIN Builder Methods
     public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
 
-        private Axis owner = null;
+        private Axis axis = null;
 
-        private String name = null;
+        private String title = null;
 
         private String description = null;
 
         private Long date = null;
 
-        private Long duration = 0L;
-
-        public Builder owner(Axis owner) {
-            this.owner = owner;
+        public Builder axis(Axis owner) {
+            this.axis = owner;
             return this;
         }
 
-        public Builder name(String name) {
-            this.name = name;
+        public Builder title(String title) {
+            this.title = title;
             return this;
         }
 
@@ -173,25 +143,8 @@ public class Element implements Comparable<Element> {
             return this;
         }
 
-        public Builder setDuration(Long duration) {
-            this.duration = duration;
-            return this;
-        }
-
         public Element build() {
-            validate();
-            return new Element(owner, name, description, date, duration);
-        }
-
-        protected void validate() {
-            Preconditions.checkNotNull(owner);
-            Preconditions.checkNotNull(name);
-            Preconditions.checkNotNull(date);
-            if (duration != null) {
-                Preconditions.checkArgument(duration >= 0);
-            }
+            return new Element(axis, title, description, date);
         }
     }
-
-    // END Builder Methods
 }

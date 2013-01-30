@@ -11,7 +11,7 @@ public class SeparatorFactory implements ISeparatorFactory {
     }
 
     @Override
-    public Separator newSeparator(long value) {
-        return new Separator(value, axis);
+    public Separator newSeparator(long date) {
+        return new Separator(date, axis);
     }
 }

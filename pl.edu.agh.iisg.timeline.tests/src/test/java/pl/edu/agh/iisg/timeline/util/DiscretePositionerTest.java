@@ -14,7 +14,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.util.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
@@ -31,8 +31,8 @@ public class DiscretePositionerTest {
         // given
         positioner = new DiscretePositioner(1000, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");
-        AxisElement element1 = AxisElement.builder().name("element1").description("description1").owner(axis).date(500L).build();
-        AxisElement element2 = AxisElement.builder().name("element2").description("description2").owner(axis).date(800L).build();
+        Element element1 = Element.builder().name("element1").description("description1").owner(axis).date(500L).build();
+        Element element2 = Element.builder().name("element2").description("description2").owner(axis).date(800L).build();
 
         // when
         positioner.init(Arrays.asList(element1, element2));
@@ -45,7 +45,7 @@ public class DiscretePositionerTest {
 
     private IElementMeasurer mockMeasurer() {
         IElementMeasurer measurer = mock(IElementMeasurer.class);
-        when(measurer.getHeightOf(any(AxisElement.class))).thenReturn(50);
+        when(measurer.getHeightOf(any(Element.class))).thenReturn(50);
         return measurer;
     }
 

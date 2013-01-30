@@ -3,20 +3,20 @@ package pl.edu.agh.iisg.timeline.editpart.dynamic;
 import java.util.Collection;
 import java.util.Collections;
 
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
 public class ModelRefresh {
 
-    private final Collection<AxisElement> elementsToAdd;
+    private final Collection<Element> elementsToAdd;
 
-    private final Collection<AxisElement> elementsToRemove;
+    private final Collection<Element> elementsToRemove;
 
     private final Collection<Separator> separatorsToAdd;
 
     private final Collection<Separator> separatorsToRemove;
 
-    public ModelRefresh(Collection<AxisElement> elementsToAdd, Collection<AxisElement> elementsToRemove,
+    public ModelRefresh(Collection<Element> elementsToAdd, Collection<Element> elementsToRemove,
             Collection<Separator> separatorsToAdd, Collection<Separator> separatorsToRemove) {
         this.elementsToAdd = elementsToAdd;
         this.elementsToRemove = elementsToRemove;
@@ -24,11 +24,11 @@ public class ModelRefresh {
         this.separatorsToRemove = separatorsToRemove;
     }
 
-    public Collection<AxisElement> getElementsToAdd() {
+    public Collection<Element> getElementsToAdd() {
         return elementsToAdd;
     }
 
-    public Collection<AxisElement> getElementsToRemove() {
+    public Collection<Element> getElementsToRemove() {
         return elementsToRemove;
     }
 
@@ -45,7 +45,7 @@ public class ModelRefresh {
     }
 
     public static ModelRefresh emptyModelRefresh() {
-        return new ModelRefresh(Collections.<AxisElement> emptyList(), Collections.<AxisElement> emptyList(),
+        return new ModelRefresh(Collections.<Element> emptyList(), Collections.<Element> emptyList(),
                 Collections.<Separator> emptyList(), Collections.<Separator> emptyList());
     }
 }

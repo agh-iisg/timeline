@@ -8,7 +8,7 @@ public class CreatingTimelineDiagramDemo {
 
     private static final int AXES_COUNT = 10;
 
-    private static final long AXIS_ELEMENTS_COUNT = 10L;
+    private static final long ELEMENTS_COUNT = 10L;
 
     private static int axesCounter = 0;
 
@@ -28,8 +28,8 @@ public class CreatingTimelineDiagramDemo {
         for (int i = 0; i < AXES_COUNT; i++) {
             Axis axis = createSampleAxis();
             diagram.addAxis(axis);
-            for (long j = 0; j < AXIS_ELEMENTS_COUNT; j++) {
-                diagram.addAxisElement(createSampleAxisElement(axis));
+            for (long j = 0; j < ELEMENTS_COUNT; j++) {
+                diagram.addElement(createSampleElement(axis));
             }
         }
 
@@ -43,8 +43,8 @@ public class CreatingTimelineDiagramDemo {
         return axis;
     }
 
-    private AxisElement createSampleAxisElement(Axis owner) {
-        AxisElement element = AxisElement.builder().owner(owner).name(String.format("element %d", elementsCounter++)).date(rand.nextLong())
+    private Element createSampleElement(Axis owner) {
+        Element element = Element.builder().owner(owner).name(String.format("element %d", elementsCounter++)).date(rand.nextLong())
                 .build();
         return element;
     }

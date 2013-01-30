@@ -7,7 +7,7 @@ import java.util.Date;
 
 import com.google.common.base.Preconditions;
 
-public class AxisElement implements Comparable<AxisElement> {
+public class Element implements Comparable<Element> {
 
     private Axis owner;
 
@@ -21,7 +21,7 @@ public class AxisElement implements Comparable<AxisElement> {
 
     // BEGIN Constructors
 
-    public AxisElement(Axis owner, String name, String description, Long date, Long duration) {
+    public Element(Axis owner, String name, String description, Long date, Long duration) {
         this.owner = owner;
         this.name = name;
         this.description = description;
@@ -91,7 +91,7 @@ public class AxisElement implements Comparable<AxisElement> {
     // BEGIN Overridden Methods
 
     @Override
-    public int compareTo(AxisElement o) {
+    public int compareTo(Element o) {
         Preconditions.checkNotNull(o);
         int res = date.compareTo(o.date);
         if (res != 0) {
@@ -114,8 +114,8 @@ public class AxisElement implements Comparable<AxisElement> {
 
     @Override
     public boolean equals(Object arg) {
-        if (arg instanceof AxisElement) {
-            final AxisElement that = (AxisElement)arg;
+        if (arg instanceof Element) {
+            final Element that = (Element)arg;
             return equal(owner, that.owner) && equal(name, that.name) && equal(description, that.description) && equal(date, that.date)
                     && equal(duration, that.duration);
         } else {
@@ -178,9 +178,9 @@ public class AxisElement implements Comparable<AxisElement> {
             return this;
         }
 
-        public AxisElement build() {
+        public Element build() {
             validate();
-            return new AxisElement(owner, name, description, date, duration);
+            return new Element(owner, name, description, date, duration);
         }
 
         protected void validate() {

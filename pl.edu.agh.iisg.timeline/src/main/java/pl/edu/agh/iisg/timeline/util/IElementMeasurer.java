@@ -1,6 +1,6 @@
 package pl.edu.agh.iisg.timeline.util;
 
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 
 /**
  * Measures the size of elements.
@@ -8,7 +8,7 @@ import pl.edu.agh.iisg.timeline.model.AxisElement;
  * @author leszko
  */
 public interface IElementMeasurer {
-    int getHeightOf(AxisElement element);
+    int getHeightOf(Element element);
 
     int getHeightOfTitle(String title);
 

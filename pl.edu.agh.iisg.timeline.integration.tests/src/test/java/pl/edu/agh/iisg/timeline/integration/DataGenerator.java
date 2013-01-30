@@ -9,7 +9,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import pl.edu.agh.iisg.timeline.integration.util.Messages;
 import pl.edu.agh.iisg.timeline.model.Axis;
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class DataGenerator {
@@ -34,7 +34,7 @@ public class DataGenerator {
         }
 
         for (long elementIdx = 0; elementIdx < totalElementsCnt; elementIdx++) {
-            AxisElement.Builder element = AxisElement.builder();
+            Element.Builder element = Element.builder();
             element.name("Element no.: " + elementIdx);
             element.description("This is element with index: " + elementIdx);
             element.date(minDateTime + interval * elementIdx);
@@ -77,8 +77,8 @@ public class DataGenerator {
         axis1.imageDesc(imgDesc1);
         diagram.addAxis(axis1.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, day, 0, diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, day, 0, diagram);
+        addElement(Messages.DataGenerator_SampleElement1, Messages.DataGenerator_SampleElement2, initialDateTime1, day, 0, diagram);
+        addElement(Messages.DataGenerator_SampleElement3, Messages.DataGenerator_SampleElement4, initialDateTime3, day, 0, diagram);
 
         Axis.Builder axis2 = Axis.builder();
         axis2.name(Messages.DataGenerator_SampleAxisName1);
@@ -86,8 +86,8 @@ public class DataGenerator {
         axis2.imageDesc(imgDesc2);
         diagram.addAxis(axis2.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime1, day, 1, diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * hour, day, 1,
+        addElement(Messages.DataGenerator_SampleElement5, Messages.DataGenerator_SampleElement6, initialDateTime1, day, 1, diagram);
+        addElement(Messages.DataGenerator_SampleElement7, Messages.DataGenerator_SampleElement8, initialDateTime2 + 5 * hour, day, 1,
                 diagram);
 
         Axis.Builder axis3 = Axis.builder();
@@ -96,8 +96,8 @@ public class DataGenerator {
         axis3.imageDesc(imgDesc3);
         diagram.addAxis(axis3.build());
 
-        addAxisElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, day, 2, diagram);
-        addAxisElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + hour, day, 2,
+        addElement(Messages.DataGenerator_SampleElement9, Messages.DataGenerator_SampleElement10, initialDateTime3, day, 2, diagram);
+        addElement(Messages.DataGenerator_SampleElement11, Messages.DataGenerator_SampleElement12, initialDateTime3 + hour, day, 2,
                 diagram);
 
         final String[] events = { Messages.DataGenerator_SampleElement13, Messages.DataGenerator_SampleElement14,
@@ -111,7 +111,7 @@ public class DataGenerator {
         for (int i = 0; i < totalElementsCnt - 6; i++) {
             long date = dates[i % 3] + hour * (i % 30);
             dates[i % 3] = date;
-            addAxisElement(events[i % events.length], descriptions[i % descriptions.length], date, day, i % 3, diagram);
+            addElement(events[i % events.length], descriptions[i % descriptions.length], date, day, i % 3, diagram);
         }
 
         return diagram.build();
@@ -126,9 +126,9 @@ public class DataGenerator {
         return createSampleDiagram(axesCnt, totalElementsCnt, minDateTime, maxDateTime, initialDateTime);
     }
 
-    private static void addAxisElement(String name, String description, long date, long duration, int axisNumber,
+    private static void addElement(String name, String description, long date, long duration, int axisNumber,
             TimelineDiagram.Builder diagram) {
-        AxisElement.Builder element = AxisElement.builder();
+        Element.Builder element = Element.builder();
         element.name(name);
         element.description(description);
         element.date(date);

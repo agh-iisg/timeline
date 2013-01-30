@@ -1,7 +1,7 @@
 package pl.edu.agh.iisg.timeline.util;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 
 public class ElementMeasurer implements IElementMeasurer {
 
@@ -19,7 +19,7 @@ public class ElementMeasurer implements IElementMeasurer {
     }
 
     @Override
-    public int getHeightOf(AxisElement element) {
+    public int getHeightOf(Element element) {
         String title = element.getName();
         String desc = element.getDescription();
         return getHeightOfTitle(title) + getHeightOfDesc(desc);

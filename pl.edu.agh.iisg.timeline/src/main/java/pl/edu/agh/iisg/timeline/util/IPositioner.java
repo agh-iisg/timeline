@@ -2,7 +2,7 @@ package pl.edu.agh.iisg.timeline.util;
 
 import java.util.Collection;
 
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
 /**
@@ -19,15 +19,15 @@ public interface IPositioner {
      * @param elements
      *            timeline elements
      */
-    void init(Collection<AxisElement> elements);
+    void init(Collection<Element> elements);
 
-    int getPositionOf(AxisElement element);
+    int getPositionOf(Element element);
 
     int getPositionOfSeparator(Separator separator);
 
     Collection<Separator> getSeparatorsByPosition(int start, int end);
 
-    Collection<AxisElement> getElementsByPosition(int start, int end);
+    Collection<Element> getElementsByPosition(int start, int end);
 
     int getMaxPosition();
 

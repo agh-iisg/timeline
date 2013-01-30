@@ -18,7 +18,7 @@ import pl.edu.agh.iisg.timeline.editpart.dynamic.DynamicModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.IModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.ModelRefresh;
 import pl.edu.agh.iisg.timeline.model.Axis;
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.util.DateConverter;
@@ -61,7 +61,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private void initElementPositions() {
-        Collection<AxisElement> elements = ((TimelineDiagram)getModel()).getAxisElements();
+        Collection<Element> elements = ((TimelineDiagram)getModel()).getElements();
         positioner.init(elements);
     }
 
@@ -111,8 +111,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     protected void addChildVisual(EditPart childEditPart, int index) {
         if (childEditPart instanceof AxisEditPart) {
             addAxisChildVisual((AxisEditPart)childEditPart, index);
-        } else if (childEditPart instanceof AxisElementEditPart) {
-            addAxisElementChildVisual((AxisElementEditPart)childEditPart);
+        } else if (childEditPart instanceof ElementEditPart) {
+            addElementChildVisual((ElementEditPart)childEditPart);
         } else if (childEditPart instanceof SeparatorEditPart) {
             addSeparatorChildVisual((SeparatorEditPart)childEditPart);
         }
@@ -122,8 +122,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     protected void removeChildVisual(EditPart childEditPart) {
         if (childEditPart instanceof AxisEditPart) {
             removeAxisChildVisual((AxisEditPart)childEditPart);
-        } else if (childEditPart instanceof AxisElementEditPart) {
-            removeAxisElementChildVisual((AxisElementEditPart)childEditPart);
+        } else if (childEditPart instanceof ElementEditPart) {
+            removeElementChildVisual((ElementEditPart)childEditPart);
         } else if (childEditPart instanceof SeparatorEditPart) {
             removeSeparatorChildVisual((SeparatorEditPart)childEditPart);
         }
@@ -148,17 +148,17 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         return new ElementsForAxisLayer();
     }
 
-    private void addAxisElementChildVisual(AxisElementEditPart childEditPart) {
-        AxisElement model = (AxisElement)childEditPart.getModel();
+    private void addElementChildVisual(ElementEditPart childEditPart) {
+        Element model = (Element)childEditPart.getModel();
         IFigure parent = axisLayers.get(model.getAxis());
         IFigure child = childEditPart.getFigure();
         parent.add(child);
-        int y = getYIndexOf((AxisElement)childEditPart.getModel());
+        int y = getYIndexOf((Element)childEditPart.getModel());
         parent.setConstraint(child, new Rectangle(0, y, -1, -1));
     }
 
-    private void removeAxisElementChildVisual(AxisElementEditPart childEditPart) {
-        AxisElement model = (AxisElement)childEditPart.getModel();
+    private void removeElementChildVisual(ElementEditPart childEditPart) {
+        Element model = (Element)childEditPart.getModel();
         IFigure parent = axisLayers.get(model.getAxis());
         IFigure child = childEditPart.getFigure();
         parent.remove(child);
@@ -179,7 +179,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         layer.remove(figure);
     }
 
-    private int getYIndexOf(AxisElement element) {
+    private int getYIndexOf(Element element) {
         return positioner.getPositionOf(element);
     }
 

@@ -21,7 +21,7 @@ public class TimelineDiagram {
 
     private List<Axis> axes;
 
-    private TreeMultimap<Long, AxisElement> elements;
+    private TreeMultimap<Long, Element> elements;
 
     private TimelineDiagram() {
 
@@ -87,20 +87,20 @@ public class TimelineDiagram {
         return false;
     }
 
-    public boolean addAxisElement(AxisElement element) {
+    public boolean addElement(Element element) {
         Preconditions.checkNotNull(element);
         return elements.put(element.getDate(), element);
     }
 
-    public void removeAxisElement(AxisElement element) {
+    public void removeElement(Element element) {
         elements.remove(element.getDate(), element);
     }
 
-    public SortedMap<Long, Collection<AxisElement>> getAxisElementsInRange(Long start, Long end) {
+    public SortedMap<Long, Collection<Element>> getElementsInRange(Long start, Long end) {
         return elements.asMap().subMap(start, end);
     }
 
-    public Collection<AxisElement> getAxisElements() {
+    public Collection<Element> getElements() {
         return elements.values();
     }
 
@@ -164,8 +164,8 @@ public class TimelineDiagram {
             return diagram.getAxes().get(index);
         }
 
-        public Builder addElement(AxisElement element) {
-            diagram.addAxisElement(element);
+        public Builder addElement(Element element) {
+            diagram.addElement(element);
             return this;
         }
 

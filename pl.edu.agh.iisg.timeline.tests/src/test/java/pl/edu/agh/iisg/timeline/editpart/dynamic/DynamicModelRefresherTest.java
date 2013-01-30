@@ -11,7 +11,7 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 import pl.edu.agh.iisg.timeline.util.IPositioner;
 
@@ -23,13 +23,13 @@ public class DynamicModelRefresherTest {
 
     private IRangeControl range;
 
-    private AxisElement element1 = mock(AxisElement.class);
+    private Element element1 = mock(Element.class);
 
-    private AxisElement element2 = mock(AxisElement.class);
+    private Element element2 = mock(Element.class);
 
-    private AxisElement element3 = mock(AxisElement.class);
+    private Element element3 = mock(Element.class);
 
-    private AxisElement element4 = mock(AxisElement.class);
+    private Element element4 = mock(Element.class);
 
     private Separator separator1 = mock(Separator.class);
 
@@ -39,19 +39,19 @@ public class DynamicModelRefresherTest {
 
     private Separator separator4 = mock(Separator.class);
 
-    private Collection<AxisElement> elements1 = Arrays.asList(element1, element2, element3);
+    private Collection<Element> elements1 = Arrays.asList(element1, element2, element3);
 
     private Collection<Separator> separators1 = Arrays.asList(separator1, separator2, separator3);
 
-    private Collection<AxisElement> elements2 = Arrays.asList(element2, element3, element4);
+    private Collection<Element> elements2 = Arrays.asList(element2, element3, element4);
 
     private Collection<Separator> separators2 = Arrays.asList(separator1, separator4);
 
-    private Collection<AxisElement> elements2minus1 = Arrays.asList(element4);
+    private Collection<Element> elements2minus1 = Arrays.asList(element4);
 
     private Collection<Separator> separators2minus1 = Arrays.asList(separator4);
 
-    private Collection<AxisElement> elements1minus2 = Arrays.asList(element1);
+    private Collection<Element> elements1minus2 = Arrays.asList(element1);
 
     private Collection<Separator> separators1minus2 = Arrays.asList(separator2, separator3);
 

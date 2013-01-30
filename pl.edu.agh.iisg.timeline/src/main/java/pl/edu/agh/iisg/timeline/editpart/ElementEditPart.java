@@ -3,18 +3,18 @@ package pl.edu.agh.iisg.timeline.editpart;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.view.figure.ElementFigure;
 
-public class AxisElementEditPart extends AbstractGraphicalEditPart {
+public class ElementEditPart extends AbstractGraphicalEditPart {
 
-    public AxisElementEditPart(AxisElement model) {
+    public ElementEditPart(Element model) {
         setModel(model);
     }
 
     @Override
     protected IFigure createFigure() {
-        AxisElement model = (AxisElement)getModel();
+        Element model = (Element)getModel();
         return new ElementFigure(model.getName(), model.getDescription());
     }
 

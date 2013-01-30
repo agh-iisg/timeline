@@ -12,7 +12,7 @@ import java.util.TreeMap;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.model.Axis;
-import pl.edu.agh.iisg.timeline.model.AxisElement;
+import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
 import com.google.common.collect.TreeMultimap;
@@ -41,9 +41,9 @@ public class DiscretePositioner implements IPositioner {
 
     private Map<Long, Integer> separatorPosition = new HashMap<>();
 
-    private Map<AxisElement, Integer> positions = new HashMap<>();
+    private Map<Element, Integer> positions = new HashMap<>();
 
-    private TreeMultimap<Integer, AxisElement> elementsByPosition = TreeMultimap.create();
+    private TreeMultimap<Integer, Element> elementsByPosition = TreeMultimap.create();
 
     private int maxPosition;
 
@@ -54,16 +54,16 @@ public class DiscretePositioner implements IPositioner {
     }
 
     @Override
-    public void init(Collection<AxisElement> elements) {
+    public void init(Collection<Element> elements) {
         long[] dates = extractDates(elements);
         SortedMap<Long, Integer> groups = groupByIntervals(dates);
         positionInGroups(elements, groups);
     }
 
-    private long[] extractDates(Collection<AxisElement> elements) {
+    private long[] extractDates(Collection<Element> elements) {
         long[] res = new long[elements.size()];
         int i = 0;
-        for (AxisElement e : elements) {
+        for (Element e : elements) {
             res[i++] = e.getDate();
         }
         return res;
@@ -88,17 +88,17 @@ public class DiscretePositioner implements IPositioner {
         return groups;
     }
 
-    private void positionInGroups(Collection<AxisElement> elements, SortedMap<Long, Integer> groups) {
+    private void positionInGroups(Collection<Element> elements, SortedMap<Long, Integer> groups) {
         Map<Axis, Integer> pos = new HashMap<>();
         int posMax = 0;
-        Iterator<AxisElement> itr = elements.iterator();
+        Iterator<Element> itr = elements.iterator();
         for (Map.Entry<Long, Integer> group : groups.entrySet()) {
             long date = group.getKey();
             int n = group.getValue();
             addSeparator(posMax, date);
             posMax += SEPARATOR_GAP;
             for (int i = 0; i < n; i++) {
-                AxisElement element = itr.next();
+                Element element = itr.next();
                 Axis axis = element.getAxis();
                 Integer posForAxis = pos.get(axis);
                 if (posForAxis == null || posForAxis < posMax) {
@@ -131,7 +131,7 @@ public class DiscretePositioner implements IPositioner {
     }
 
     @Override
-    public int getPositionOf(AxisElement element) {
+    public int getPositionOf(Element element) {
         return positions.get(element);
     }
 
@@ -146,13 +146,13 @@ public class DiscretePositioner implements IPositioner {
     }
 
     @Override
-    public Collection<AxisElement> getElementsByPosition(int start, int end) {
+    public Collection<Element> getElementsByPosition(int start, int end) {
         return flatten(elementsByPosition.asMap().subMap(start, end).values());
     }
 
-    private Collection<AxisElement> flatten(Collection<Collection<AxisElement>> values) {
-        List<AxisElement> result = new LinkedList<>();
-        for (Collection<AxisElement> col : values) {
+    private Collection<Element> flatten(Collection<Collection<Element>> values) {
+        List<Element> result = new LinkedList<>();
+        for (Collection<Element> col : values) {
             result.addAll(col);
         }
         return result;

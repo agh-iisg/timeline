@@ -36,7 +36,7 @@ public class ElementFigure extends Figure {
     private void initHeights(String title, String description) {
         IElementMeasurer measurer = ElementMeasurer.getInstance();
         titleHeight = measurer.getHeightOfTitle(title);
-        descriptionHeight = measurer.getHeightOfDescription(description);
+        descriptionHeight = measurer.getHeightOfDesc(description);
     }
 
     private void addSquarePoint() {

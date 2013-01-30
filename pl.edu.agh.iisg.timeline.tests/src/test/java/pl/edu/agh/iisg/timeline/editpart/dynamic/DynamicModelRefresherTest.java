@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import pl.edu.agh.iisg.timeline.model.AxisElement;
 import pl.edu.agh.iisg.timeline.model.Separator;
-import pl.edu.agh.iisg.timeline.positioner.IPositioner;
+import pl.edu.agh.iisg.timeline.util.IPositioner;
 
 public class DynamicModelRefresherTest {
 

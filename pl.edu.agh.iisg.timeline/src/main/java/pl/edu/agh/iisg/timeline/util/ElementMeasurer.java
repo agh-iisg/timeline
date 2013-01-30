@@ -21,8 +21,8 @@ public class ElementMeasurer implements IElementMeasurer {
     @Override
     public int getHeightOf(AxisElement element) {
         String title = element.getName();
-        String description = element.getDescription();
-        return getHeightOfTitle(title) + getHeightOfDescription(description);
+        String desc = element.getDescription();
+        return getHeightOfTitle(title) + getHeightOfDesc(desc);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ElementMeasurer implements IElementMeasurer {
     }
 
     @Override
-    public int getHeightOfDescription(String desc) {
+    public int getHeightOfDesc(String desc) {
         int lines = Math.max(1, descSplitter.split(desc).length);
         int marginVertical = VisualConstants.ELEMENT_DESC_LABEL_MARGIN;
         int lineHeight = VisualConstants.ELEMENT_DESC_LABEL_LINE_HEIGHT;

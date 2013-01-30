@@ -12,5 +12,5 @@ public interface IElementMeasurer {
 
     int getHeightOfTitle(String title);
 
-    int getHeightOfDescription(String description);
+    int getHeightOfDesc(String description);
 }

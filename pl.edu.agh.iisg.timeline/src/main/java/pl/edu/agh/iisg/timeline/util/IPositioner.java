@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.positioner;
+package pl.edu.agh.iisg.timeline.util;
 
 import java.util.Collection;
 

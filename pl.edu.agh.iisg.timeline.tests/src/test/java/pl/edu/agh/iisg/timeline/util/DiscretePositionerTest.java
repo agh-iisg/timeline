@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.positioner;
+package pl.edu.agh.iisg.timeline.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,9 +15,10 @@ import org.mockito.stubbing.Answer;
 
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
-import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
+import pl.edu.agh.iisg.timeline.util.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
+import pl.edu.agh.iisg.timeline.util.ISeparatorFactory;
 
 public class DiscretePositionerTest {
 

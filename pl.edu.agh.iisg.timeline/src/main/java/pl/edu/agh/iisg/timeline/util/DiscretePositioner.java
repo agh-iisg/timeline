@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.timeline.positioner;
+package pl.edu.agh.iisg.timeline.util;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -13,9 +13,7 @@ import java.util.TreeMap;
 import pl.edu.agh.iisg.timeline.VisualConstants;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
-import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
-import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
 
 import com.google.common.collect.TreeMultimap;
 

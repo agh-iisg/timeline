@@ -19,15 +19,15 @@ import pl.edu.agh.iisg.timeline.editpart.dynamic.IModelRefresher;
 import pl.edu.agh.iisg.timeline.editpart.dynamic.ModelRefresh;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.AxisElement;
-import pl.edu.agh.iisg.timeline.model.ISeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.Separator;
-import pl.edu.agh.iisg.timeline.model.SeparatorFactory;
 import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.positioner.DiscretePositioner;
-import pl.edu.agh.iisg.timeline.positioner.IPositioner;
 import pl.edu.agh.iisg.timeline.util.DateConverter;
+import pl.edu.agh.iisg.timeline.util.DiscretePositioner;
 import pl.edu.agh.iisg.timeline.util.ElementMeasurer;
 import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
+import pl.edu.agh.iisg.timeline.util.IPositioner;
+import pl.edu.agh.iisg.timeline.util.ISeparatorFactory;
+import pl.edu.agh.iisg.timeline.util.SeparatorFactory;
 import pl.edu.agh.iisg.timeline.view.figure.ElementsForAxisLayer;
 
 public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {

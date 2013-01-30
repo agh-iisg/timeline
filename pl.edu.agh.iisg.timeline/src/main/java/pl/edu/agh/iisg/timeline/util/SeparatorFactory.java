@@ -1,4 +1,6 @@
-package pl.edu.agh.iisg.timeline.model;
+package pl.edu.agh.iisg.timeline.util;
+
+import pl.edu.agh.iisg.timeline.model.Separator;
 
 public class SeparatorFactory implements ISeparatorFactory {
 
@@ -12,5 +14,4 @@ public class SeparatorFactory implements ISeparatorFactory {
     public Separator newSeparator(long value) {
         return new Separator(value, axis);
     }
-
 }

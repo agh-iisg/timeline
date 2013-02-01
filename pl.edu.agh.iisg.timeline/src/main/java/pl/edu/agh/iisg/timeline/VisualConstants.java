@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Display;
 
 import pl.edu.agh.iisg.timeline.util.FontsLoader;
 
-
 public final class VisualConstants {
 
     public static final Color BACKGROUND = ColorConstants.white;

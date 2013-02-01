@@ -13,25 +13,23 @@ import pl.edu.agh.iisg.timeline.Activator;
 
 public class FontsLoader {
 
-	/**
-	 * Loads fonts files from specified directory (given as bundle relative path)
-	 * @param relativeDir a font directory path
-	 * @throws IOException
-	 */
-	public static void loadFromDirectory(String relativeDir) throws IOException {
+    /**
+     * Loads fonts files from specified directory (given as bundle relative path)
+     *
+     * @param relativeDir
+     *            a font directory path
+     * @throws IOException
+     */
+    public static void loadFromDirectory(String relativeDir) throws IOException {
 
-		URL fullPathUrl = FileLocator.find(
-				Platform.getBundle(Activator.PLUGIN_ID), new Path(relativeDir),
-				null);
-		File fontsDir = new File(FileLocator.toFileURL(fullPathUrl)
-				.getPath());
-		if (!fontsDir.isDirectory()) {
-			throw new IllegalArgumentException(
-					"Fonts should be loaded from directory given as plugin relative path");
-		}
+        URL fullPathUrl = FileLocator.find(Platform.getBundle(Activator.PLUGIN_ID), new Path(relativeDir), null);
+        File fontsDir = new File(FileLocator.toFileURL(fullPathUrl).getPath());
+        if (!fontsDir.isDirectory()) {
+            throw new IllegalArgumentException("Fonts should be loaded from directory given as plugin relative path");
+        }
 
-		for (File fontsFile : fontsDir.listFiles()) {
-			Display.getDefault().loadFont(fontsFile.getAbsolutePath());
-		}
-	}
+        for (File fontsFile : fontsDir.listFiles()) {
+            Display.getDefault().loadFont(fontsFile.getAbsolutePath());
+        }
+    }
 }

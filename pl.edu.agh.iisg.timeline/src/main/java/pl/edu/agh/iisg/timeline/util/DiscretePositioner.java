@@ -18,11 +18,10 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 import com.google.common.collect.TreeMultimap;
 
 /**
- * Positioner for the discrete timeline. It positions the elements in the groups representing the same time on the axis.
+ * Positioner for the discrete timeline. It positions the elements in the groups representing the same time on the axis. The interval of the
+ * separators is constant.
  *
- * If it works too slow, it can be optimised by using only arrays in the logic.
- *
- * @author leszko
+ * @author AGH CAST Team
  *
  */
 public class DiscretePositioner implements IPositioner {

@@ -15,6 +15,11 @@ import org.eclipse.gef.editparts.SimpleRootEditPart;
 import pl.edu.agh.iisg.timeline.view.figure.AxisLayer;
 import pl.edu.agh.iisg.timeline.view.figure.ElementsLayer;
 
+/**
+ * Main controller that creates all main layers.
+ *
+ * @author AGH CAST Team
+ */
 public class TimelineRootEditPart extends SimpleRootEditPart {
 
     private ScrollPane axesScroll;

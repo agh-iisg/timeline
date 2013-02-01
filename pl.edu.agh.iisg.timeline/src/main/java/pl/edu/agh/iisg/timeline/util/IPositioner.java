@@ -8,7 +8,7 @@ import pl.edu.agh.iisg.timeline.model.Separator;
 /**
  * Arranger of timeline elements. Assigns a timeline position (x coordinate) to each timeline element.
  *
- * @author leszko
+ * @author AGH CAST Team
  *
  */
 public interface IPositioner {

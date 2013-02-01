@@ -6,6 +6,11 @@ import java.util.Collections;
 import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
+/**
+ * Structure representing the update of the model (which elements should be added to the diagram and which should be removed).
+ *
+ * @author AGH CAST Team
+ */
 public class ModelRefresh {
 
     private final Collection<Element> elementsToAdd;
@@ -16,8 +21,8 @@ public class ModelRefresh {
 
     private final Collection<Separator> separatorsToRemove;
 
-    public ModelRefresh(Collection<Element> elementsToAdd, Collection<Element> elementsToRemove,
-            Collection<Separator> separatorsToAdd, Collection<Separator> separatorsToRemove) {
+    public ModelRefresh(Collection<Element> elementsToAdd, Collection<Element> elementsToRemove, Collection<Separator> separatorsToAdd,
+            Collection<Separator> separatorsToRemove) {
         this.elementsToAdd = elementsToAdd;
         this.elementsToRemove = elementsToRemove;
         this.separatorsToAdd = separatorsToAdd;
@@ -45,7 +50,7 @@ public class ModelRefresh {
     }
 
     public static ModelRefresh emptyModelRefresh() {
-        return new ModelRefresh(Collections.<Element> emptyList(), Collections.<Element> emptyList(),
-                Collections.<Separator> emptyList(), Collections.<Separator> emptyList());
+        return new ModelRefresh(Collections.<Element> emptyList(), Collections.<Element> emptyList(), Collections.<Separator> emptyList(),
+                Collections.<Separator> emptyList());
     }
 }

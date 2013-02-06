@@ -121,8 +121,8 @@ public class DiscretePositioner implements IPositioner {
         separatorPosition.put(date, sepPos);
     }
 
-    public void setGranulation(long granulation) {
-        this.interval = granulation;
+    public void setInterval(long interval) {
+        this.interval = interval;
     }
 
     public void setStart(long start) {

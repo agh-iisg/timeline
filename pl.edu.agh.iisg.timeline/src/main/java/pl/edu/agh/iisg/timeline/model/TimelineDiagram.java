@@ -1,5 +1,6 @@
 package pl.edu.agh.iisg.timeline.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -9,7 +10,12 @@ import java.util.SortedMap;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.TreeMultimap;
 
-public class TimelineDiagram {
+public class TimelineDiagram implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     private List<Axis> axes;
 

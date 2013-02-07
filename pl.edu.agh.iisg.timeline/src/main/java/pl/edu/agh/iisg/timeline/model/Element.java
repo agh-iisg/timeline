@@ -3,11 +3,17 @@ package pl.edu.agh.iisg.timeline.model;
 import static com.google.common.base.Objects.equal;
 import static java.util.Objects.hash;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.google.common.base.Preconditions;
 
-public class Element implements Comparable<Element> {
+public class Element implements Comparable<Element>, Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     private Axis axis;
 

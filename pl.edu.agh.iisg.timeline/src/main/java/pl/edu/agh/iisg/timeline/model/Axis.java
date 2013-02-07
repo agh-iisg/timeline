@@ -1,10 +1,17 @@
 package pl.edu.agh.iisg.timeline.model;
 
+import java.io.Serializable;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import com.google.common.base.Preconditions;
 
-public class Axis {
+public class Axis implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     private String name;
 

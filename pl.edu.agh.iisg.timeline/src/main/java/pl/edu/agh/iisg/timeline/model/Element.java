@@ -7,7 +7,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.google.common.base.Preconditions;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+@XStreamAlias("E")
 public class Element implements Comparable<Element>, Serializable {
 
     /**
@@ -15,12 +19,16 @@ public class Element implements Comparable<Element>, Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    @XStreamOmitField
     private Axis axis;
 
+    @XStreamAsAttribute
     private String title;
 
+    @XStreamAsAttribute
     private String description;
 
+    @XStreamAsAttribute
     private Long date;
 
     public Element(Axis axis, String name, String description, Long date) {

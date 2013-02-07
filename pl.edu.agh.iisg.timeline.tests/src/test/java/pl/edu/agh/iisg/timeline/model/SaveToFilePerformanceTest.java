@@ -1,6 +1,7 @@
 package pl.edu.agh.iisg.timeline.model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -9,6 +10,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.binary.BinaryStreamWriter;
 
 import pl.edu.agh.iisg.timeline.integration.DataGenerator;
 
@@ -38,6 +42,36 @@ public class SaveToFilePerformanceTest {
         storeToTempFileAndPrintStatistics(diagram);
         storeTextToTempFileAndPrintStatistics(diagram);
         storeZipFileAndPrintStatistics(diagram);
+        storeXStreamAndPrintStatistics(diagram);
+    }
+
+    private static void storeXStreamAndPrintStatistics(TimelineDiagram diagram) throws IOException {
+        System.out.println("3. XStream serialization:");
+        File temp = File.createTempFile("tempfile4", ".xst");
+        long start = System.currentTimeMillis();
+
+        storeXStreamDiagram(temp, diagram);
+
+        long end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
+        System.out.println("size: " + temp.length());
+        System.out.println();
+    }
+
+    private static void storeXStreamDiagram(File file, TimelineDiagram diagram) throws IOException {
+        FileOutputStream fos = new FileOutputStream(file);
+        XStream xstream = new XStream();
+        xstream.setMode(XStream.NO_REFERENCES);
+        xstream.processAnnotations(Element.class);
+        ZipOutputStream zos = new ZipOutputStream(fos);
+        ZipEntry ze = new ZipEntry("spy.log");
+        zos.putNextEntry(ze);
+        xstream.toXML(diagram.getElements().toArray(), zos);
+
+
+
+        //xstream.marshal(diagram.getElements().toArray(), new BinaryStreamWriter(fos));
+
     }
 
     private static void storeZipFileAndPrintStatistics(TimelineDiagram diagram) throws IOException {

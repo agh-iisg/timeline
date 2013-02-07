@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import pl.edu.agh.iisg.timeline.integration.DataGenerator;
 
@@ -35,6 +37,39 @@ public class SaveToFilePerformanceTest {
 
         storeToTempFileAndPrintStatistics(diagram);
         storeTextToTempFileAndPrintStatistics(diagram);
+        storeZipFileAndPrintStatistics(diagram);
+    }
+
+    private static void storeZipFileAndPrintStatistics(TimelineDiagram diagram) throws IOException {
+        System.out.println("3. Zip text serialization:");
+        File temp = File.createTempFile("tempfile3", ".zip");
+        long start = System.currentTimeMillis();
+
+        storeZipDiagram(temp, diagram);
+
+        long end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
+        System.out.println("size: " + temp.length());
+        System.out.println();
+    }
+
+    private static void storeZipDiagram(File zipFile, TimelineDiagram diagram) {
+        try {
+            FileOutputStream fos = new FileOutputStream(zipFile);
+            ZipOutputStream zos = new ZipOutputStream(fos);
+            ZipEntry ze = new ZipEntry("spy.log");
+            zos.putNextEntry(ze);
+            ObjectOutputStream oos = new ObjectOutputStream(zos);
+
+            writeElements(oos, diagram.getElements());
+            writeAxes(oos, diagram.getAxes());
+
+            oos.close();
+            zos.close();
+            fos.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private static void storeTextToTempFileAndPrintStatistics(TimelineDiagram diagram) throws IOException {
@@ -63,7 +98,6 @@ public class SaveToFilePerformanceTest {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
     private static void writeAxes(ObjectOutputStream oos, List<Axis> axes) throws IOException {

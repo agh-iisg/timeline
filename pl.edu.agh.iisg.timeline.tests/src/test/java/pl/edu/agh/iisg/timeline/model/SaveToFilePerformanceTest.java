@@ -63,10 +63,14 @@ public class SaveToFilePerformanceTest {
         XStream xstream = new XStream();
         xstream.setMode(XStream.NO_REFERENCES);
         xstream.processAnnotations(Element.class);
-        ZipOutputStream zos = new ZipOutputStream(fos);
-        ZipEntry ze = new ZipEntry("spy.log");
-        zos.putNextEntry(ze);
-        xstream.toXML(diagram.getElements().toArray(), zos);
+
+        xstream.toXML(diagram.getElements().toArray(), fos);
+
+
+        //ZipOutputStream zos = new ZipOutputStream(fos);
+        //ZipEntry ze = new ZipEntry("spy.log");
+        //zos.putNextEntry(ze);
+        //xstream.toXML(diagram.getElements().toArray(), zos);
 
 
 

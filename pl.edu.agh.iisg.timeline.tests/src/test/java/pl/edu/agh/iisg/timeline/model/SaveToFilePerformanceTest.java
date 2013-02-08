@@ -1,6 +1,7 @@
 package pl.edu.agh.iisg.timeline.model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -12,6 +13,8 @@ import java.util.zip.ZipOutputStream;
 
 import pl.edu.agh.iisg.timeline.integration.DataGenerator;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Output;
 import com.thoughtworks.xstream.XStream;
 
 public class SaveToFilePerformanceTest {
@@ -42,6 +45,30 @@ public class SaveToFilePerformanceTest {
         storeZipFileAndPrintStatistics(diagram);
         storeXStreamAndPrintStatistics(diagram);
         storeXStreamZipAndPrintStatistics(diagram);
+        storeKryoAndPrintStatistics(diagram);
+    }
+
+    private static void storeKryoAndPrintStatistics(TimelineDiagram diagram) throws IOException {
+        System.out.println("5. Kryo serialization:");
+        File temp = File.createTempFile("tempfile7", ".bin");
+        long start = System.currentTimeMillis();
+
+        storeKryoDiagram(temp, diagram);
+
+        long end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
+        System.out.println("size: " + temp.length());
+        System.out.println();
+    }
+
+    private static void storeKryoDiagram(File file, TimelineDiagram diagram) throws FileNotFoundException {
+        FileOutputStream fos = new FileOutputStream(file);
+        Kryo kryo = new Kryo();
+        kryo.setReferences(true);
+        Output output = new Output(fos);
+        kryo.writeObject(output, diagram.getElements());
+        kryo.writeObject(output, diagram.getAxes());
+        output.close();
     }
 
     private static void storeXStreamZipAndPrintStatistics(TimelineDiagram diagram) throws IOException {

@@ -7,6 +7,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -16,9 +18,7 @@ import org.mockito.stubbing.Answer;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
-import pl.edu.agh.iisg.timeline.util.DiscretePositioner;
-import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
-import pl.edu.agh.iisg.timeline.util.ISeparatorFactory;
+import pl.edu.agh.iisg.timeline.util.Interval.Units;
 
 public class DiscretePositionerTest {
 
@@ -29,7 +29,9 @@ public class DiscretePositionerTest {
     @Test
     public void testPosition() {
         // given
-        positioner = new DiscretePositioner(1000, mockMeasurer(), mockSeparatorFactory());
+    	Interval interval = new Interval(1000, Units.MILLISECONDS);
+    	Calendar referenceDate = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+        positioner = new DiscretePositioner(interval, referenceDate, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");
         Element element1 = Element.builder().title("element1").description("description1").axis(axis).date(500L).build();
         Element element2 = Element.builder().title("element2").description("description2").axis(axis).date(800L).build();
@@ -40,7 +42,7 @@ public class DiscretePositionerTest {
         // then
         assertTrue(positioner.getPositionOf(element1) < positioner.getPositionOf(element2));
         assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
-        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getDate() < positioner.getPositionOf(element1));
+        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getDate().getTimeInMillis() < positioner.getPositionOf(element1));
     }
 
     private IElementMeasurer mockMeasurer() {
@@ -51,7 +53,7 @@ public class DiscretePositionerTest {
 
     private ISeparatorFactory mockSeparatorFactory() {
         ISeparatorFactory separatorFactory = mock(ISeparatorFactory.class);
-        final ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
+        final ArgumentCaptor<Calendar> captor = ArgumentCaptor.forClass(Calendar.class);
         when(separatorFactory.newSeparator(captor.capture())).thenAnswer(new Answer<Separator>() {
 
             @Override

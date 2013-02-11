@@ -8,6 +8,7 @@ public class Messages extends NLS {
 	public static String DateConverter_August;
 	public static String DateConverter_December;
 	public static String DateConverter_February;
+	public static String DateConverter_HourPrefix;
 	public static String DateConverter_January;
 	public static String DateConverter_July;
 	public static String DateConverter_June;

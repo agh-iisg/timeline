@@ -1,6 +1,8 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +29,7 @@ import pl.edu.agh.iisg.timeline.util.ElementMeasurer;
 import pl.edu.agh.iisg.timeline.util.IElementMeasurer;
 import pl.edu.agh.iisg.timeline.util.IPositioner;
 import pl.edu.agh.iisg.timeline.util.ISeparatorFactory;
+import pl.edu.agh.iisg.timeline.util.Interval;
 import pl.edu.agh.iisg.timeline.util.SeparatorFactory;
 import pl.edu.agh.iisg.timeline.view.figure.ElementsForAxisLayer;
 
@@ -49,13 +52,14 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private void init() {
-        long msInDay = 86400000L;
-        long interval = msInDay;
+    	Interval interval = new Interval(1, Interval.Units.MILLISECONDS);
+    	Calendar referenceDate = new GregorianCalendar(2012, Calendar.MAY, 1, 0, 0, 0);
+
         IElementMeasurer measurer = ElementMeasurer.getInstance();
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
         ISeparatorFactory separatorFactory = new SeparatorFactory(axis);
 
-        positioner = new DiscretePositioner(interval, measurer, separatorFactory);
+        positioner = new DiscretePositioner(interval, referenceDate, measurer, separatorFactory);
         refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
         converter = new DateConverter(interval);
     }

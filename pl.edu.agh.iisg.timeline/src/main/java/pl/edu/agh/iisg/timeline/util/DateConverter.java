@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Converter from date to string. The string format depends on the interval (the bigger interval is, the more detaild the date string is).
+ * Converter from date to string. The string format depends on the interval (the bigger interval is, the more detailed the date string is).
  *
  * @author AGH CAST Team
  */
@@ -16,55 +16,69 @@ public class DateConverter {
         Messages.DateConverter_August, Messages.DateConverter_September, Messages.DateConverter_October, Messages.DateConverter_November,
         Messages.DateConverter_December };
 
-    private static final long DAY_INTERVAL = 1000 * 24 * 60 * 60;
-
-    private static final long MONTH_INTERVAL = 30 * DAY_INTERVAL;
-
-    private static final long YEAR_INTERVAL = 365 * DAY_INTERVAL;
-
     private static final String DATE_LOCALE = Messages.DateConverter_Locale;
 
-    private static final String YEAR_PATTERN = "yyyy";
+    private static final String YEAR_PATTERN = "yyyy"; //$NON-NLS-1$
 
-    private static final String MONTH_PATTERN = "MMMM ";
+    private static final String MONTH_PATTERN = "MMMM"; //$NON-NLS-1$
 
-    private static final String DAY_PATTERN = "EEEE, d ";
+    private static final String DAY_PATTERN = "EEEE, d"; //$NON-NLS-1$
 
-    private static final String HOUR_PATTERN = " 'godz.' hh:mm";
+    private static final String HOUR_PATTERN = String.format("'%s'HH:mm", Messages.DateConverter_HourPrefix); //$NON-NLS-1$
 
-    private long interval;
+    private static final String SECOND_PATTERN = ":ss"; //$NON-NLS-1$
 
-    public DateConverter(long interval) {
+    private static final String MILLISECOND_PATTERN = ":SSS"; //$NON-NLS-1$
+
+
+    private Interval interval;
+
+    public DateConverter(Interval interval) {
         this.interval = interval;
     }
 
-    public String asString(long date) {
+    public String asString(Calendar date) {
         Locale locale = new Locale(DATE_LOCALE);
 
-        // full pattern: "EEEE, d MMMM yyyy 'godz.' hh:mm";
-        StringBuilder pattern = new StringBuilder(YEAR_PATTERN);
+        // full pattern: "EEEE, d MMMM yyyy 'godz.' hh:mm:ss";
+        String pattern;
+        int monthNumber = date.get(Calendar.MONTH);
 
-        if (interval < YEAR_INTERVAL) {
-            pattern.insert(0, MONTH_PATTERN);
+        switch (interval.getUnits()) {
+        case YEARS:
+        	pattern = String.format("%s", YEAR_PATTERN); //$NON-NLS-1$
+        	break;
 
-            if (interval < MONTH_INTERVAL) {
-                pattern.delete(0, MONTH_PATTERN.length());
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(date);
-                int monthNumber = cal.get(Calendar.MONTH);
-                pattern.insert(0, "'" + months[monthNumber] + "' ");
+        case MONTHS:
+        	pattern = String.format("%s %s", MONTH_PATTERN, YEAR_PATTERN); //$NON-NLS-1$
+        	break;
 
-                pattern.insert(0, DAY_PATTERN);
+        case DAYS:
+        	pattern = String.format("%s '%s' %s",
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN); //$NON-NLS-1$
+        	break;
 
-                if (interval < DAY_INTERVAL) {
-                    pattern.append(HOUR_PATTERN);
-                }
-            }
+        case HOURS:
+        case MINUTES:
+        	pattern = String.format("%s '%s' %s %s",
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN); //$NON-NLS-1$
+        	break;
+
+        case SECONDS:
+        default:
+        	pattern = String.format("%s '%s' %s %s%s",
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN); //$NON-NLS-1$
+        	break;
+
+        case MILLISECONDS:
+        	pattern = String.format("%s '%s' %s %s%s%s",
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN, MILLISECOND_PATTERN); //$NON-NLS-1$
+        	break;
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat(pattern.toString(), locale);
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
 
-        return upperCaseFirstLetter(formatter.format(date));
+        return upperCaseFirstLetter(formatter.format(date.getTime()));
     }
 
     private String upperCaseFirstLetter(String strToUpper) {

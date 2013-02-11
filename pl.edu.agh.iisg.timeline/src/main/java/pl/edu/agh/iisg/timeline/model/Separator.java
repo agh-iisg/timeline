@@ -1,17 +1,19 @@
 package pl.edu.agh.iisg.timeline.model;
 
+import java.util.Calendar;
+
 public class Separator {
 
-    private final long date;
+    private final Calendar date;
 
     private final int axis;
 
-    public Separator(long date, int axis) {
+    public Separator(Calendar date, int axis) {
         this.date = date;
         this.axis = axis;
     }
 
-    public long getDate() {
+    public Calendar getDate() {
         return date;
     }
 

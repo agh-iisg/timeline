@@ -1,13 +1,14 @@
 package pl.edu.agh.iisg.timeline.util;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import pl.edu.agh.iisg.timeline.VisualConstants;
@@ -15,6 +16,9 @@ import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
 
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 
 /**
@@ -28,9 +32,9 @@ public class DiscretePositioner implements IPositioner {
 
     public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT;
 
-    private long start = 0L;
+    private Interval interval;
 
-    private long interval;
+    private Calendar referenceDate;
 
     private final IElementMeasurer measurer;
 
@@ -38,7 +42,7 @@ public class DiscretePositioner implements IPositioner {
 
     private TreeMap<Integer, Separator> separators = new TreeMap<>();
 
-    private Map<Long, Integer> separatorPosition = new HashMap<>();
+    private Map<Calendar, Integer> separatorPosition = new HashMap<>();
 
     private Map<Element, Integer> positions = new HashMap<>();
 
@@ -46,87 +50,89 @@ public class DiscretePositioner implements IPositioner {
 
     private int maxPosition;
 
-    public DiscretePositioner(long interval, IElementMeasurer measurer, ISeparatorFactory separatorFactory) {
+    public DiscretePositioner(Interval interval, Calendar referenceDate, IElementMeasurer measurer, ISeparatorFactory separatorFactory) {
         this.interval = interval;
+        this.referenceDate = referenceDate;
         this.measurer = measurer;
         this.separatorFactory = separatorFactory;
     }
 
     @Override
     public void init(Collection<Element> elements) {
-        long[] dates = extractDates(elements);
-        SortedMap<Long, Integer> groups = groupByIntervals(dates);
-        positionInGroups(elements, groups);
+
+    	ListMultimap<Calendar, Element> elementsByPeriod = groupElementsByPeriod(elements);
+    	calculateElementsPositions(elementsByPeriod);
     }
 
-    private long[] extractDates(Collection<Element> elements) {
-        long[] res = new long[elements.size()];
-        int i = 0;
-        for (Element e : elements) {
-            res[i++] = e.getDate();
-        }
-        return res;
+    /**
+     * Groups elements by period and returns multimap that maps period beginning object to elements.
+     *
+     * @param elements elements to map
+     * @return {@link ListMultimap} with mapping period beginnings to elements.
+     */
+    private ListMultimap<Calendar, Element> groupElementsByPeriod(Collection<Element> elements) {
+    	ListMultimap<Calendar, Element> resultMap = LinkedListMultimap.create();
+
+    	Calendar periodBeginning = null;
+    	for (Element element: elements) {
+    		Calendar givenDate = new GregorianCalendar();
+    		givenDate.setTimeInMillis(element.getDate());
+
+    		periodBeginning = interval.findPeriodBeginning(referenceDate, givenDate);
+    		resultMap.put(periodBeginning, element);
+    	}
+
+    	return resultMap;
     }
 
-    private SortedMap<Long, Integer> groupByIntervals(long[] dates) {
-        SortedMap<Long, Integer> groups = new TreeMap<>();
-        if (dates.length > 0) {
-            long intStart = dates[0] - ((dates[0] - start) % interval);
-            int group = 0;
-            for (long date : dates) {
-                if (date < intStart + interval) {
-                    group++;
-                } else {
-                    groups.put(intStart, group);
-                    group = 1;
-                    intStart = date - ((date - intStart) % interval);
-                }
-            }
-            groups.put(intStart, group);
-        }
-        return groups;
-    }
-
-    private void positionInGroups(Collection<Element> elements, SortedMap<Long, Integer> groups) {
+    /**
+     * Calculates elements positions on the diagram.
+     *
+     * @param elementsByPeriod {@link Multimap} that holds mapping between period beginnings and elements.
+     */
+    private void calculateElementsPositions(Multimap<Calendar, Element> elementsByPeriod) {
         Map<Axis, Integer> pos = new HashMap<>();
+
         int posMax = 0;
-        Iterator<Element> itr = elements.iterator();
-        for (Map.Entry<Long, Integer> group : groups.entrySet()) {
-            long date = group.getKey();
-            int n = group.getValue();
-            addSeparator(posMax, date);
-            posMax += SEPARATOR_GAP;
-            for (int i = 0; i < n; i++) {
-                Element element = itr.next();
-                Axis axis = element.getAxis();
+        for (Entry<Calendar, Collection<Element>> entry: elementsByPeriod.asMap().entrySet()) {
+        	Calendar period = entry.getKey();
+        	Collection<Element> elements = entry.getValue();
+
+        	addSeparator(posMax, period);
+        	posMax += SEPARATOR_GAP;
+
+        	for (Element element: elements) {
+        		Axis axis = element.getAxis();
                 Integer posForAxis = pos.get(axis);
                 if (posForAxis == null || posForAxis < posMax) {
                     posForAxis = posMax;
                 }
+
                 positions.put(element, posForAxis);
                 elementsByPosition.put(posForAxis, element);
                 int spaceForElement = measurer.getHeightOf(element) + VisualConstants.ELEMENT_MARGIN
                         + VisualConstants.ELEMENT_SQUARE_MARGIN;
                 posForAxis += spaceForElement;
                 pos.put(axis, posForAxis);
-            }
-            posMax = Collections.max(pos.values());
+        	}
+        	posMax = Collections.max(pos.values());
         }
         maxPosition = posMax;
+
     }
 
-    private void addSeparator(int position, long date) {
+    private void addSeparator(int position, Calendar date) {
         int sepPos = position;
         separators.put(sepPos, separatorFactory.newSeparator(date));
         separatorPosition.put(date, sepPos);
     }
 
-    public void setInterval(long interval) {
+    public void setInterval(Interval interval) {
         this.interval = interval;
     }
 
-    public void setStart(long start) {
-        this.start = start;
+    public void setReferenceDate(Calendar referenceDate) {
+        this.referenceDate = referenceDate;
     }
 
     @Override

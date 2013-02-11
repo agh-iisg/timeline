@@ -1,5 +1,7 @@
 package pl.edu.agh.iisg.timeline.util;
 
+import java.util.Calendar;
+
 import pl.edu.agh.iisg.timeline.model.Separator;
 
 public class SeparatorFactory implements ISeparatorFactory {
@@ -11,7 +13,7 @@ public class SeparatorFactory implements ISeparatorFactory {
     }
 
     @Override
-    public Separator newSeparator(long date) {
+    public Separator newSeparator(Calendar date) {
         return new Separator(date, axis);
     }
 }

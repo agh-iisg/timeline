@@ -52,7 +52,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private void init() {
-        Interval interval = new Interval(1, Interval.Units.DAYS);
+        Interval interval = new Interval(1, Interval.Unit.DAY);
         Calendar referenceDate = new GregorianCalendar(2012, Calendar.MAY, 1, 0, 0, 0);
 
         IElementMeasurer measurer = ElementMeasurer.getInstance();

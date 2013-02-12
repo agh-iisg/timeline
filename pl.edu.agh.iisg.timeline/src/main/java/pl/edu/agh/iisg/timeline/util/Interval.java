@@ -5,13 +5,13 @@ import java.util.GregorianCalendar;
 
 public class Interval {
 
-    public enum Units {
-        MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS;
+    public enum Unit {
+        MILLISECOND, SECOND, MINUTE, HOUR, DAY, MONTH, YEAR;
     }
 
-    private int value;
+    private int duration;
 
-    private Units units;
+    private Unit unit;
 
     private static final int MONTHS_IN_YEAR = 12;
 
@@ -31,9 +31,9 @@ public class Interval {
      * @param units
      *            units in which interval is expressed.
      */
-    public Interval(int duration, Units units) {
-        this.value = duration;
-        this.units = units;
+    public Interval(int duration, Unit units) {
+        this.duration = duration;
+        this.unit = units;
     }
 
     /**
@@ -42,16 +42,16 @@ public class Interval {
      * @return duration.
      */
     public int getDuration() {
-        return value;
+        return duration;
     }
 
     /**
-     * Gets unit of the interval. See {@link Units}.
+     * Gets unit of the interval. See {@link Unit}.
      *
-     * @return units value.
+     * @return unit value.
      */
-    public Units getUnits() {
-        return units;
+    public Unit getUnit() {
+        return unit;
     }
 
     /**
@@ -64,160 +64,208 @@ public class Interval {
      * @return new {@link Calendar} object with period beginning.
      */
     public Calendar findPeriodBeginning(Calendar referenceDate, Calendar givenDate) {
-        Calendar resultCalendar = null;
 
-        switch (units) {
-            case MILLISECONDS:
-                resultCalendar = new GregorianCalendar();
+        switch (unit) {
+            case MILLISECOND:
+            	return findPeriodBeginningForMilliseconds(referenceDate, givenDate);
 
-                long referenceMillis = referenceDate.getTimeInMillis();
-                long givenMillis = givenDate.getTimeInMillis();
+            case SECOND:
+            	return findPeriodBeginningForSeconds(referenceDate, givenDate);
 
-                // Difference between period beginning and given date.
-                long diff = moduloWithNegatives((givenMillis - referenceMillis), value);
-                diff = diff >= 0 ? diff : value + diff;
+            case MINUTE:
+                return findPeriodBeginningForMinutes(referenceDate, givenDate);
 
-                resultCalendar.setTimeInMillis(givenMillis - diff);
-                break;
+            case HOUR:
+            	return findPeriodBeginningForHours(referenceDate, givenDate);
 
-            case SECONDS:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-                resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
-                resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
-                resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
-                resultCalendar.set(Calendar.MINUTE, givenDate.get(Calendar.MINUTE));
-                resultCalendar.set(Calendar.SECOND, givenDate.get(Calendar.SECOND));
+            case DAY:
+            	return findPeriodBeginningForDays(referenceDate, givenDate);
 
-                long refSecondsSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_SECOND;
-                long givenSecondsSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_SECOND;
+            case MONTH:
+            	return findPeriodBeginningForMonths(referenceDate, givenDate);
 
-                int secondsDiff = (int)moduloWithNegatives((givenSecondsSinceEpoch - refSecondsSinceEpoch), value);
-                resultCalendar.add(Calendar.SECOND, -secondsDiff);
+            case YEAR:
+            	return findPeriodBeginningForYears(referenceDate, givenDate);
 
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.SECOND, -value);
-                }
-                break;
+            default:
+            	throw new UnsupportedOperationException("Unit support not implemented.");
+        }
+    }
 
-            case MINUTES:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-                resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
-                resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
-                resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
-                resultCalendar.set(Calendar.MINUTE, givenDate.get(Calendar.MINUTE));
+    private Calendar findPeriodBeginningForMilliseconds(Calendar referenceDate, Calendar givenDate) {
+    	Calendar resultCalendar = new GregorianCalendar();
 
-                long refMinutesSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_MINUTE;
-                long givenMinutesSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_MINUTE;
+        long referenceMillis = referenceDate.getTimeInMillis();
+        long givenMillis = givenDate.getTimeInMillis();
 
-                int minutesDiff = (int)moduloWithNegatives((givenMinutesSinceEpoch - refMinutesSinceEpoch), value);
-                resultCalendar.add(Calendar.MINUTE, -minutesDiff);
+        // difference between period beginning and given date
+        long diff = moduloWithNegatives((givenMillis - referenceMillis), duration);
+        diff = diff >= 0 ? diff : duration + diff;
 
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.MINUTE, -value);
-                }
-                break;
+        resultCalendar.setTimeInMillis(givenMillis - diff);
+        return resultCalendar;
+    }
 
-            case HOURS:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-                resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
-                resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
-                resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
+    private Calendar findPeriodBeginningForSeconds(Calendar referenceDate, Calendar givenDate) {
+    	Calendar resultCalendar = (Calendar)referenceDate.clone();
+        resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+        resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
+        resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
+        resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
+        resultCalendar.set(Calendar.MINUTE, givenDate.get(Calendar.MINUTE));
+        resultCalendar.set(Calendar.SECOND, givenDate.get(Calendar.SECOND));
 
-                long refHoursSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_HOUR;
-                long givenHoursSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_HOUR;
+        // compute and subtract difference between given date and period beginning
+        long refSecondsSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_SECOND;
+        long givenSecondsSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_SECOND;
 
-                int hoursDiff = (int)moduloWithNegatives((givenHoursSinceEpoch - refHoursSinceEpoch), value);
-                resultCalendar.add(Calendar.HOUR_OF_DAY, -hoursDiff);
+        int secondsDiff = (int)moduloWithNegatives((givenSecondsSinceEpoch - refSecondsSinceEpoch), duration);
+        resultCalendar.add(Calendar.SECOND, -secondsDiff);
 
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.HOUR_OF_DAY, -value);
-                }
-                break;
-
-            case DAYS:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-                resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
-                resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
-
-                long refDaysSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_DAY;
-                long givenDaysSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_DAY;
-
-                int daysDiff = (int)moduloWithNegatives((givenDaysSinceEpoch - refDaysSinceEpoch), value);
-                resultCalendar.add(Calendar.DAY_OF_MONTH, -daysDiff);
-
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.DAY_OF_YEAR, -value);
-                }
-                break;
-
-            case MONTHS:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-                resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
-
-                long refMonthsSinceEpoch = referenceDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + referenceDate.get(Calendar.MONTH);
-                long givenMonthsSinceEpoch = givenDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + givenDate.get(Calendar.MONTH);
-
-                int monthDiff = (int)moduloWithNegatives((givenMonthsSinceEpoch - refMonthsSinceEpoch), value);
-                resultCalendar.add(Calendar.MONTH, -monthDiff);
-
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.MONTH, -value);
-                }
-                break;
-
-            case YEARS:
-                resultCalendar = (Calendar)referenceDate.clone();
-                resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
-
-                long refYearsSinceEpoch = referenceDate.get(Calendar.YEAR);
-                long givenYearsSinceEpoch = givenDate.get(Calendar.YEAR);
-
-                int yearsDiff = (int)moduloWithNegatives((givenYearsSinceEpoch - refYearsSinceEpoch), value);
-                resultCalendar.add(Calendar.YEAR, -yearsDiff);
-
-                while (resultCalendar.after(givenDate)) {
-                    resultCalendar.add(Calendar.YEAR, -value);
-                }
-                break;
+        // if computed period beginning is still after given date, take the previous one
+        if (resultCalendar.after(givenDate)) {
+        	resultCalendar.add(Calendar.SECOND, -duration);
         }
 
         return resultCalendar;
     }
 
+    private Calendar findPeriodBeginningForMinutes(Calendar referenceDate, Calendar givenDate) {
+    	Calendar resultCalendar = (Calendar)referenceDate.clone();
+        resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+        resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
+        resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
+        resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
+        resultCalendar.set(Calendar.MINUTE, givenDate.get(Calendar.MINUTE));
+
+        // compute and subtract difference between given date and period beginning
+        long refMinutesSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_MINUTE;
+        long givenMinutesSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_MINUTE;
+
+        int minutesDiff = (int)moduloWithNegatives((givenMinutesSinceEpoch - refMinutesSinceEpoch), duration);
+        resultCalendar.add(Calendar.MINUTE, -minutesDiff);
+
+        // if computed period beginning is still after given date, take the previous one
+        if (resultCalendar.after(givenDate)) {
+            resultCalendar.add(Calendar.MINUTE, -duration);
+        }
+
+        return resultCalendar;
+    }
+
+    private Calendar findPeriodBeginningForHours(Calendar referenceDate, Calendar givenDate) {
+    	Calendar resultCalendar = (Calendar)referenceDate.clone();
+        resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+        resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
+        resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
+        resultCalendar.set(Calendar.HOUR_OF_DAY, givenDate.get(Calendar.HOUR_OF_DAY));
+
+        // compute and subtract difference between given date and period beginning
+        long refHoursSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_HOUR;
+        long givenHoursSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_HOUR;
+
+        int hoursDiff = (int)moduloWithNegatives((givenHoursSinceEpoch - refHoursSinceEpoch), duration);
+        resultCalendar.add(Calendar.HOUR_OF_DAY, -hoursDiff);
+
+        // if computed period beginning is still after given date, take the previous one
+        if (resultCalendar.after(givenDate)) {
+            resultCalendar.add(Calendar.HOUR_OF_DAY, -duration);
+        }
+
+        return resultCalendar;
+    }
+
+    private Calendar findPeriodBeginningForDays(Calendar referenceDate, Calendar givenDate) {
+    	Calendar resultCalendar = (Calendar)referenceDate.clone();
+        resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+        resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
+        resultCalendar.set(Calendar.DAY_OF_MONTH, givenDate.get(Calendar.DAY_OF_MONTH));
+
+        // compute and subtract difference between given date and period beginning
+        long refDaysSinceEpoch = referenceDate.getTimeInMillis() / MILLIS_IN_DAY;
+        long givenDaysSinceEpoch = givenDate.getTimeInMillis() / MILLIS_IN_DAY;
+
+        int daysDiff = (int)moduloWithNegatives((givenDaysSinceEpoch - refDaysSinceEpoch), duration);
+        resultCalendar.add(Calendar.DAY_OF_MONTH, -daysDiff);
+
+        // if computed period beginning is still after given date, take the previous one
+        if (resultCalendar.after(givenDate)) {
+            resultCalendar.add(Calendar.DAY_OF_YEAR, -duration);
+        }
+
+        return resultCalendar;
+    }
+
+    private Calendar findPeriodBeginningForMonths(Calendar referenceDate, Calendar givenDate) {
+    	 Calendar resultCalendar = (Calendar)referenceDate.clone();
+         resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+         resultCalendar.set(Calendar.MONTH, givenDate.get(Calendar.MONTH));
+
+         // compute and subtract difference between given date and period beginning
+         long refMonthsSinceEpoch = referenceDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + referenceDate.get(Calendar.MONTH);
+         long givenMonthsSinceEpoch = givenDate.get(Calendar.YEAR) * MONTHS_IN_YEAR + givenDate.get(Calendar.MONTH);
+
+         int monthDiff = (int)moduloWithNegatives((givenMonthsSinceEpoch - refMonthsSinceEpoch), duration);
+         resultCalendar.add(Calendar.MONTH, -monthDiff);
+
+         // if computed period beginning is still after given date, take the previous one
+         if (resultCalendar.after(givenDate)) {
+             resultCalendar.add(Calendar.MONTH, -duration);
+         }
+
+         return resultCalendar;
+    }
+
+	private Calendar findPeriodBeginningForYears(Calendar referenceDate, Calendar givenDate) {
+	    Calendar resultCalendar = (Calendar)referenceDate.clone();
+	    resultCalendar.set(Calendar.YEAR, givenDate.get(Calendar.YEAR));
+
+        // compute and subtract difference between given date and period beginning
+	    long refYearsSinceEpoch = referenceDate.get(Calendar.YEAR);
+	    long givenYearsSinceEpoch = givenDate.get(Calendar.YEAR);
+
+	    int yearsDiff = (int)moduloWithNegatives((givenYearsSinceEpoch - refYearsSinceEpoch), duration);
+	    resultCalendar.add(Calendar.YEAR, -yearsDiff);
+
+	    // if computed period beginning is still after given date, take the previous one
+	    if (resultCalendar.after(givenDate)) {
+	        resultCalendar.add(Calendar.YEAR, -duration);
+	    }
+
+	    return resultCalendar;
+	}
+
     public Calendar findNextPeriodBeginning(Calendar givenDate) {
         Calendar resultCalendar = (Calendar)givenDate.clone();
 
-        switch (units) {
+        switch (unit) {
 
-            case MILLISECONDS:
-                resultCalendar.add(Calendar.MILLISECOND, value);
+            case MILLISECOND:
+                resultCalendar.add(Calendar.MILLISECOND, duration);
                 break;
 
-            case MINUTES:
-                resultCalendar.add(Calendar.MINUTE, value);
+            case MINUTE:
+                resultCalendar.add(Calendar.MINUTE, duration);
                 break;
 
-            case HOURS:
-                resultCalendar.add(Calendar.HOUR, value);
+            case HOUR:
+                resultCalendar.add(Calendar.HOUR_OF_DAY, duration);
                 break;
 
-            case DAYS:
-                resultCalendar.add(Calendar.DAY_OF_MONTH, value);
+            case DAY:
+                resultCalendar.add(Calendar.DAY_OF_MONTH, duration);
                 break;
 
-            case MONTHS:
-                resultCalendar.add(Calendar.MONTH, value);
+            case MONTH:
+                resultCalendar.add(Calendar.MONTH, duration);
                 break;
 
-            case YEARS:
-                resultCalendar.add(Calendar.YEAR, value);
+            case YEAR:
+                resultCalendar.add(Calendar.YEAR, duration);
                 break;
 
+            default:
+            	throw new UnsupportedOperationException("Unit support not implemented.");
         }
 
         return resultCalendar;

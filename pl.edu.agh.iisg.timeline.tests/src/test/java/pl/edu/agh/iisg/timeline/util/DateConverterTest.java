@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import pl.edu.agh.iisg.timeline.util.Interval.Units;
+import pl.edu.agh.iisg.timeline.util.Interval.Unit;
 
 public class DateConverterTest {
 
@@ -32,7 +32,7 @@ public class DateConverterTest {
     public void testGetAsStringWithMillisecondInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.MILLISECONDS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.MILLISECOND));
 
         // when
         String result = converter.asString(dateToTest);
@@ -48,7 +48,7 @@ public class DateConverterTest {
     public void testGetAsStringWithSecondInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.SECONDS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.SECOND));
 
         // when
         String result = converter.asString(dateToTest);
@@ -64,7 +64,7 @@ public class DateConverterTest {
     public void testGetAsStringWithMinuteInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.MINUTES));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.MINUTE));
 
         // when
         String result = converter.asString(dateToTest);
@@ -80,7 +80,7 @@ public class DateConverterTest {
     public void testGetAsStringWithHourInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.HOURS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.HOUR));
 
         // when
         String result = converter.asString(dateToTest);
@@ -96,7 +96,7 @@ public class DateConverterTest {
     public void testGetAsStringWithDayInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.DAYS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.DAY));
 
         // when
         String result = converter.asString(dateToTest);
@@ -112,7 +112,7 @@ public class DateConverterTest {
     public void testGetAsStringWithMonthInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.MONTHS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.MONTH));
 
         // when
         String result = converter.asString(dateToTest);
@@ -128,7 +128,7 @@ public class DateConverterTest {
     public void testGetAsStringWithYearInterval() {
 
         // given
-        DateConverter converter = new DateConverter(new Interval(1, Units.YEARS));
+        DateConverter converter = new DateConverter(new Interval(1, Unit.YEAR));
 
         // when
         String result = converter.asString(dateToTest);

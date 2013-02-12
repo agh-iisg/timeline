@@ -44,33 +44,33 @@ public class DateConverter {
         String pattern;
         int monthNumber = date.get(Calendar.MONTH);
 
-        switch (interval.getUnits()) {
-        case YEARS:
+        switch (interval.getUnit()) {
+        case YEAR:
         	pattern = String.format("%s", YEAR_PATTERN); //$NON-NLS-1$
         	break;
 
-        case MONTHS:
+        case MONTH:
         	pattern = String.format("%s %s", MONTH_PATTERN, YEAR_PATTERN); //$NON-NLS-1$
         	break;
 
-        case DAYS:
+        case DAY:
         	pattern = String.format("%s '%s' %s",
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN); //$NON-NLS-1$
         	break;
 
-        case HOURS:
-        case MINUTES:
+        case HOUR:
+        case MINUTE:
         	pattern = String.format("%s '%s' %s %s",
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN); //$NON-NLS-1$
         	break;
 
-        case SECONDS:
+        case SECOND:
         default:
         	pattern = String.format("%s '%s' %s %s%s",
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN); //$NON-NLS-1$
         	break;
 
-        case MILLISECONDS:
+        case MILLISECOND:
         	pattern = String.format("%s '%s' %s %s%s%s",
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN, MILLISECOND_PATTERN); //$NON-NLS-1$
         	break;

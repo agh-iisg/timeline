@@ -7,14 +7,14 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import pl.edu.agh.iisg.timeline.util.Interval.Units;
+import pl.edu.agh.iisg.timeline.util.Interval.Unit;
 
 public class IntervalTest {
 
 	@Test
 	public void testMillis() {
 		// given
-		Interval interval = new Interval(500, Units.MILLISECONDS);
+		Interval interval = new Interval(500, Unit.MILLISECOND);
 		Calendar referenceDate = new GregorianCalendar();
 		referenceDate.setTimeInMillis(1300);
 
@@ -33,15 +33,15 @@ public class IntervalTest {
 		Calendar periodBeginning3 = interval.findPeriodBeginning(referenceDate, givenDate3);
 
 		// then
-		assertEquals(periodBeginning1.getTimeInMillis(), 800);
-		assertEquals(periodBeginning2.getTimeInMillis(), 1300);
-		assertEquals(periodBeginning3.getTimeInMillis(), 1800);
+		assertEquals(800, periodBeginning1.getTimeInMillis());
+		assertEquals(1300, periodBeginning2.getTimeInMillis());
+		assertEquals(1800, periodBeginning3.getTimeInMillis());
 	}
 
 	@Test
 	public void testSeconds() {
 		//given
-		Interval interval = new Interval(30, Units.SECONDS);
+		Interval interval = new Interval(30, Unit.SECOND);
 
 		// 1 Feb 2013, 10:05
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.MARCH, 1, 10, 0, 5);
@@ -61,15 +61,15 @@ public class IntervalTest {
 		Calendar periodBeginning3 = interval.findPeriodBeginning(referenceDate, givenDate3);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 5, 15, 0, 35));
-		assertEquals(periodBeginning2, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0, 5));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.JANUARY, 20, 16, 59, 35));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 5, 15, 0, 35), periodBeginning1);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0, 5), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.JANUARY, 20, 16, 59, 35), periodBeginning3);
 	}
 
 	@Test
 	public void testMinutes() {
 		//given
-		Interval interval = new Interval(30, Units.MINUTES);
+		Interval interval = new Interval(30, Unit.MINUTE);
 
 		// 1 Feb 2013, 10:05
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.MARCH, 1, 10, 5);
@@ -89,16 +89,16 @@ public class IntervalTest {
 		Calendar periodBeginning3 = interval.findPeriodBeginning(referenceDate, givenDate3);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 5, 15, 35));
-		assertEquals(periodBeginning2, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 5));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.JANUARY, 20, 16, 35));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 5, 15, 35), periodBeginning1);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 5), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.JANUARY, 20, 16, 35), periodBeginning3);
 	}
 
 	@Test
 	public void testHours() {
 		//given
-		Interval interval = new Interval(2, Units.HOURS);
-		Interval interval2 = new Interval(24, Units.HOURS);
+		Interval interval = new Interval(2, Unit.HOUR);
+		Interval interval2 = new Interval(24, Unit.HOUR);
 
 		// 1 Feb 2013, 23:00
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 23, 0);
@@ -126,17 +126,17 @@ public class IntervalTest {
 		Calendar periodBeginning4 = interval2.findPeriodBeginning(referenceDate2, givenDate4);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 23, 0));
-		assertEquals(periodBeginning2, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 23, 0));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.FEBRUARY, 2, 5, 0));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 23, 0), periodBeginning1);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 23, 0), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 2, 5, 0), periodBeginning3);
 
-		assertEquals(periodBeginning4, new GregorianCalendar(2012, Calendar.AUGUST, 28, 0, 0));
+		assertEquals(new GregorianCalendar(2012, Calendar.AUGUST, 28, 0, 0), periodBeginning4);
 	}
 
 	@Test
 	public void testDays() {
 		//given
-		Interval interval = new Interval(1, Units.DAYS);
+		Interval interval = new Interval(1, Unit.DAY);
 
 		// 1 Feb 2013, 10:00
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0);
@@ -160,16 +160,16 @@ public class IntervalTest {
 		Calendar periodBeginning4 = interval.findPeriodBeginning(referenceDate, givenDate4);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0));
-		assertEquals(periodBeginning2, new GregorianCalendar(2013, Calendar.JANUARY, 31, 10, 0));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.FEBRUARY, 2, 10, 0));
-		assertEquals(periodBeginning4, new GregorianCalendar(2013, Calendar.AUGUST, 3, 10, 0));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0), periodBeginning1);
+		assertEquals(new GregorianCalendar(2013, Calendar.JANUARY, 31, 10, 0), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 2, 10, 0), periodBeginning3);
+		assertEquals(new GregorianCalendar(2013, Calendar.AUGUST, 3, 10, 0), periodBeginning4);
 	}
 
 	@Test
 	public void testMonths() {
 		//given
-		Interval interval = new Interval(2, Units.MONTHS);
+		Interval interval = new Interval(2, Unit.MONTH);
 
 		// 1 Feb 2013, 10:00
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0);
@@ -189,15 +189,15 @@ public class IntervalTest {
 		Calendar periodBeginning3 = interval.findPeriodBeginning(referenceDate, givenDate3);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0));
-		assertEquals(periodBeginning2, new GregorianCalendar(2012, Calendar.DECEMBER, 1, 10, 0));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.AUGUST, 1, 10, 0));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0), periodBeginning1);
+		assertEquals(new GregorianCalendar(2012, Calendar.DECEMBER, 1, 10, 0), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.AUGUST, 1, 10, 0), periodBeginning3);
 	}
 
 	@Test
 	public void testYears() {
 		//given
-		Interval interval = new Interval(1, Units.YEARS);
+		Interval interval = new Interval(1, Unit.YEAR);
 
 		// 1 Feb 2013, 10:00
 		Calendar referenceDate = new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0);
@@ -217,17 +217,17 @@ public class IntervalTest {
 		Calendar periodBeginning3 = interval.findPeriodBeginning(referenceDate, givenDate3);
 
 		// then
-		assertEquals(periodBeginning1, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0));
-		assertEquals(periodBeginning2, new GregorianCalendar(2012, Calendar.FEBRUARY, 1, 10, 0));
-		assertEquals(periodBeginning3, new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0));
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0), periodBeginning1);
+		assertEquals(new GregorianCalendar(2012, Calendar.FEBRUARY, 1, 10, 0), periodBeginning2);
+		assertEquals(new GregorianCalendar(2013, Calendar.FEBRUARY, 1, 10, 0), periodBeginning3);
 	}
 
 
 	@Test
 	public void testNextPeriodMonths() {
 		//given
-		Interval interval = new Interval(1, Units.MONTHS);
-		Interval interval2 = new Interval(6, Units.MONTHS);
+		Interval interval = new Interval(1, Unit.MONTH);
+		Interval interval2 = new Interval(6, Unit.MONTH);
 
 		// 15 Dec 2012, 15:00 should give 15 Jan 2013, 15:00
 		Calendar givenDate1 = new GregorianCalendar(2012, Calendar.DECEMBER, 15, 15, 0);
@@ -237,8 +237,8 @@ public class IntervalTest {
 		Calendar nextPeriodBeginning2 = interval2.findNextPeriodBeginning(givenDate1);
 
 		// then
-		assertEquals(nextPeriodBeginning1, new GregorianCalendar(2013, Calendar.JANUARY, 15, 15, 0));
-		assertEquals(nextPeriodBeginning2, new GregorianCalendar(2013, Calendar.JUNE, 15, 15, 0));
+		assertEquals(new GregorianCalendar(2013, Calendar.JANUARY, 15, 15, 0), nextPeriodBeginning1);
+		assertEquals(new GregorianCalendar(2013, Calendar.JUNE, 15, 15, 0), nextPeriodBeginning2);
 	}
 
 }

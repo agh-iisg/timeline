@@ -18,7 +18,7 @@ import org.mockito.stubbing.Answer;
 import pl.edu.agh.iisg.timeline.model.Axis;
 import pl.edu.agh.iisg.timeline.model.Element;
 import pl.edu.agh.iisg.timeline.model.Separator;
-import pl.edu.agh.iisg.timeline.util.Interval.Units;
+import pl.edu.agh.iisg.timeline.util.Interval.Unit;
 
 public class DiscretePositionerTest {
 
@@ -29,7 +29,7 @@ public class DiscretePositionerTest {
     @Test
     public void testPosition() {
         // given
-        Interval interval = new Interval(1000, Units.MILLISECONDS);
+        Interval interval = new Interval(1000, Unit.MILLISECOND);
         Calendar referenceDate = new GregorianCalendar(2012, Calendar.JANUARY, 1);
         positioner = new DiscretePositioner(interval, referenceDate, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");

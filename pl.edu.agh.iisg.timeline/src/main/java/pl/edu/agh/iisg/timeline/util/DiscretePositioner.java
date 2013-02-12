@@ -58,7 +58,6 @@ public class DiscretePositioner implements IPositioner {
 
     @Override
     public void init(Collection<Element> elements) {
-
         ListMultimap<Calendar, Element> elementsByPeriod = groupElementsByPeriod(elements);
         calculateElementsPositions(elementsByPeriod);
     }

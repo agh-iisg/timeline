@@ -22,8 +22,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 
 /**
- * Positioner for the discrete timeline. It positions the elements in the groups representing the same time on the axis. The interval of the
- * separators is constant.
+ * Positioner for the discrete timeline. It positions the elements in the groups representing the same time on the axis.
  *
  * @author AGH CAST Team
  *
@@ -60,49 +59,51 @@ public class DiscretePositioner implements IPositioner {
     @Override
     public void init(Collection<Element> elements) {
 
-    	ListMultimap<Calendar, Element> elementsByPeriod = groupElementsByPeriod(elements);
-    	calculateElementsPositions(elementsByPeriod);
+        ListMultimap<Calendar, Element> elementsByPeriod = groupElementsByPeriod(elements);
+        calculateElementsPositions(elementsByPeriod);
     }
 
     /**
      * Groups elements by period and returns multimap that maps period beginning object to elements.
      *
-     * @param elements elements to map
+     * @param elements
+     *            elements to map
      * @return {@link ListMultimap} with mapping period beginnings to elements.
      */
     private ListMultimap<Calendar, Element> groupElementsByPeriod(Collection<Element> elements) {
-    	ListMultimap<Calendar, Element> resultMap = LinkedListMultimap.create();
+        ListMultimap<Calendar, Element> resultMap = LinkedListMultimap.create();
 
-    	Calendar periodBeginning = null;
-    	for (Element element: elements) {
-    		Calendar givenDate = new GregorianCalendar();
-    		givenDate.setTimeInMillis(element.getDate());
+        Calendar periodBeginning = null;
+        for (Element element : elements) {
+            Calendar givenDate = new GregorianCalendar();
+            givenDate.setTimeInMillis(element.getDate());
 
-    		periodBeginning = interval.findPeriodBeginning(referenceDate, givenDate);
-    		resultMap.put(periodBeginning, element);
-    	}
+            periodBeginning = interval.findPeriodBeginning(referenceDate, givenDate);
+            resultMap.put(periodBeginning, element);
+        }
 
-    	return resultMap;
+        return resultMap;
     }
 
     /**
      * Calculates elements positions on the diagram.
      *
-     * @param elementsByPeriod {@link Multimap} that holds mapping between period beginnings and elements.
+     * @param elementsByPeriod
+     *            {@link Multimap} that holds mapping between period beginnings and elements.
      */
     private void calculateElementsPositions(Multimap<Calendar, Element> elementsByPeriod) {
         Map<Axis, Integer> pos = new HashMap<>();
 
         int posMax = 0;
-        for (Entry<Calendar, Collection<Element>> entry: elementsByPeriod.asMap().entrySet()) {
-        	Calendar period = entry.getKey();
-        	Collection<Element> elements = entry.getValue();
+        for (Entry<Calendar, Collection<Element>> entry : elementsByPeriod.asMap().entrySet()) {
+            Calendar period = entry.getKey();
+            Collection<Element> elements = entry.getValue();
 
-        	addSeparator(posMax, period);
-        	posMax += SEPARATOR_GAP;
+            addSeparator(posMax, period);
+            posMax += SEPARATOR_GAP;
 
-        	for (Element element: elements) {
-        		Axis axis = element.getAxis();
+            for (Element element : elements) {
+                Axis axis = element.getAxis();
                 Integer posForAxis = pos.get(axis);
                 if (posForAxis == null || posForAxis < posMax) {
                     posForAxis = posMax;
@@ -114,8 +115,8 @@ public class DiscretePositioner implements IPositioner {
                         + VisualConstants.ELEMENT_SQUARE_MARGIN;
                 posForAxis += spaceForElement;
                 pos.put(axis, posForAxis);
-        	}
-        	posMax = Collections.max(pos.values());
+            }
+            posMax = Collections.max(pos.values());
         }
         maxPosition = posMax;
 

@@ -29,8 +29,8 @@ public class DiscretePositionerTest {
     @Test
     public void testPosition() {
         // given
-    	Interval interval = new Interval(1000, Units.MILLISECONDS);
-    	Calendar referenceDate = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+        Interval interval = new Interval(1000, Units.MILLISECONDS);
+        Calendar referenceDate = new GregorianCalendar(2012, Calendar.JANUARY, 1);
         positioner = new DiscretePositioner(interval, referenceDate, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");
         Element element1 = Element.builder().title("element1").description("description1").axis(axis).date(500L).build();
@@ -42,7 +42,8 @@ public class DiscretePositionerTest {
         // then
         assertTrue(positioner.getPositionOf(element1) < positioner.getPositionOf(element2));
         assertEquals(1, positioner.getSeparatorsByPosition(0, 1000).size());
-        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getDate().getTimeInMillis() < positioner.getPositionOf(element1));
+        assertTrue(positioner.getSeparatorsByPosition(0, 1000).iterator().next().getDate().getTimeInMillis() < positioner
+                .getPositionOf(element1));
     }
 
     private IElementMeasurer mockMeasurer() {

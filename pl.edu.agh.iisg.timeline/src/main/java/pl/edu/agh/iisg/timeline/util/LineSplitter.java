@@ -17,14 +17,15 @@ public class LineSplitter implements ILineSplitter {
 
     @Override
     public String[] split(String string) {
-        String[] words = splitByWhitespaces(string);
         clearFields();
+
+        String[] words = splitByWhitespaces(string);
         for (String word : words) {
-            addOverflowChars();
+            addLineIfOverflowChars();
             addWordsIfOverflow(word);
             builder.append(word);
         }
-        addOverflowChars();
+        addLineIfOverflowChars();
         addIfNotEmpty();
         return lines.toArray(new String[lines.size()]);
     }
@@ -36,7 +37,7 @@ public class LineSplitter implements ILineSplitter {
      * @return
      */
     private String[] splitByWhitespaces(String string) {
-        return string.split("(?<=\\s+)"); //
+        return string.split("(?<=\\s+)");
     }
 
     private void clearFields() {
@@ -44,7 +45,7 @@ public class LineSplitter implements ILineSplitter {
         builder = new StringBuilder();
     }
 
-    private void addOverflowChars() {
+    private void addLineIfOverflowChars() {
         while (builder.length() > charsPerLine) {
             lines.add(builder.substring(0, charsPerLine).trim());
             builder.replace(0, charsPerLine, "");

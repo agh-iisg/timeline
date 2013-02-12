@@ -52,8 +52,8 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
     }
 
     private void init() {
-    	Interval interval = new Interval(1, Interval.Units.MILLISECONDS);
-    	Calendar referenceDate = new GregorianCalendar(2012, Calendar.MAY, 1, 0, 0, 0);
+        Interval interval = new Interval(1, Interval.Units.DAYS);
+        Calendar referenceDate = new GregorianCalendar(2012, Calendar.MAY, 1, 0, 0, 0);
 
         IElementMeasurer measurer = ElementMeasurer.getInstance();
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
@@ -76,7 +76,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     @Override
     protected void createEditPolicies() {
-        // TODO Auto-generated method stub
+        // do nothing
     }
 
     @Override
@@ -157,7 +157,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         IFigure parent = axisLayers.get(model.getAxis());
         IFigure child = childEditPart.getFigure();
         parent.add(child);
-        int y = getYIndexOf((Element)childEditPart.getModel());
+        int y = getPositionOf((Element)childEditPart.getModel());
         parent.setConstraint(child, new Rectangle(0, y, -1, -1));
     }
 
@@ -183,7 +183,7 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
         layer.remove(figure);
     }
 
-    private int getYIndexOf(Element element) {
+    private int getPositionOf(Element element) {
         return positioner.getPositionOf(element);
     }
 

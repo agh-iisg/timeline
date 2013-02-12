@@ -5,7 +5,7 @@ import pl.edu.agh.iisg.timeline.model.Element;
 /**
  * Measures the size of elements.
  *
- * @author leszko
+ * @author AGH CAST Team
  */
 public interface IElementMeasurer {
     int getHeightOf(Element element);

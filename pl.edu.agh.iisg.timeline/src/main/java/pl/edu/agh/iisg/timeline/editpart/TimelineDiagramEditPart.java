@@ -1,8 +1,6 @@
 package pl.edu.agh.iisg.timeline.editpart;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,13 +51,12 @@ public class TimelineDiagramEditPart extends AbstractGraphicalEditPart {
 
     private void init() {
         Interval interval = new Interval(1, Interval.Unit.DAY);
-        Calendar referenceDate = new GregorianCalendar(2012, Calendar.MAY, 1, 0, 0, 0);
 
         IElementMeasurer measurer = ElementMeasurer.getInstance();
         int axis = ((TimelineDiagram)getModel()).getAxes().size();
         ISeparatorFactory separatorFactory = new SeparatorFactory(axis);
 
-        positioner = new DiscretePositioner(interval, referenceDate, measurer, separatorFactory);
+        positioner = new DiscretePositioner(interval, measurer, separatorFactory);
         refresher = new DynamicModelRefresher(positioner, new DefaultRangeControl());
         converter = new DateConverter(interval);
     }

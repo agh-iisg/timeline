@@ -8,7 +8,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -30,8 +29,7 @@ public class DiscretePositionerTest {
     public void testPosition() {
         // given
         Interval interval = new Interval(1000, Unit.MILLISECOND);
-        Calendar referenceDate = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-        positioner = new DiscretePositioner(interval, referenceDate, mockMeasurer(), mockSeparatorFactory());
+        positioner = new DiscretePositioner(interval, mockMeasurer(), mockSeparatorFactory());
         Axis axis = new Axis("axis");
         Element element1 = Element.builder().title("element1").description("description1").axis(axis).date(500L).build();
         Element element2 = Element.builder().title("element2").description("description2").axis(axis).date(800L).build();

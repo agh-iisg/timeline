@@ -31,7 +31,9 @@ public class DiscretePositioner implements IPositioner {
 
     public static final int SEPARATOR_GAP = VisualConstants.SEPARATOR_MARGIN_TOP_BOTTOM + VisualConstants.SEPARATOR_HEIGHT;
 
-    private Interval interval;
+    public static final Calendar DEFAULT_REFERENCE_DATE = new GregorianCalendar(1970, Calendar.JANUARY, 1);
+
+    private PeriodFinder periodFinder;
 
     private Calendar referenceDate;
 
@@ -49,11 +51,36 @@ public class DiscretePositioner implements IPositioner {
 
     private int maxPosition;
 
-    public DiscretePositioner(Interval interval, Calendar referenceDate, IElementMeasurer measurer, ISeparatorFactory separatorFactory) {
-        this.interval = interval;
-        this.referenceDate = referenceDate;
+    /**
+     * Instantiates a new discrete positioner.
+     *
+     * @param interval interval to express duration of periods
+     * @param measurer the measurer to find elements dimensions.
+     * @param separatorFactory the separator factory
+     */
+    public DiscretePositioner(Interval interval, IElementMeasurer measurer, ISeparatorFactory separatorFactory) {
+        this(interval, measurer, separatorFactory, null);
+    }
+
+    /**
+     * Instantiates a new discrete positioner.
+     *
+     * @param interval interval to express duration of periods
+     * @param measurer the measurer to find elements dimensions.
+     * @param separatorFactory the separator factory
+     * @param referenceDate the reference date to set period reference point in time. If null then default 1 Jan 1970 00:00:00 is used.
+     */
+    public DiscretePositioner(Interval interval, IElementMeasurer measurer, ISeparatorFactory separatorFactory, Calendar referenceDate) {
         this.measurer = measurer;
         this.separatorFactory = separatorFactory;
+
+        if (referenceDate != null) {
+        	this.referenceDate = referenceDate;
+        } else {
+        	this.referenceDate = DEFAULT_REFERENCE_DATE;
+        }
+
+        periodFinder = new PeriodFinder(interval);
     }
 
     @Override
@@ -77,7 +104,7 @@ public class DiscretePositioner implements IPositioner {
             Calendar givenDate = new GregorianCalendar();
             givenDate.setTimeInMillis(element.getDate());
 
-            periodBeginning = interval.findPeriodBeginning(referenceDate, givenDate);
+            periodBeginning = periodFinder.findPeriodBeginning(referenceDate, givenDate);
             resultMap.put(periodBeginning, element);
         }
 
@@ -128,7 +155,15 @@ public class DiscretePositioner implements IPositioner {
     }
 
     public void setInterval(Interval interval) {
-        this.interval = interval;
+        periodFinder = new PeriodFinder(interval);
+    }
+
+    public Interval getInterval() {
+    	if (periodFinder != null) {
+    		return periodFinder.getInterval();
+    	}
+
+    	return null;
     }
 
     public void setReferenceDate(Calendar referenceDate) {

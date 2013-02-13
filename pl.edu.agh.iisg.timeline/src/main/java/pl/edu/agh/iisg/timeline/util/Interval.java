@@ -1,6 +1,5 @@
 package pl.edu.agh.iisg.timeline.util;
 
-
 public class Interval {
 
     public enum Unit {
@@ -16,12 +15,12 @@ public class Interval {
      *
      * @param duration
      *            duration of the interval
-     * @param units
-     *            units in which interval is expressed.
+     * @param unit
+     *            unit in which interval is expressed.
      */
-    public Interval(int duration, Unit units) {
+    public Interval(int duration, Unit unit) {
         this.duration = duration;
-        this.unit = units;
+        this.unit = unit;
     }
 
     /**

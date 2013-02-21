@@ -4,13 +4,13 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
 public class TimelinePerspective implements IPerspectiveFactory {
-	public static final String TIMELINE_PERSPECTIVE = "pl.edu.agh.iisg.timeline.perspective";
+	public static final String TIMELINE_PERSPECTIVE = "pl.edu.agh.iisg.timeline.perspective"; //$NON-NLS-1$
 
 	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		String editorArea = layout.getEditorArea();
 		layout.addStandaloneView(TimelineView.TIMELINE_VIEW_ID, true, IPageLayout.TOP, 0.95f, editorArea);
-
+		layout.setEditorAreaVisible(true);
 	}
 
 }

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Timeline editor tests
-Bundle-SymbolicName: pl.edu.agh.iisg.timeline.tests
+Bundle-SymbolicName: pl.edu.agh.iisg.timeline.common.tests
 Bundle-Version: 0.0.1.qualifier
 Bundle-Vendor: AGH-UST Krakow
-Fragment-Host: pl.edu.agh.iisg.timeline;bundle-version="0.0.1"
+Fragment-Host: pl.edu.agh.iisg.timeline.common;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit;bundle-version="4.8.2",
  org.mockito;bundle-version="1.8.4",

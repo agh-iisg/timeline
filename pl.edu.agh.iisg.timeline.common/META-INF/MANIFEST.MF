@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Timeline Common Plug-in
+Bundle-SymbolicName: pl.edu.agh.iisg.timeline.common
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: pl.edu.agh.iisg.timeline.common.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.google.guava;bundle-version="10.0.1",
+ org.eclipse.draw2d;bundle-version="3.7.0",
+ org.eclipse.gef;bundle-version="3.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Vendor: %Bundle-Vendor
+Export-Package: pl.edu.agh.iisg.timeline.common.editpart,
+ pl.edu.agh.iisg.timeline.common.model,
+ pl.edu.agh.iisg.timeline.common.model.generator
+

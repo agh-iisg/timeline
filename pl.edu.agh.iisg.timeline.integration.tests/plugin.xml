@@ -66,7 +66,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateSampleTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateSampleTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.example.create"
             name="Create a sample diagram">
          <commandParameter
@@ -79,7 +79,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateRealDataTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateRealDataTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.example.create.real.data"
             name="Create a real data diagram">
          <commandParameter
@@ -92,7 +92,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.CreateLongTextsAndIconsTimelineDiagramHandler"
+            defaultHandler="pl.edu.agh.iisg.timeline.handler.CreateLongTextsAndIconsTimelineDiagramHandler"
             id="pl.edu.agh.iisg.timeline.example.create.long.labels.icons"
             name="Create long texts and icons diagram">
          <commandParameter

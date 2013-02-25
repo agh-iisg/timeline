@@ -21,7 +21,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
-import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
+import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
 
 /**
  *

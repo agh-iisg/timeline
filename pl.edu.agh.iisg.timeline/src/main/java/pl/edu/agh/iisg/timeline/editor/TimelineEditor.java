@@ -28,9 +28,9 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
 
-import pl.edu.agh.iisg.timeline.editpart.TimelineRootEditPart;
-import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.view.TimelineEditPartsFactory;
+import pl.edu.agh.iisg.timeline.common.editpart.TimelineEditPartsFactory;
+import pl.edu.agh.iisg.timeline.common.editpart.TimelineRootEditPart;
+import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
 
 /**
  *

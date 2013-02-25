@@ -1,14 +1,21 @@
 package pl.edu.agh.iisg.timeline.integration.handler;
 
+import java.text.ParseException;
+
+import pl.edu.agh.iisg.timeline.editor.TimelineEditorInput;
 import pl.edu.agh.iisg.timeline.integration.DataGenerator;
-import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
 
 public class CreateRealDataTimelineDiagramHandler extends
 		CreateSampleTimelineDiagramHandler {
 
 	@Override
-	protected TimelineDiagram getTimelineDiagram(int axesCnt, long elementsCont)
-			throws Exception {
-		return DataGenerator.createRealDataDiagram(axesCnt, elementsCont,false);
-	}
+	 protected TimelineEditorInput createTimelineEditorInput(int axesCnt, long elementsCount) {
+        TimelineEditorInput editorInput = new TimelineEditorInput();
+        try {
+            editorInput.setTimelineDiagram(DataGenerator.createRealDataDiagram(axesCnt, elementsCount, false));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return editorInput;
+    }
 }

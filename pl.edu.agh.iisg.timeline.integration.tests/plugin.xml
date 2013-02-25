@@ -104,11 +104,6 @@
                name="Elements Count">
          </commandParameter>
       </command>
-      <command
-            defaultHandler="pl.edu.agh.iisg.timeline.integration.handler.OpenTimelineEditorHandler"
-            id="pl.edu.agh.iisg.timeline.example.open.timeline.editor"
-            name="Open Timeline Editor">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -190,15 +185,6 @@
             </command>
          </menu>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="pl.edu.agh.iisg.timeline.integration.TimelineView"
-            id="pl.edu.agh.iisg.timeline.view"
-            name="%view.name"
-            restorable="true">
-      </view>
    </extension>
    <extension
          point="org.eclipse.ui.editors">

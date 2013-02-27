@@ -55,24 +55,24 @@ public class DateConverter {
 
         case DAY:
         	pattern = String.format("%s '%s' %s",
-        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN); //$NON-NLS-1$
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN);
         	break;
 
         case HOUR:
         case MINUTE:
         	pattern = String.format("%s '%s' %s %s",
-        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN); //$NON-NLS-1$
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN);
         	break;
 
         case SECOND:
         default:
         	pattern = String.format("%s '%s' %s %s%s",
-        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN); //$NON-NLS-1$
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN);
         	break;
 
         case MILLISECOND:
         	pattern = String.format("%s '%s' %s %s%s%s",
-        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN, MILLISECOND_PATTERN); //$NON-NLS-1$
+        			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN, MILLISECOND_PATTERN);
         	break;
         }
 

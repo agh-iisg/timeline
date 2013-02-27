@@ -1,7 +1,5 @@
 package pl.edu.agh.iisg.timeline.integration.handler;
 
-import java.text.ParseException;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -39,11 +37,11 @@ public class CreateSampleTimelineDiagramHandler extends AbstractHandler {
 
     protected TimelineEditorInput createTimelineEditorInput(int axesCnt, long elementsCount) {
         TimelineEditorInput editorInput = new TimelineEditorInput();
-        try {
-            editorInput.setTimelineDiagram(DataGenerator.createRealDataDiagram(axesCnt, elementsCount, false));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            try {
+                editorInput.setTimelineDiagram(DataGenerator.createSampleDiagram(axesCnt, elementsCount));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         return editorInput;
     }
 }

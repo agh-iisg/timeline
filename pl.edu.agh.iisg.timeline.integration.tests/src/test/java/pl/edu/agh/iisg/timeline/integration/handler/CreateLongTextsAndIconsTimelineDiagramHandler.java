@@ -11,7 +11,7 @@ public class CreateLongTextsAndIconsTimelineDiagramHandler extends CreateSampleT
 	 protected TimelineEditorInput createTimelineEditorInput(int axesCnt, long elementsCount) {
         TimelineEditorInput editorInput = new TimelineEditorInput();
         try {
-            editorInput.setTimelineDiagram(DataGenerator.createRealDataDiagram(axesCnt, elementsCount, false));
+            editorInput.setTimelineDiagram(DataGenerator.createRealDataDiagram(axesCnt, elementsCount, true));
         } catch (ParseException e) {
             e.printStackTrace();
         }

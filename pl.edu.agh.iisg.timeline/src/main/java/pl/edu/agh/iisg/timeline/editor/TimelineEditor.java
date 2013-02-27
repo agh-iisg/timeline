@@ -22,11 +22,13 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.parts.GraphicalEditor;
+import org.eclipse.gef.ui.parts.GraphicalViewerImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.widgets.Composite;
 
 import pl.edu.agh.iisg.timeline.common.editpart.TimelineEditPartsFactory;
 import pl.edu.agh.iisg.timeline.common.editpart.TimelineRootEditPart;
@@ -48,6 +50,16 @@ public class TimelineEditor extends GraphicalEditor {
      */
     public TimelineEditor() {
         setEditDomain(new DefaultEditDomain(this));
+    }
+
+    @Override
+    protected void createGraphicalViewer(Composite parent) {
+        GraphicalViewer viewer = new GraphicalViewerImpl();
+        viewer.createControl(parent);
+        setGraphicalViewer(viewer);
+        configureGraphicalViewer();
+        hookGraphicalViewer();
+        initializeGraphicalViewer();
     }
 
     @Override

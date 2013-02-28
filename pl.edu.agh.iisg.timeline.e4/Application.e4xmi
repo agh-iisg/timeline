@@ -4,9 +4,7 @@
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_VyAzwIGTEeKbEdS9uHvDsw" elementId="pl.edu.agh.iisg.timeline.e4.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_YERxUIGTEeKbEdS9uHvDsw" elementId="pl.edu.agh.iisg.timeline.e4.perspective" label="Timeline Perspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_AyMkYIGzEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.partsashcontainer">
-          <children xsi:type="basic:PartStack" xmi:id="_irAC8IGUEeKbEdS9uHvDsw" elementId="pl.edu.agh.iisg.timeline.e4.partstack">
-            <children xsi:type="basic:Part" xmi:id="_kVlVcIGUEeKbEdS9uHvDsw" elementId="pl.edu.agh.iisg.timeline.e4.part.editor" containerData="" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.parts.TimelineEditorPart" label="Timeline Editor"/>
-          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_irAC8IGUEeKbEdS9uHvDsw" elementId="pl.edu.agh.iisg.timeline.e4.partstack"/>
         </children>
       </children>
     </children>
@@ -20,6 +18,7 @@
     </mainMenu>
   </children>
   <handlers xmi:id="_c8cS8IG7EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.handlers.samplediagram.create" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.handlers.CreateSampleTimelineDiagramHandler" command="_fyZo4IG6EeK5U7EUsy0Pcg"/>
+  <descriptors xmi:id="_bXeicIHKEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.partdescriptor.editor" label="Timeline Editor" allowMultiple="true" closeable="true" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.parts.TimelineEditorPart"/>
   <commands xmi:id="_fyZo4IG6EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commands.samplediagram.create" commandName="Create a sample diagram">
     <parameters xmi:id="_Czs9kIG9EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" name="Diagram Axes Cnt"/>
     <parameters xmi:id="_GyV9YIG9EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" name="Diagram Elements Cnt"/>

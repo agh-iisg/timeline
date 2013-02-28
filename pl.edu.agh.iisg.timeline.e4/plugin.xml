@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="Timeline_Editor_Product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="pl.edu.agh.iisg.timeline.e4.product">
+         <property
+               name="appName"
+               value="pl.edu.agh.iisg.timeline.e4.product">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

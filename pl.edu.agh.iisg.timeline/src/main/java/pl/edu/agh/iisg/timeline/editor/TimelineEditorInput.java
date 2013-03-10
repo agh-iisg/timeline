@@ -29,7 +29,7 @@ import pl.edu.agh.iisg.timeline.model.TimelineDiagram;
  */
 public class TimelineEditorInput implements IEditorInput {
 
-    private static final String TIMELINE_EDITOR_INPUT_NAME = "Timeline editor input"; //$NON-NLS-1$
+    private static final String TIMELINE_EDITOR_NAME = "Timeline editor"; //$NON-NLS-1$
 
     private TimelineDiagram diagram;
 
@@ -51,7 +51,7 @@ public class TimelineEditorInput implements IEditorInput {
 
     @Override
     public String getName() {
-        return TIMELINE_EDITOR_INPUT_NAME;
+        return TIMELINE_EDITOR_NAME;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TimelineEditorInput implements IEditorInput {
 
     @Override
     public String getToolTipText() {
-        return TIMELINE_EDITOR_INPUT_NAME;
+        return TIMELINE_EDITOR_NAME;
     }
 
     /**

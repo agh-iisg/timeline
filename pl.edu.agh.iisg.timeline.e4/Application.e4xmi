@@ -14,14 +14,35 @@
           <parameters xmi:id="_T5OtYIG4EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.axesCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" value="3"/>
           <parameters xmi:id="_tPIlsIG4EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.elementsCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" value="100"/>
         </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_CPLZkIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.menuitem..samplediagram.create" label="Create a medium diagram" mnemonics="m" command="_fyZo4IG6EeK5U7EUsy0Pcg">
+          <parameters xmi:id="_KROkcIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.axesCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" value="3"/>
+          <parameters xmi:id="_KrPm8IHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.elementsCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" value="1000"/>
+        </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_WlEUoIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.menuitem..samplediagram.create" label="Create a large diagram" mnemonics="l" command="_fyZo4IG6EeK5U7EUsy0Pcg">
+          <parameters xmi:id="_WlEUoYHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.axesCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" value="5"/>
+          <parameters xmi:id="_WlEUooHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.elementsCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" value="10000"/>
+        </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_gFI8sIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.menuitem..samplediagram.create" label="Create a huge diagram" mnemonics="h" command="_fyZo4IG6EeK5U7EUsy0Pcg">
+          <parameters xmi:id="_gFI8sYHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.axesCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" value="10"/>
+          <parameters xmi:id="_gFI8soHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.elementsCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" value="100000"/>
+        </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_tp7-cIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.menuitem..samplediagram.create" label="Create a real data diagram" mnemonics="r" command="_k6mPwIHQEeK5U7EUsy0Pcg">
+          <parameters xmi:id="_tp7-cYHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.axesCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" value="3"/>
+          <parameters xmi:id="_tp7-coHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.create.sample.elementsCnt" name="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" value="100"/>
+        </children>
       </children>
     </mainMenu>
   </children>
   <handlers xmi:id="_c8cS8IG7EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.handlers.samplediagram.create" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.handlers.CreateSampleTimelineDiagramHandler" command="_fyZo4IG6EeK5U7EUsy0Pcg"/>
+  <handlers xmi:id="_3RfukIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.handlers.samplediagram.create" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.handlers.CreateRealDataTimelineDiagramHandler" command="_k6mPwIHQEeK5U7EUsy0Pcg"/>
   <descriptors xmi:id="_bXeicIHKEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.partdescriptor.editor" label="Timeline Editor" allowMultiple="true" closeable="true" contributionURI="bundleclass://pl.edu.agh.iisg.timeline.e4/pl.edu.agh.iisg.timeline.e4.parts.TimelineEditorPart"/>
   <commands xmi:id="_fyZo4IG6EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commands.samplediagram.create" commandName="Create a sample diagram">
     <parameters xmi:id="_Czs9kIG9EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" name="Diagram Axes Cnt"/>
     <parameters xmi:id="_GyV9YIG9EeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" name="Diagram Elements Cnt"/>
+  </commands>
+  <commands xmi:id="_k6mPwIHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commands.realdatadiagram.create" commandName="Create a real data diagram">
+    <parameters xmi:id="_k6m20IHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt" name="Diagram Axes Cnt"/>
+    <parameters xmi:id="_k6m20YHQEeK5U7EUsy0Pcg" elementId="pl.edu.agh.iisg.timeline.e4.commandparameter.elements.cnt" name="Diagram Elements Cnt"/>
   </commands>
   <addons xmi:id="_zd0KwYGSEeKbEdS9uHvDsw" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_zd0KwoGSEeKbEdS9uHvDsw" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>

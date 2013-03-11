@@ -37,6 +37,10 @@ public class TimelineEditorPart {
 		getEditPartViewer().setFocus(rootEditPart);
 	}
 	
+	public void setFocus() {
+		getEditPartViewer().setFocus(rootEditPart);
+	}
+	
 	public void setEditPartViewer(EditPartViewer viewer) {
 		this.viewer = viewer;
 	}

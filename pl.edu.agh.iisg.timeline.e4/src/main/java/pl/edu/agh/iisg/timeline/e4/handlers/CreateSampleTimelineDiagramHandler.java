@@ -11,7 +11,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
-import org.eclipse.emf.ecore.EModelElement;
 
 import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
 import pl.edu.agh.iisg.timeline.common.model.generator.DataGenerator;
@@ -42,6 +41,7 @@ public class CreateSampleTimelineDiagramHandler {
 		MPart part = createTimelineEditorPart();
 		displayTimelineEditorPart(part);
 		setTimelineEditorPartInput(part, Integer.parseInt(axesCntParam), Integer.parseInt(elementsCntParam));
+		setFocusOnTimelineEditor(part);
 	}
 	
 	protected TimelineDiagram getTimelineDiagram(int axesCnt, int elementsCount) {
@@ -70,5 +70,10 @@ public class CreateSampleTimelineDiagramHandler {
 	private void setTimelineEditorPartInput(MPart part, int axesCnt, int elementsCnt) {
 		TimelineDiagram diagram = getTimelineDiagram(axesCnt, elementsCnt);
 		((TimelineEditorPart)part.getObject()).setDiagram(diagram);
+	}
+	
+	@SuppressWarnings("restriction")
+	private void setFocusOnTimelineEditor(MPart part) {
+		((TimelineEditorPart)part.getObject()).setFocus();
 	}
 }

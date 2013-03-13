@@ -18,6 +18,17 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.ui" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="com.google.guava" version="10.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.draw2d" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="pl.edu.agh.iisg.timeline" version="0.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors"/>
+   </requires>
+
    <plugin
          id="pl.edu.agh.iisg.timeline"
          download-size="0"
@@ -37,7 +48,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
 </feature>

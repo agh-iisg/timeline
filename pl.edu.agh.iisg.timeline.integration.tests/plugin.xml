@@ -21,16 +21,8 @@
             application="pl.edu.agh.iisg.timeline.app"
             name="%product.name">
          <property
-               name="windowImages"
-               value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
-         </property>
-         <property
                name="aboutText"
                value="%productBlurb">
-         </property>
-         <property
-               name="aboutImage"
-               value="eclipse_lg.gif">
          </property>
          <property
                name="startupForegroundColor"
@@ -190,7 +182,6 @@
          point="org.eclipse.ui.editors">
       <editor
             class="pl.edu.agh.iisg.timeline.editor.TimelineEditor"
-            contributorClass="pl.edu.agh.iisg.timeline.editor.TimelineEditorActionBarContributor"
             extensions="tml"
             id="pl.edu.agh.iisg.timeline.editor"
             name="%editor.name">

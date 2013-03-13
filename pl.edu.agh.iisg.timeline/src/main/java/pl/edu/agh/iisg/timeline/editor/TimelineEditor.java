@@ -1,20 +1,3 @@
-/*
- * This file is a part of CAST project.
- * (c) Copyright 2007, AGH University of Science & Technology
- * https://caribou.iisg.agh.edu.pl/trac/cast
- *
- * Licensed under the Eclipse Public License, Version 1.0 (the "License").
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.eclipse.org/legal/epl-v10.html
- */
-/*
- * File: TimelineEditor.java
- * Created: Feb 19, 2013
- * Author: mentel
- * $Id$
- */
-
 package pl.edu.agh.iisg.timeline.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;

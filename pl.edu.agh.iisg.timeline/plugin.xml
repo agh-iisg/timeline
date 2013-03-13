@@ -7,7 +7,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="pl.edu.agh.iisg.timeline.app"
-            name="%productName">
+            name="%product.name">
          <property
                name="windowImages"
                value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
@@ -35,6 +35,10 @@
          <property
                name="preferenceCustomization"
                value="plugin_customization.ini">
+         </property>
+         <property
+               name="appName"
+               value="%product.name">
          </property>
       </product>
    </extension>

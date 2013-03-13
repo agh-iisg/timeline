@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%productName" uid="pl.edu.agh.iisg.timeline.product" id="pl.edu.agh.iisg.timeline.Timeline_Editor" application="pl.edu.agh.iisg.timeline.app" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="%product.name" uid="pl.edu.agh.iisg.timeline.product" id="pl.edu.agh.iisg.timeline.example.Timeline_Editor" application="pl.edu.agh.iisg.timeline.app" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="eclipse_lg.gif"/>
       <text>
          %productBlurb
       </text>
@@ -18,7 +17,7 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="eclipse.gif" i32="eclipse32.gif" i48="eclipse48.gif" i64="eclipse.png" i128="eclipse32.png"/>
+   <windowImages/>
 
    <splash
       startupProgressRect="0,280,455,15"
@@ -36,12 +35,12 @@
    </vm>
 
    <plugins>
-      <plugin id="org.eclipse.graphiti"/>
-      <plugin id="org.eclipse.graphiti.ui"/>
-      <plugin id="pl.edu.agh.cast.common" fragment=""/>
+      <plugin id="org.eclipse.graphiti" fragment=""/>
+      <plugin id="org.eclipse.graphiti.ui" fragment=""/>
+      <plugin id="pl.edu.agh.cast.common"/>
       <plugin id="pl.edu.agh.iisg.timeline"/>
-      <plugin id="pl.edu.agh.iisg.timeline.integration.tests"/>
-      <plugin id="pl.edu.agh.iisg.timeline.persistence"/>
+      <plugin id="pl.edu.agh.iisg.timeline.integration.tests" fragment=""/>
+      <plugin id="pl.edu.agh.iisg.timeline.persistence" fragment=""/>
       <plugin id="pl.edu.agh.iisg.timeline.tests" fragment="true"/>
    </plugins>
 

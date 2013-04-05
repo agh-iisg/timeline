@@ -17,26 +17,37 @@
   <name>Timeline Parent</name>
 
   <properties>
-    <tycho-version>0.16.0</tycho-version>
-    <platform-version-name>indigo</platform-version-name>
+    <tycho-version>0.17.0</tycho-version>
+    <platform-version-name>juno</platform-version-name>
     <eclipse-site>http://download.eclipse.org/releases/${platform-version-name}</eclipse-site>
     <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository/</orbit-site>
   </properties>
 
 
   <modules>
+    <!-- common -->  
+    <module>pl.edu.agh.iisg.timeline.common</module>
+
+    <!-- Eclipse 3.x -->
     <module>pl.edu.agh.iisg.timeline</module>
-	<module>pl.edu.agh.iisg.timeline.integration.tests</module>
+	  <module>pl.edu.agh.iisg.timeline.integration.tests</module>
     <module>pl.edu.agh.iisg.timeline.tests</module>
 	
-	<module>pl.edu.agh.iisg.timeline.feature</module>
+	  <module>pl.edu.agh.iisg.timeline.feature</module>
 	
-	<module>pl.edu.agh.iisg.timeline.repository</module>
+	  <module>pl.edu.agh.iisg.timeline.repository</module>
+
+    <!-- Eclipse 4.x -->
+    <module>pl.edu.agh.iisg.timeline.e4</module>
+    <module>pl.edu.agh.iisg.timeline.e4.feature</module>  
+    <module>pl.edu.agh.iisg.timeline.e4.repository</module>
+  
+
   </modules>
 
   <repositories>
     <repository>
-      <id>indigo</id>
+      <id>juno</id>
       <layout>p2</layout>
       <url>${eclipse-site}</url>
     </repository>

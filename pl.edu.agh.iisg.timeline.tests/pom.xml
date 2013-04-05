@@ -10,7 +10,7 @@
 	<version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>pl.edu.agh.iisg.timeline.tests</artifactId>
+  <artifactId>pl.edu.agh.iisg.timeline.common.tests</artifactId>
   <packaging>eclipse-test-plugin</packaging>
 
   <name>Timeline Tests Plug-in</name>

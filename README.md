@@ -1,7 +1,7 @@
 Timeline Editor in Eclipse Draw2d
 ========
 
-This repository contains plugins for two projects: one based on Eclipse 3.x, the seond one on Eclipse 4.x. There're also common plugins that are required for both projects.
+This repository contains plugins for two projects: one based on Eclipse 3.x, the second one on Eclipse 4.x. There're also common plugins that are required for both projects.
 
 The following list presents plugins required for Eclipse 3.x based project:
 <ol>

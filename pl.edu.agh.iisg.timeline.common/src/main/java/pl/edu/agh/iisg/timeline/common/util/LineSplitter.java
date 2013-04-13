@@ -37,7 +37,7 @@ public class LineSplitter implements ILineSplitter {
      * @return
      */
     private String[] splitByWhitespaces(String string) {
-        return string.split("(?<=\\s+)");
+        return string.split("(?<=\\s+)"); //$NON-NLS-1$
     }
 
     private void clearFields() {
@@ -48,7 +48,7 @@ public class LineSplitter implements ILineSplitter {
     private void addLineIfOverflowChars() {
         while (builder.length() > charsPerLine) {
             lines.add(builder.substring(0, charsPerLine).trim());
-            builder.replace(0, charsPerLine, "");
+            builder.replace(0, charsPerLine, ""); //$NON-NLS-1$
         }
     }
 

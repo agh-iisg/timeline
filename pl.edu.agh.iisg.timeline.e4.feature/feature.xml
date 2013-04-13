@@ -3,7 +3,7 @@
       id="pl.edu.agh.iisg.timeline.e4.feature"
       label="Timeline E4 Feature"
       version="0.0.1.qualifier"
-      plugin="pl.edu.agh.iisg.timeline.e4">
+      plugin="pl.edu.agh.iisg.timeline.e4.example">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -18,17 +18,31 @@
    </license>
 
    <plugin
-         id="pl.edu.agh.iisg.timeline"
+         id="pl.edu.agh.iisg.timeline.common"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.1.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="pl.edu.agh.iisg.timeline.e4.example"
+         download-size="0"
+         install-size="0"
+         version="0.0.1.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="pl.edu.agh.iisg.timeline.common.example"
+         download-size="0"
+         install-size="0"
+         version="0.0.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="pl.edu.agh.iisg.timeline.e4"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.1.qualifier"
          unpack="false"/>
 
 </feature>

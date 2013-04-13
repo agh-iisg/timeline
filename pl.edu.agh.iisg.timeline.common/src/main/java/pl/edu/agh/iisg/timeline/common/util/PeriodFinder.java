@@ -66,7 +66,7 @@ public class PeriodFinder {
             	return findPeriodBeginningForYears(referenceDate, givenDate);
 
             default:
-            	throw new UnsupportedOperationException("Unit support not implemented.");
+            	throw new UnsupportedOperationException("Unit support not implemented."); //$NON-NLS-1$
         }
     }
 
@@ -243,7 +243,7 @@ public class PeriodFinder {
                 break;
 
             default:
-            	throw new UnsupportedOperationException("Unit support not implemented.");
+            	throw new UnsupportedOperationException("Unit support not implemented."); //$NON-NLS-1$
         }
 
         return resultCalendar;

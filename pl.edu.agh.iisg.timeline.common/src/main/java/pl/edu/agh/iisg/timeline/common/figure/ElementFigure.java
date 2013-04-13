@@ -160,7 +160,7 @@ public class ElementFigure extends Figure {
         String[] lines = splitter.split(text);
         StringBuilder res = new StringBuilder();
         for (String line : lines) {
-            res.append(line + "\n");
+            res.append(line + "\n"); //$NON-NLS-1$
         }
         return res.toString().trim();
     }

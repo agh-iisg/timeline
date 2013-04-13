@@ -24,7 +24,7 @@ public class DateConverter {
 
     private static final String DAY_PATTERN = "EEEE, d"; //$NON-NLS-1$
 
-    private static final String HOUR_PATTERN = String.format("'%s'HH:mm", Messages.DateConverter_HourPrefix); //$NON-NLS-1$
+    private static final String HOUR_PATTERN = String.format("'%s' HH:mm", Messages.DateConverter_HourPrefix); //$NON-NLS-1$
 
     private static final String SECOND_PATTERN = ":ss"; //$NON-NLS-1$
 
@@ -54,24 +54,24 @@ public class DateConverter {
         	break;
 
         case DAY:
-        	pattern = String.format("%s '%s' %s",
+        	pattern = String.format("%s '%s' %s", //$NON-NLS-1$
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN);
         	break;
 
         case HOUR:
         case MINUTE:
-        	pattern = String.format("%s '%s' %s %s",
+        	pattern = String.format("%s '%s' %s %s", //$NON-NLS-1$
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN);
         	break;
 
         case SECOND:
         default:
-        	pattern = String.format("%s '%s' %s %s%s",
+        	pattern = String.format("%s '%s' %s %s%s", //$NON-NLS-1$
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN);
         	break;
 
         case MILLISECOND:
-        	pattern = String.format("%s '%s' %s %s%s%s",
+        	pattern = String.format("%s '%s' %s %s%s%s", //$NON-NLS-1$
         			DAY_PATTERN, months[monthNumber], YEAR_PATTERN, HOUR_PATTERN, SECOND_PATTERN, MILLISECOND_PATTERN);
         	break;
         }

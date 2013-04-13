@@ -12,10 +12,11 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
+import pl.edu.agh.iisg.timeline.common.example.generator.DataGenerator;
 import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.common.model.generator.DataGenerator;
 import pl.edu.agh.iisg.timeline.e4.parts.TimelineEditorPart;
 
+@SuppressWarnings("restriction")
 public class CreateSampleTimelineDiagramHandler {
 	
 	private static final String AXES_CNT =  "pl.edu.agh.iisg.timeline.e4.commandparameter.axes.cnt";
@@ -35,7 +36,6 @@ public class CreateSampleTimelineDiagramHandler {
 	@Inject
 	private MApplication application;
 
-	@SuppressWarnings("restriction")
 	@Execute
 	public void execute(@Named(AXES_CNT) String axesCntParam, @Named(ELEMENTS_CNT) String elementsCntParam) {
 		MPart part = createTimelineEditorPart();
@@ -54,25 +54,21 @@ public class CreateSampleTimelineDiagramHandler {
 		return diagram;
 	}
 	
-	@SuppressWarnings("restriction")
 	private MPart createTimelineEditorPart() {
 		return partService.createPart(EDITOR_PART_ID);
 	}
 	
-	@SuppressWarnings("restriction")
 	private void displayTimelineEditorPart(MPart part) {
 		MPartStack stack = (MPartStack)modelService.find(PART_STACK_ID, application);
 		stack.getChildren().add(part);
 		partService.showPart(part, PartState.ACTIVATE);
 	}
 	
-	@SuppressWarnings("restriction")
 	private void setTimelineEditorPartInput(MPart part, int axesCnt, int elementsCnt) {
 		TimelineDiagram diagram = getTimelineDiagram(axesCnt, elementsCnt);
 		((TimelineEditorPart)part.getObject()).setDiagram(diagram);
 	}
 	
-	@SuppressWarnings("restriction")
 	private void setFocusOnTimelineEditor(MPart part) {
 		((TimelineEditorPart)part.getObject()).setFocus();
 	}

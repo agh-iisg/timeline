@@ -1,0 +1,12 @@
+qManifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common Example
+Bundle-SymbolicName: pl.edu.agh.iisg.timeline.common.example
+Bundle-Version: 0.0.1.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",
+ org.eclipse.core.runtime;bundle-version="3.7.0"
+Import-Package: pl.edu.agh.iisg.timeline.common.model
+Bundle-Vendor: %Bundle-Vendor
+Export-Package: pl.edu.agh.iisg.timeline.common.example.generator
+

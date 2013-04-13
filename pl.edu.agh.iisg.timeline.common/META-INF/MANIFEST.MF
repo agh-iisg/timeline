@@ -13,6 +13,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: %Bundle-Vendor
 Export-Package: pl.edu.agh.iisg.timeline.common.editpart,
- pl.edu.agh.iisg.timeline.common.model,
- pl.edu.agh.iisg.timeline.common.model.generator
+ pl.edu.agh.iisg.timeline.common.model
+ 
 

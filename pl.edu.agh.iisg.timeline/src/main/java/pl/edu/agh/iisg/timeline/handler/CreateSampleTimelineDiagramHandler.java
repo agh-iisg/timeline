@@ -8,7 +8,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import pl.edu.agh.iisg.timeline.common.model.generator.DataGenerator;
+import pl.edu.agh.iisg.timeline.common.example.generator.DataGenerator;
+
 
 
 import pl.edu.agh.iisg.timeline.editor.TimelineEditor;

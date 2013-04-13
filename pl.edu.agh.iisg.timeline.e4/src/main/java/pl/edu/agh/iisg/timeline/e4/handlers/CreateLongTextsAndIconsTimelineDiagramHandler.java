@@ -3,8 +3,8 @@ package pl.edu.agh.iisg.timeline.e4.handlers;
 
 import java.text.ParseException;
 
+import pl.edu.agh.iisg.timeline.common.example.generator.DataGenerator;
 import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
-import pl.edu.agh.iisg.timeline.common.model.generator.DataGenerator;
 
 public class CreateLongTextsAndIconsTimelineDiagramHandler extends CreateSampleTimelineDiagramHandler {
 

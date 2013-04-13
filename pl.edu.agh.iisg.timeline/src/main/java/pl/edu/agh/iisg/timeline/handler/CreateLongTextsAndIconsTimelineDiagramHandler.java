@@ -2,7 +2,8 @@ package pl.edu.agh.iisg.timeline.handler;
 
 import java.text.ParseException;
 
-import pl.edu.agh.iisg.timeline.common.model.generator.DataGenerator;
+import pl.edu.agh.iisg.timeline.common.example.generator.DataGenerator;
+
 
 
 import pl.edu.agh.iisg.timeline.editor.TimelineEditorInput;

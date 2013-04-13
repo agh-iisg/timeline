@@ -27,18 +27,18 @@
   <modules>
     <!-- common -->  
     <module>pl.edu.agh.iisg.timeline.common</module>
-
+	<module>pl.edu.agh.iisg.timeline.common.tests</module>
+	<module>pl.edu.agh.iisg.timeline.common.example</module>
+	
     <!-- Eclipse 3.x -->
     <module>pl.edu.agh.iisg.timeline</module>
-	  <module>pl.edu.agh.iisg.timeline.integration.tests</module>
-    <module>pl.edu.agh.iisg.timeline.tests</module>
-	
-	  <module>pl.edu.agh.iisg.timeline.feature</module>
-	
-	  <module>pl.edu.agh.iisg.timeline.repository</module>
+	<module>pl.edu.agh.iisg.timeline.example</module>
+    <module>pl.edu.agh.iisg.timeline.feature</module>
+	<module>pl.edu.agh.iisg.timeline.repository</module>
 
     <!-- Eclipse 4.x -->
     <module>pl.edu.agh.iisg.timeline.e4</module>
+	<module>pl.edu.agh.iisg.timeline.e4.example</module>
     <module>pl.edu.agh.iisg.timeline.e4.feature</module>  
     <module>pl.edu.agh.iisg.timeline.e4.repository</module>
   

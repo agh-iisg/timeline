@@ -18,6 +18,7 @@ import pl.edu.agh.iisg.timeline.common.editpart.TimelineEditPartsFactory;
 import pl.edu.agh.iisg.timeline.common.editpart.TimelineRootEditPart;
 import pl.edu.agh.iisg.timeline.common.model.TimelineDiagram;
 
+@SuppressWarnings("restriction")
 public class TimelineEditorPart {
 	
 	private EditPartViewer viewer;

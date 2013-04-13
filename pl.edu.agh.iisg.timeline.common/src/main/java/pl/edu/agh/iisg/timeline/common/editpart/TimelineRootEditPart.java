@@ -85,7 +85,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
 
     private void addHorizontalScrollListener(ScrollPane scrollPane) {
         scrollPane.getViewport().getVerticalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
-            private static final String SCROLL_PROPERTY_NAME = "value";
+            private static final String SCROLL_PROPERTY_NAME = "value"; //$NON-NLS-1$
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -99,7 +99,7 @@ public class TimelineRootEditPart extends SimpleRootEditPart {
     private void addVerticalScrollListener(ScrollPane scrollPane) {
         scrollPane.getViewport().getHorizontalRangeModel().addPropertyChangeListener(new PropertyChangeListener() {
 
-            private static final String SCROLL_PROPERTY_NAME = "value";
+            private static final String SCROLL_PROPERTY_NAME = "value"; //$NON-NLS-1$
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
